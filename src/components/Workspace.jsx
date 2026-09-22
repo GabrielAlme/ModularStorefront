@@ -1,5 +1,6 @@
 import React from 'react'
 import { Mosaic, MosaicWindow } from 'react-mosaic-component';
+import 'react-mosaic-component/react-mosaic-component.css';
 
 const Workspace = ({ children }) => {
   return (
