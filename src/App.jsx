@@ -1,10 +1,11 @@
 import React from 'react'
+import Workspace from "./components/Workspace"
 
 const App = () => {
   return (
-    <div>
-      
-    </div>
+    <Workspace>
+      <div>Hello World</div>
+    </Workspace>
   )
 }
 
