@@ -22,6 +22,8 @@ This will not work on a stout computer so use this link instead:
  - [nvm-windows](https://nvm-windows.com)
 
 Install the setup.exe file for the latest full release version and run it
+If you have node.js installed on your stout computer and it does not work, you will have to remove the node.js program from your computer.
+Do this by going to "add or remove programs" in system settings and remove node.js. Restart visual studios and it should work. 
 Before you will be able to run the project, you must run the command "npm install latest" in the terminal
 
 Then to run, enter the command "npm run dev"
