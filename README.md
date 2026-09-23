@@ -11,6 +11,29 @@ Currently, two official plugins are available:
 
 The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
+## Installing Node on Stout Computers
+
+If you are using a personal computer that is not part of the stout system, you should be able to install node normal from the website:
+
+ - [node.js](https://nodejs.org/en/download)
+
+This will not work on a stout computer so use this link instead:
+
+ - [nvm-windows](https://nvm-windows.com)
+
 ## Expanding the ESLint configuration
 
 If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+
+## PostgresSQL and PGAdmin 
+
+PostgresSql download link:
+
+ - [postgresSQL](https://www.postgresql.org/download/)
+
+PGAdmin is a tool for programming with postgresSQL made by the same people:
+
+ - [pgadmin](https://www.postgresql.org/ftp/pgadmin/pgadmin4/v9.18/windows/)
+
+The install process is lengthy and involves a lot of different menus so think carefully about 
+
