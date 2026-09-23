@@ -24,3 +24,16 @@ This will not work on a stout computer so use this link instead:
 ## Expanding the ESLint configuration
 
 If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+
+## PostgresSQL and PGAdmin 
+
+PostgresSql download link:
+
+ - [postgresSQL](https://www.postgresql.org/download/)
+
+PGAdmin is a tool for programming with postgresSQL made by the same people:
+
+ - [pgadmin](https://www.postgresql.org/ftp/pgadmin/pgadmin4/v9.18/windows/)
+
+The install process is lengthy and involves a lot of different menus so think carefully about 
+
