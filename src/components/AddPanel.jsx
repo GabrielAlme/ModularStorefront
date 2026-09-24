@@ -16,7 +16,7 @@ const handleSelect = (item) => {
     setSelect(item);
 };
 
-const AddPanels = () => {
+const AddPanel = () => {
   return (
     <div ref={ref}>
         <button onClick={() => setIsOpen(prev => !prev)}>
@@ -31,4 +31,4 @@ const AddPanels = () => {
   )
 }
 
-export default AddPanels
+export default AddPanel
