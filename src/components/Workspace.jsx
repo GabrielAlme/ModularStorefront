@@ -3,7 +3,6 @@ import MosaicWorkspace from './MosaicWorkspace';
 import AddPanel from './AddPanel';
 import { PANELS } from '../panels/registry';
 
-
 const Workspace = () => {
   const [workspace] = useState(loadWorkspace);
   const [panels, setPanels] = useState(workspace.panels);
@@ -16,8 +15,14 @@ const Workspace = () => {
 
   useEffect (() => {
         localStorage.setItem("workspace", JSON.stringify({ panels, nextId: nextId.current })
-        , [panels]) // this watches the array [panels] and when a change is made to it it uploads it to the local storage
+        , [panels]); // this watches the array [panels] and when a change is made to it it uploads it to the local storage
   })
+
+  const addPanel = (type) => {
+    const id = nextId.current++;
+    setPanels(prev => [...prev, {id, type}]);
+  }
+
 
   return (
     <div>
