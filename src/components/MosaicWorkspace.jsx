@@ -3,6 +3,8 @@ import 'react-mosaic-component/react-mosaic-component.css';
 import { PANELS } from '../panels/registry';
 
 const MosaicWorkspace = ({ open }) => {
+
+
   return (
     <div style={{ height: "100vh" }}>
       <Mosaic
