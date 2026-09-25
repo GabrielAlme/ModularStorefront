@@ -1,7 +1,6 @@
 import { useState, useRef, useEffect } from 'react'
 import MosaicWorkspace from './MosaicWorkspace';
 import AddPanel from './AddPanel';
-import { PANELS } from '../panels/registry';
 
 const Workspace = () => {
   const [workspace] = useState(loadWorkspace);
@@ -22,7 +21,6 @@ const Workspace = () => {
     const id = nextId.current++; //sets id to the current value of nextId THEN increments the value of nextId
     setPanels(prev => [...prev, {id, type}]); //takes the previous [panels] array and creates a new one with all of the old data and appends the new panel to the end of it
   }
-
 
   return (
     <div>

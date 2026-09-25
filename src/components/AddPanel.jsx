@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import { PANELS } from '../panels/registry';
 
 const AddPanel = ({ onSelect }) => {
 
@@ -19,8 +20,10 @@ const AddPanel = ({ onSelect }) => {
             Add Panel v
         </button>
         {isOpen && (
-            <ul className="menu">
-                <li onClick={() => onSelect("placeholder")}>Placeholder</li>
+            <ul className="dropdown">
+                {Object.entries(PANELS).map(([type, panel]) => ( //this takes each entry in PANELS and creates an object for them and adds that object to the dropdown menu
+                    <li key={type} onClick={() => onSelect(type)}>{ panel.title }</li>
+                ))}
             </ul>
         )}
     </div>
