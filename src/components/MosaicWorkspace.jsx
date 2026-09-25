@@ -1,6 +1,6 @@
 import { Mosaic, MosaicWindow, createBalancedTreeFromLeaves } from 'react-mosaic-component';
 import 'react-mosaic-component/react-mosaic-component.css';
-import { PANELS } from '../panels/registry';
+
 
 const MosaicWorkspace = ({ open }) => {
 
