@@ -1,6 +1,6 @@
 import { Mosaic, MosaicWindow, createBalancedTreeFromLeaves } from 'react-mosaic-component';
 import 'react-mosaic-component/react-mosaic-component.css';
-
+import { PANELS } from '../panels/registry';
 
 const MosaicWorkspace = ({ panels }) => {
 
@@ -13,10 +13,10 @@ const MosaicWorkspace = ({ panels }) => {
         initialValue={createBalancedTreeFromLeaves(panels.map(p => p.id))}
         zeroStateView={<h1>Add a panel from the dropdown menu</h1>}
         renderTile={(id, path) => {
-            const panel = PANELS[id];
-            const Component = panel.component;
+            const panel = panels.find(p => p.id === id)
+            const { title, component: Component } = PANELS[panel.type]
             return (
-            <MosaicWindow path={path} title={panel.title}>
+            <MosaicWindow path={path} title={title}>
                 <Component/>
             </MosaicWindow>
             );
