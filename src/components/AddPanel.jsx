@@ -1,9 +1,8 @@
 import { useState, useRef, useEffect } from "react";
 
-const AddPanel = () => {
+const AddPanel = ({ onSelect }) => {
 
     const [isOpen, setIsOpen] = useState(false);
-    const [select, setSelect] = useState(null);
     const ref = useRef(null);
 
     useEffect(() => {
