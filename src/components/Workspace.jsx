@@ -21,7 +21,7 @@ const Workspace = () => {
   const addPanel = (type) => {
     const id = nextId.current++; //sets id to the current value of nextId THEN increments the value of nextId
     setPanels(prev => [...prev, {id, type}]); //takes the previous [panels] array and creates a new one with all of the old data and appends the new panel to the end of it
-    setLayout(prev => prev ? {direction: "column", first: id, second: prev} : id); //places the new panel on top of the others
+    setLayout(prev => prev ? {type: "split", direction: "column", children: [id, prev]} : id); //places the new panel on top of the others
   }
 
   return (

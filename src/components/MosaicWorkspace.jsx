@@ -10,7 +10,7 @@ const MosaicWorkspace = ({ panels, layout, onChange }) => {
       <Mosaic
         className="mosaic-theme"
         value={layout}
-          onChange={onChange}
+        onChange={onChange}
         zeroStateView={<h1>Add a panel from the dropdown menu</h1>}
         renderTile={(id, path) => {//moves through the tree and creates a mosaic window for each of the leaves it hits
             const panel = panels.find(p => p.id === id);//creates an object for each panel based on the id not the type
