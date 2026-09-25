@@ -10,7 +10,7 @@ const Workspace = () => {
 
   function loadWorkspace() {
     const saved = JSON.parse(localStorage.getItem("workspace")) ?? {};
-    return { panels: saved.panels ?? [], nextId: saved.nextId ?? 1, layout: saved.layout ?? null} //checks local storage for the stored layout of panels, if there is no layout stored it upates it to the values on the right
+    return { panels: saved.panels ?? {}, nextId: saved.nextId ?? 1, layout: saved.layout ?? null} //checks local storage for the stored layout of panels, if there is no layout stored it upates it to the values on the right
   }
 
   useEffect (() => {
@@ -20,7 +20,7 @@ const Workspace = () => {
 
   const addPanel = (type) => {
     const id = nextId.current++; //sets id to the current value of nextId THEN increments the value of nextId
-    setPanels(prev => [...prev, {id, type}]); //takes the previous [panels] array and creates a new one with all of the old data and appends the new panel to the end of it
+    setPanels(prev => ({...prev, [id]: { type } })); //now creates and object with a keyed id array and a cooresponding type for each key
     setLayout(prev => prev ? {type: "split", direction: "column", children: [id, prev]} : id); //places the new panel on top of the others
   }
 
