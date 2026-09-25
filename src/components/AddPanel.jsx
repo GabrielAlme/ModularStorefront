@@ -13,10 +13,6 @@ const AddPanel = ({ onSelect }) => {
         return () => document.removeEventListener("mousedown", handleClick);
     }, []);
 
-    const handleSelect = (item) => {
-        setSelect(item);
-    };
-
   return (
     <div ref={ref}>
         <button onClick={() => setIsOpen(prev => !prev)}>
