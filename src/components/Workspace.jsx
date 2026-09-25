@@ -24,8 +24,8 @@ const Workspace = () => {
 
   return (
     <div>
-        <AddPanel onSelect={addPanel}/>
-        <MosaicWorkspace panels={panels}/>
+        <AddPanel onSelect={addPanel}/>  {/* this passes the data from onSelect inside of AddPanel to the function addPanel */}
+        <MosaicWorkspace panels={panels}/> {/* when a new panel is added to panels array it is passed to the mosaic inside of mosaic workspace here*/}
     </div>
   )
 }
