@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import Workspace from "./components/Workspace"
+import Workspace from "./components/MosaicWorkspace"
 import AddPanel from "./components/AddPanel"
 
 const App = () => {
