@@ -3,7 +3,9 @@ import Workspace from "./components/Workspace"
 import AddPanel from "./components/AddPanel"
 
 const App = () => {
-  const [open, setOpen] = useState(["placeholder", "placeholder2", "placeholder3", "placeholder4"]);
+  const [workspace] = useState(loadWorkspace);
+  const [panels, setPanels] = useState(workspace.panels);
+  const nextId = useRef(workspace.nextId)
   
   return (
     <>
