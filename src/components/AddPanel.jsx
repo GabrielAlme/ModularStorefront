@@ -24,7 +24,7 @@ const AddPanel = ({ onSelect }) => {
         </button>
         {isOpen && (
             <ul className="menu">
-                <li onClick={() => handleSelect("placeholder")}>Placeholder</li>
+                <li onClick={() => onSelect("placeholder")}>Placeholder</li>
             </ul>
         )}
     </div>

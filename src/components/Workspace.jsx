@@ -26,8 +26,8 @@ const Workspace = () => {
 
   return (
     <div>
-        <AddPanel/>
-        <MosaicWorkspace/>
+        <AddPanel onSelect={addPanel}/>
+        <MosaicWorkspace panels={panels}/>
     </div>
   )
 }
