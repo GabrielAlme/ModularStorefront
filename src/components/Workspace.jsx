@@ -25,11 +25,11 @@ const Workspace = () => {
     setLayout(prev => prev ? {type: "split", direction: "column", children: [id, prev]} : id); //places the new panel on top of the others
   };
 
-  const handleLayoutChange = (newLayout) => {
+  const handleLayoutChange = (newLayout) => { //mosaic passes its new layout when onChange is called
     setLayout(newLayout);
-    const ids = getLeaves(newLayout);
-    setPanels(prev => Object.fromEntries(
-      Object.entries(prev).filter(([id]) => ids.includes(Number(id)))
+    const ids = getLeaves(newLayout); //gets the ids from the layout of the current panels
+    setPanels(prev => Object.fromEntries( //uses the previous panels object to create an array of pairs [id, panel]
+      Object.entries(prev).filter(([id]) => ids.includes(Number(id))) //finds the ids that are still on the page and builds a new object containing the current panels removing the panel that was closed
     ));
   };
 
