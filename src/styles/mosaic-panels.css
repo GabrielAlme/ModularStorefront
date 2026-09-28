@@ -1,16 +1,37 @@
 .mosaic-theme {
     --bg: #F2EBDD;
-    --panel: #ede9e1;
-    --border: #d1d0cd;
+    --panel: #fffbf2;
+    --border: #1b190f;
     --text: #3B342C;
     --muted: #8a857c;
-    --accent: #4f6bed;
+    --accent: #6f85e69c;
     --danger: #d9534f;
     --radius: 12px; 
     --gap: 6px;
     background: var(--bg);
 }
 
-.mosaic-theme .mosaic-title {
-    
+.mosaic-theme .mosaic-tile {
+    margin: var(--gap);
+}
+
+.mosaic-theme .mosaic-window {
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+}
+
+.mosaic-theme .mosaic-window-body {
+    background: var(--panel);
+}
+
+.mosaic-theme .mosaic-split:hover.-column {
+    background: var(--accent);
+    height:8px;
+    border-radius: var(--radius);
+}
+
+.mosaic-theme .mosaic-split:hover.-row {
+    background: var(--accent);
+    width:8px;
+    border-radius: var(--radius);
 }
