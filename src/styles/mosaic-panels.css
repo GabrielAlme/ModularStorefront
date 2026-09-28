@@ -1,0 +1,58 @@
+/* broad variables for consistent design */
+.mosaic-theme {
+    --bg: #F2EBDD;
+    --panel: #fffbf2;
+    --border: #1b190f;
+    --text: #3B342C;
+    --muted: #8a857c;
+    --accent: #6f85e69c;
+    --danger: #d9534f;
+    --radius: 12px; 
+    --gap: 6px;
+    background: var(--bg);
+}
+
+.mosaic-theme .mosaic-tile {
+    margin: var(--gap);
+}
+
+.mosaic-theme .mosaic-window {
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+}
+
+.mosaic-theme .mosaic-window-body {
+    background: var(--panel);
+    padding: var(--gap);
+}
+
+
+/* mosaic resizing bar */
+.mosaic-theme .mosaic-split:hover.-column {
+    background: var(--accent);
+    height:8px;
+    border-radius: var(--radius);
+}
+
+.mosaic-theme .mosaic-split:hover.-row {
+    background: var(--accent);
+    width:8px;
+    border-radius: var(--radius);
+}
+
+/* mosaic window close button */
+.mosaic-theme .mosaic-default-control {
+    margin-right: var(--gap);
+    border: none;
+    background: none;
+}
+
+.mosaic-theme .mosaic-default-control.close-button:hover {
+    color: var(--danger);
+    cursor: pointer;
+}
+
+.mosaic:not(.mosaic-blueprint-theme) .mosaic-default-control.close-button::before {
+  content: '✕';
+  font-size: large;
+}
