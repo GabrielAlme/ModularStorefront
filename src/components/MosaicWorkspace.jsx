@@ -1,4 +1,4 @@
-import { Mosaic, MosaicWindow, createBalancedTreeFromLeaves } from 'react-mosaic-component';
+import { Mosaic, MosaicWindow, RemoveButton } from 'react-mosaic-component';
 import { PANELS } from '../panels/registry';
 import 'react-mosaic-component/react-mosaic-component.css';
 import '../styles/mosaic-panels.css';
@@ -17,7 +17,7 @@ const MosaicWorkspace = ({ panels, layout, onChange }) => {
             const panel = panels[id];//creates an object for each panel based on the id not the type
             const { title, component: Component } = PANELS[panels[id].type];//uses the type of the panel to get the component for building the panel
             return (
-            <MosaicWindow path={path} title={title}>
+            <MosaicWindow path={path} title={title} toolbarControls={[<RemoveButton key="remove"/>]}>
                 <Component/>
             </MosaicWindow>
             );

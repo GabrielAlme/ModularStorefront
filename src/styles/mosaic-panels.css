@@ -22,6 +22,7 @@
 
 .mosaic-theme .mosaic-window-body {
     background: var(--panel);
+    padding: var(--gap);
 }
 
 .mosaic-theme .mosaic-split:hover.-column {
@@ -34,4 +35,8 @@
     background: var(--accent);
     width:8px;
     border-radius: var(--radius);
+}
+
+.mosaic-theme .mosaic-default-control {
+    margin-right: 5px;
 }
