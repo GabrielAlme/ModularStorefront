@@ -1,0 +1,16 @@
+.mosaic-theme {
+    --bg: #F2EBDD;
+    --panel: #ede9e1;
+    --border: #d1d0cd;
+    --text: #3B342C;
+    --muted: #8a857c;
+    --accent: #4f6bed;
+    --danger: #d9534f;
+    --radius: 12px; 
+    --gap: 6px;
+    background: var(--bg);
+}
+
+.mosaic-theme .mosaic-title {
+    
+}
