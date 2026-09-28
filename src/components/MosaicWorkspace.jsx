@@ -7,7 +7,7 @@ const MosaicWorkspace = ({ panels, layout, onChange }) => {
 
 
   return (
-    <div style={{ height: "100vh" }}>
+    <div style={{ height: "100vh" }} padding-left="160px">
       <Mosaic
         className="mosaic-theme"
         value={layout}
