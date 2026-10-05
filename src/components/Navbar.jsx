@@ -3,7 +3,7 @@ import React from 'react'
 const Navbar = () => {
   return (
     <div class="topnav">
-        <h1 color='white'>Modular Storefront</h1>
+        <h1 color='white'>Placeholder</h1>
     </div>
   )
 }
