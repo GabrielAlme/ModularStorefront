@@ -3,7 +3,9 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "engines": { "node": "26.x" },
+  "engines": {
+    "node": "26.x"
+  },
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -14,7 +16,8 @@
     "express": "^5.2.1",
     "react": "^19.3.0",
     "react-dom": "^19.3.0",
-    "react-mosaic-component": "^7.1.0"
+    "react-mosaic-component": "^7.1.0",
+    "router": "^2.2.0"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
