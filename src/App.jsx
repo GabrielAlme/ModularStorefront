@@ -1,5 +1,6 @@
 import Sidebar from "./components/Sidebar"
 import Workspace from "./components/Workspace"
+import Navbar from "./components/Navbar"
 
 const App = () => {
   
@@ -7,6 +8,9 @@ const App = () => {
     <>
     <div>
       <Sidebar/>
+    </div>
+    <div id="nav">
+      <Navbar/>
     </div>
     <div id="ws">
       <Workspace/>

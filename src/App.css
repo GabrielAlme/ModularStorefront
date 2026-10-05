@@ -16,10 +16,30 @@ body {
 
 .sidebar a {
   padding: 6px 8px 6px 16px;
-  text-decoration: none;
   font-size: 20px;
   color: #818181;
   display: block;
+}
+
+.topnav {
+  width: 100%;
+  height: 60px;
+  position: fixed;
+  top: 0;
+  left: 160px;
+  background-color: #111;
+}
+
+.topnav a {
+  padding: 6px 8px 6px 16px;
+  color: #818181;
+  display: block;
+}
+
+.topnav h1 {
+  color: white;
+  display: block;
+  padding: 13 px 10px
 }
 
 .sidebar a:hover {
@@ -27,12 +47,14 @@ body {
 }
 
 .main {
-  margin-left: 160px; /* Same as the width of the sidenav */
+  margin-left: 160px; /* Same as the width of the sidebar */
+  margin-top: 60px;   /* Same as height of the topnav     */
   padding: 0px 10px;
 }
 
 #ws {
     padding-left: 160px;
+    padding-top: 60px;
 }
 
 @media screen and (max-height: 450px) {
