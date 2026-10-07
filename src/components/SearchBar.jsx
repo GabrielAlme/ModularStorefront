@@ -6,6 +6,18 @@ const searchbar = ({ registry, onAction, onSelect }) => {
 
     const wrapperRef = useRef(null);
 
+    useEffect(() => { 
+        if (!open) return;
+
+        function handleOutside(e) {
+            if (wrapperRef.current && !wrapperRef.current.contains(e.target)) {
+                setOpen(false);
+            }
+        }
+        document.addEventListener("pointerdown", handleOutside);
+        return () => document.removeEventListener("pointerdown", handleOutside);
+    }, [open]);
+
     const results = useMemo(() => {
         const q = query.trim().toLowercase(); //trims the users query of spaces and end lines at the start or end
         if(!q) return [];//hands the searchbar a blank array if the query is empty
