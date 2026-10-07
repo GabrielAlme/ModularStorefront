@@ -1,7 +1,7 @@
 
 const Sidebar = () => {
   return (
-    <div class="sidebar">
+    <div className="sidebar">
         <div>This is empty for now</div>
     </div>
   )
