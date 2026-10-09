@@ -1,7 +1,9 @@
 import { useState, useRef, useEffect } from 'react';
 import { getLeaves } from 'react-mosaic-component';
+import { PANELS } from '../panels/registry';
 import MosaicWorkspace from './MosaicWorkspace';
 import AddPanel from './AddPanel';
+import SearchBar from './SearchBar';
 
 const Workspace = () => {
   const [workspace] = useState(loadWorkspace);
@@ -13,7 +15,7 @@ const Workspace = () => {
     const saved = JSON.parse(localStorage.getItem("workspace")) ?? {};
     return { panels: saved.panels ?? {}, nextId: saved.nextId ?? 1, layout: saved.layout ?? null} //checks local storage for the stored layout of panels, if there is no layout stored it upates it to the values on the right
   };
-
+  
   useEffect (() => {
         localStorage.setItem("workspace", JSON.stringify({ panels, nextId: nextId.current, layout })
         , [panels, layout]); // this watches the array [panels] and when a change is made to it it uploads it to the local storage
@@ -21,7 +23,7 @@ const Workspace = () => {
 
   const addPanel = (type) => {
     const id = nextId.current++; //sets id to the current value of nextId THEN increments the value of nextId
-    setPanels(prev => ({...prev, [id]: { type } })); //now creates and object with a keyed id array and a cooresponding type for each key
+    setPanels(prev => ({...prev, [id] : { type } })); //now creates and object with a keyed id array and a cooresponding type for each key
     setLayout(prev => prev ? {type: "split", direction: "column", children: [id, prev]} : id); //places the new panel on top of the others
   };
 
@@ -34,9 +36,12 @@ const Workspace = () => {
   };
 
   return (
-    <div>
+    <div className="workspace">
+      <div className="navbar">
         <AddPanel onSelect={addPanel}/>  {/* this passes the data from onSelect inside of AddPanel to the function addPanel */}
-        <MosaicWorkspace panels={panels} layout={layout} onChange={handleLayoutChange}/> {/* when a new panel is added/removed to/from panels object it passes the fucntion handleLayoutChange*/}
+        <SearchBar registry={PANELS} onSelect={addPanel}/>
+      </div>
+      <MosaicWorkspace panels={panels} layout={layout} onChange={handleLayoutChange}/> {/* when a new panel is added/removed to/from panels object it passes the fucntion handleLayoutChange*/}
     </div>
   )
 }

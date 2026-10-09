@@ -52,10 +52,21 @@ body {
   padding: 0px 10px;
 }
 
+.workspace {
+  display: grid;
+  grid-template-rows: 100px 1fr;
+}
+
+.workspace .navbar {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
 #ws {
     padding-left: 160px;
     padding-top: 60px;
 }
+
 
 @media screen and (max-height: 450px) {
   .sidebar {padding-top: 15px;}
