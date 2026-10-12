@@ -72,3 +72,31 @@ body {
   .sidebar {padding-top: 15px;}
   .sidebar a {font-size: 18px;}
 }
+
+/* Styling to fix dropdown placement and prevent layout layout distortion */
+.dropdown {
+  position: absolute;       /* Positions the menu on top of text without pushing content down */
+  z-index: 10;              /* Forces the menu to float above windows and headers */
+  background-color: #ffffff; /* Gives it a solid background color so text doesn't show through */
+  border: 1px solid #1b190f; /* Adds a solid border to match your mosaic design rules */
+  border-radius: 6px;       /* Adds subtle rounding matching your UI theme */
+  padding: 8px 0;           /* Gives items room to breathe away from structural edges */
+  margin-top: 4px;          /* Positions the drop container cleanly right below the button */
+  list-style: none;         /* Strips away the bullet points cluttering your screenshot view */
+  min-width: 200px;         /* Prevents long titles from warping or line-wrapping awkwardly */
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15); /* Adds depth so it is clear where the window sits */
+}
+
+/* Individual list entries decoration styling */
+.dropdown li {
+  padding: 8px 16px;
+  color: #3B342C;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+/* Adds an active visual change state when selecting options */
+.dropdown li:hover {
+  background-color: #6f85e69c; /* Uses your theme's active accent color on list highlights */
+  color: #ffffff;
+}
