@@ -40,14 +40,14 @@ const App = () => {
 
     //React router setup
     <BrowserRouter>
-      //Nav that contains the links for the different pages
+      {/* Nav that contains the links for the different pages */}
       <nav>
-        <Link to="/">Home</Link>
-        <Link to="/WorkShop">Work Shop</Link>
+        <Link to="/">Home</Link> |{" "}
+        <Link to="/WorkShop">Work Shop</Link> |{" "}
         <Link to="/SignIn">Login/Sign up</Link>
       </nav>
 
-      //These routes make the links navigate to the corresponding functions defined above app
+      {/* These routes make the links navigate to the corresponding functions defined above app */}
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/Workshop" element={<Workshop />} />
