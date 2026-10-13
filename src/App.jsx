@@ -28,7 +28,7 @@ function Workshop() {
   )
 }
 //Function that links to loginpage.jsx
-function SignIn() {
+function LogIn() {
   return (
     <LoginPage/>
   )
@@ -51,7 +51,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/Workshop" element={<Workshop />} />
-        <Route path="/SignIn" element={<SignIn />} />
+        <Route path="/SignIn" element={<LogIn />} />
       </Routes>
     </BrowserRouter>
   )
