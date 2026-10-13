@@ -36,6 +36,10 @@ const LoginPage = () => {
       <p>Not a user yet? 
         <Link to="./SignUp"> Sign Up Here</Link>
       </p>
+      <br />
+      <br />
+      <p>Your Username: {name}</p>
+      <p>Your Password: {pass}</p>
     </>
   )
 }
