@@ -60,12 +60,23 @@ const Workspace = () => {
       favorites.filter(key => PANELS[key]).map(key => [key, PANELS[key]])
     ), [favorites]);
 
+    const toggleFavorite = (key) => {
+      setFavorites(prev => prev.includes(key) ? prev.filter(k => k != key) : [...prev, key] );
+    };
+
+    const favoriteButton = (id) => {
+      return(
+        <button onClick={(e) => {e.stopPropagation(); toggleFavorite(id); }}>
+          {favorites.includes(id) ? "★" : "☆" }
+        </button>
+      )
+    };
 
   return (
     <div className="workspace">
       <div className="navbar">
         <Dropdown registry={favoritePanels} onSelect={addPanel} title="Favorites" emptyMessage="Add panels to favorites using the star in the search menu"/>  {/* this passes the data from onSelect inside of AddPanel to the function addPanel */}
-        <SearchBar registry={PANELS} onSelect={addPanel}/>
+        <SearchBar registry={PANELS} onSelect={addPanel} button={favoriteButton}/>
       </div>
       <MosaicWorkspace panels={panels} layout={layout} onChange={handleLayoutChange}/> {/* when a new panel is added/removed to/from panels object it passes the fucntion handleLayoutChange*/}
     </div>
