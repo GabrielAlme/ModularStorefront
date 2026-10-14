@@ -22,11 +22,15 @@ const Dropdown = ({ registry, onSelect, title }) => {
         </button>
         {isOpen && (
             <ul className="search-results">
-                {Object.entries(registry).map(([id, type]) => ( //takes the filtered results and maps the items to an unordered list
-                    <li key={id} onClick={() => {onSelect(id);}}>
-                        <span>{type.title}</span>
-                    </li>
-                ))}
+                {Object.keys(registry).length === 0 ? (
+                    <li className="empty">Add panels to favorites using the star in the search menu</li>
+                    ) : (
+                    Object.entries(registry).map(([id, type]) => ( //takes the filtered results and maps the items to an unordered list
+                        <li key={id} onClick={() => {onSelect(id);}}>
+                            <span>{type.title}</span>
+                        </li>
+                    ))
+                )}
             </ul>
         )}
     </div>
