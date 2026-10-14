@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useMemo } from 'react';
 import { getLeaves } from 'react-mosaic-component';
 import { PANELS } from '../panels/registry';
 import MosaicWorkspace from './MosaicWorkspace';
@@ -47,12 +47,12 @@ const Workspace = () => {
 
 //functions for loading, updating, and saving favorites
   function loadFavorites() {
-    const saved = JSON.parse(localStorage.getItem("favorites")) ?? {};
+    const saved = JSON.parse(localStorage.getItem("favorites")) ?? [];
     return saved;
   }
 
   useEffect(() => {
-    localStorage.setItem("favorites", JSON.stringify({favorites}));
+    localStorage.setItem("favorites", JSON.stringify(favorites));
   }, [favorites]);
 
   const favoritePanels = useMemo(
@@ -64,7 +64,7 @@ const Workspace = () => {
   return (
     <div className="workspace">
       <div className="navbar">
-        <Dropdown onSelect={addPanel}/>  {/* this passes the data from onSelect inside of AddPanel to the function addPanel */}
+        <Dropdown registry={favoritePanels} onSelect={addPanel} title="Favorites"/>  {/* this passes the data from onSelect inside of AddPanel to the function addPanel */}
         <SearchBar registry={PANELS} onSelect={addPanel}/>
       </div>
       <MosaicWorkspace panels={panels} layout={layout} onChange={handleLayoutChange}/> {/* when a new panel is added/removed to/from panels object it passes the fucntion handleLayoutChange*/}
