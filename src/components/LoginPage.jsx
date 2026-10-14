@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
-import { Link } from 'react-router-dom';
-import SignUp from './SignUp';
+import { Link } from 'react-router-dom'
+import SignUp from './SignUp'
 
 function ToSignUp() {
   return <SignUp/>
@@ -26,7 +26,7 @@ const LoginPage = () => {
         <br /><br />
         <label>Enter Password:<br />
           <input
-            type="text"
+            type="password"
             value={pass}
             onChange={(e) => setPass(e.target.value)}
             />
