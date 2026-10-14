@@ -1,6 +1,6 @@
 import { useState, useMemo, useRef, useEffect } from 'react';
 
-const SearchBar = ({ registry, onAction, onSelect }) => {
+const SearchBar = ({ registry, onSelect, button = () => null }) => {
     const [query, setQuery] = useState("");
     const [open, setOpen] = useState(false);
 
@@ -29,7 +29,7 @@ const SearchBar = ({ registry, onAction, onSelect }) => {
     }, [query, registry]);
 
   return (
-    <div>
+    <div ref={wrapperRef}>
       <input
         type="search"
         value={query}
@@ -41,13 +41,8 @@ const SearchBar = ({ registry, onAction, onSelect }) => {
             <ul className="search-results">
                 {results.map(item => ( //takes the filtered results and maps the items to an unordered list
                     <li key={item.id} onClick={() => {onSelect(item.id); setOpen(false)}}>
-                        <span>{item.title}</span>
-                        <button //WIP will be turned into the favorite button (a nice little star)
-                            onMouseDown={e => e.preventDefault()}
-                            onClick={e => {e.stopPropagation(); onAction={item}}} 
-                        >
-                            Favorite
-                        </button>
+                        <span>{item.title}{"   "/*REMOVE THIS WHITESPACE LATER*/}</span>
+                        {button(item.id)}
                     </li>
                 ))}
             </ul>
