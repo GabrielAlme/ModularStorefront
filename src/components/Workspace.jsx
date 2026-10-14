@@ -7,10 +7,14 @@ import SearchBar from './SearchBar';
 
 const Workspace = () => {
   const [workspace] = useState(loadWorkspace);
+  const [favorites, setFavorites] = useState(loadFavorites);
   const [panels, setPanels] = useState(workspace.panels);
   const [layout, setLayout] = useState(workspace.layout);
   const nextId = useRef(workspace.nextId);
 
+
+
+// functions and use states related to loading the workspace panels
   function loadWorkspace() {
     const saved = JSON.parse(localStorage.getItem("workspace")) ?? {};
     return { panels: saved.panels ?? {}, nextId: saved.nextId ?? 1, layout: saved.layout ?? null} //checks local storage for the stored layout of panels, if there is no layout stored it upates it to the values on the right
@@ -21,6 +25,10 @@ const Workspace = () => {
         , [panels, layout]); // this watches the array [panels] and when a change is made to it it uploads it to the local storage
   });
 
+
+
+
+//functions for handling when panels are added and updating the layout
   const addPanel = (type) => {
     const id = nextId.current++; //sets id to the current value of nextId THEN increments the value of nextId
     setPanels(prev => ({...prev, [id] : { type } })); //now creates and object with a keyed id array and a cooresponding type for each key
@@ -34,6 +42,18 @@ const Workspace = () => {
       Object.entries(prev).filter(([id]) => ids.includes(Number(id))) //finds the ids that are still on the page and builds a new object containing the current panels removing the panel that was closed
     ));
   };
+
+
+//functions for loading, updating, and saving favorites
+  function loadFavorites() {
+    const saved = JSON.parse(localStorage.getItem("favorites")) ?? {};
+    return saved;
+  }
+
+  useEffect(() => {
+    localStorage.setItem("favorites", JSON.stringify({favorites}));
+  }, [favorites]);
+
 
   return (
     <div className="workspace">
