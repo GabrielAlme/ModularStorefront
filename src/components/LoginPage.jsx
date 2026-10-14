@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, Route, Routes } from 'react-router-dom'
 import SignUp from './SignUp'
 
 function ToSignUp() {
@@ -34,7 +34,7 @@ const LoginPage = () => {
       </form>
 
       <p>Not a user yet? 
-        <Link to="./SignUp"> Sign Up Here</Link>
+        <Link to="/SignUp"> Sign Up Here</Link>
       </p>
       <br />
       <br />

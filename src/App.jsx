@@ -4,6 +4,7 @@ import Navbar from "./components/Navbar"
 import LoginPage from "./components/LoginPage"
 import Home from "./components/Home"
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom"
+import SignUp from "./components/SignUp"
 
 //Function that links to Home.jsx
 function HomePage() {
@@ -33,6 +34,9 @@ function LogIn() {
     <LoginPage/>
   )
 }
+function ToSignUp() {
+  return <SignUp/>
+}
 
 const App = () => {
   
@@ -52,6 +56,7 @@ const App = () => {
         <Route path="/" element={<HomePage />} />
         <Route path="/Workshop" element={<Workshop />} />
         <Route path="/SignIn" element={<LogIn />} />
+        <Route path="/SignUp" element={<ToSignUp />} />
       </Routes>
     </BrowserRouter>
   )
