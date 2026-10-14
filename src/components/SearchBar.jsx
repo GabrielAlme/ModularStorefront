@@ -41,7 +41,7 @@ const SearchBar = ({ registry, onAction, onSelect }) => {
             <ul className="search-results">
                 {results.map(item => ( //takes the filtered results and maps the items to an unordered list
                     <li key={item.id} onClick={() => {onSelect(item.id); setOpen(false)}}>
-                        <span>{item.title}</span>
+                        <span>{item.title}{"   "/*REMOVE THIS WHITESPACE LATER*/}</span>
                         <button //WIP will be turned into the favorite button (a nice little star)
                             onMouseDown={e => e.preventDefault()}
                             onClick={e => {e.stopPropagation(); onAction={item}}} 
