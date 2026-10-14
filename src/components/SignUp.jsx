@@ -18,28 +18,28 @@ const SignUp = () => {
             value={name}
             onChange = {(e) => setName(e.target.value)}
           />
-        </label><br />
+        </label><br /><br />
         <label>Enter your Username:<br />
           <input 
             type = "text"
             value = {user}
             onChange={(e) => setUser(e.target.value)}
           />
-        </label><br />
+        </label><br /><br />
         <label>Enter your email: <br />
           <input 
             type = "email"
             value = {email}
             onChange = {(e) => setEmail(e.target.value)}
           />
-        </label><br />
+        </label><br /><br />
         <label>Enter your password: <br />
           <input 
             type = "password" 
             value = {pass}
             onChange={(e) => setPass(e.target.value)}
           />
-        </label><br />
+        </label><br /><br />
         <label>Confirm password: <br />
           <input 
             type = "password"
