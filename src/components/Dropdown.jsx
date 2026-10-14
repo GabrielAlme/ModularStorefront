@@ -1,5 +1,4 @@
 import { useState, useRef, useEffect } from "react";
-import { PANELS } from '../panels/registry';
 
 const Dropdown = ({ registry, onSelect, title }) => {
 
@@ -27,9 +26,11 @@ const Dropdown = ({ registry, onSelect, title }) => {
             { title }
         </button>
         {isOpen && (
-            <ul className="dropdown">
-                {Object.entries(PANELS).map(([type, panel]) => ( //this takes each entry in PANELS and creates an object for them and adds that object to the dropdown menu
-                    <li key={type} onClick={() => onSelect(type)}>{ panel.title }</li>
+            <ul className="search-results">
+                {results.map(item => ( //takes the filtered results and maps the items to an unordered list
+                    <li key={item.id} onClick={() => {onSelect(item.id);}}>
+                        <span>{item.title}</span>
+                    </li>
                 ))}
             </ul>
         )}
