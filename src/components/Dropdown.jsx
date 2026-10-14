@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 
-const Dropdown = ({ registry, onSelect, title }) => {
+const Dropdown = ({ registry, onSelect, title, emptyMessage = "Nothing Here"}) => {
 
     const [isOpen, setIsOpen] = useState(false);
     const ref = useRef(null);
@@ -23,7 +23,7 @@ const Dropdown = ({ registry, onSelect, title }) => {
         {isOpen && (
             <ul className="search-results">
                 {Object.keys(registry).length === 0 ? (
-                    <li className="empty">Add panels to favorites using the star in the search menu</li>
+                    <li className="empty">{ emptyMessage }</li>
                     ) : (
                     Object.entries(registry).map(([id, type]) => ( //takes the filtered results and maps the items to an unordered list
                         <li key={id} onClick={() => {onSelect(id);}}>

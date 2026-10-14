@@ -64,7 +64,7 @@ const Workspace = () => {
   return (
     <div className="workspace">
       <div className="navbar">
-        <Dropdown registry={favoritePanels} onSelect={addPanel} title="Favorites"/>  {/* this passes the data from onSelect inside of AddPanel to the function addPanel */}
+        <Dropdown registry={favoritePanels} onSelect={addPanel} title="Favorites" emptyMessage="Add panels to favorites using the star in the search menu"/>  {/* this passes the data from onSelect inside of AddPanel to the function addPanel */}
         <SearchBar registry={PANELS} onSelect={addPanel}/>
       </div>
       <MosaicWorkspace panels={panels} layout={layout} onChange={handleLayoutChange}/> {/* when a new panel is added/removed to/from panels object it passes the fucntion handleLayoutChange*/}
