@@ -16,8 +16,9 @@ body {
   z-index: 1;
   top: 0;
   left: 0;
-  background-color: #111;
+  background-color: #fffbf2;
   overflow-x: hidden;
+  border-right: 1px solid black;
 }
 
 .sidebar a {
@@ -53,6 +54,7 @@ body {
 /* workshop styling */
 
 .workshop {
+
 }
 
 .ws { /*workspace*/
