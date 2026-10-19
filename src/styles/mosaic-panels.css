@@ -13,7 +13,7 @@
 }
 
 .mosaic-theme .mosaic-tile {
-    margin: var(--gap);
+    padding: var(--gap);
 }
 
 .mosaic-theme .mosaic-window {
@@ -25,7 +25,6 @@
     background: var(--panel);
     padding: var(--gap);
 }
-
 
 /* mosaic resizing bar */
 .mosaic-theme .mosaic-split:hover.-column {

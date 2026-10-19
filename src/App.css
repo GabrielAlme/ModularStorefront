@@ -1,17 +1,24 @@
 body {
     background-color: #F2EBDD;
+    margin: 0;  
+}
+
+.app{
+  height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  grid-template-columns: auto auto 1fr;
 }
 
 .sidebar {
   height: 100%;
   width: 160px;
-  position: fixed;
   z-index: 1;
   top: 0;
   left: 0;
-  background-color: #111;
+  background-color: #fffbf2;
   overflow-x: hidden;
-  padding-top: 16px;
+  border-right: 1px solid black;
 }
 
 .sidebar a {
@@ -24,9 +31,7 @@ body {
 .topnav {
   width: 100%;
   height: 60px;
-  position: fixed;
   top: 0;
-  left: 160px;
   background-color: #111;
 }
 
@@ -46,27 +51,132 @@ body {
   color: #f1f1f1;
 }
 
-.main {
-  margin-left: 160px; /* Same as the width of the sidebar */
-  margin-top: 60px;   /* Same as height of the topnav     */
-  padding: 0px 10px;
+/* workshop styling */
+
+.workshop {
+
 }
+
+.ws { /*workspace*/
+  overflow: auto;
+  grid-column: 2 / 4;
+}
+
+.router-nav { /*topnav*/
+  grid-column: 1 / 4;
+  z-index: 20;
+}
+
+/* workspace styling */
 
 .workspace {
   display: grid;
-  grid-template-rows: 100px 1fr;
+  grid-template-rows: auto 1fr;
+  height: 100%;
 }
 
 .workspace .navbar {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  width: 100%;
+  grid-template-columns: auto auto 1fr;
+  z-index: 5;
+  border-bottom: 1px solid black;
+  background-color: #fffbf2;
+  align-items: center;
+  padding: 0.5rem 0 0.5rem 0;
 }
 
-#ws {
-    padding-left: 160px;
-    padding-top: 60px;
+.workspace .navbar > * {
+  padding-left: 0.5rem;
 }
 
+.workspace .mosaic-workspace{
+  display: grid;
+  overflow-y: auto;
+}
+
+/* styling for dropdowns */
+
+.drop-wrapper {
+  position: relative;
+}
+
+.drop-button {
+  height: 2rem;
+  width: 6rem;
+  border-radius: 16px;
+  font-size: 0.95rem;
+  font-family: Arial;
+  background-color: white;
+}
+
+.drop-list {
+  position: absolute;
+  z-index: 10;
+  border: 1px solid black;
+  border-radius: 12px;
+  background-color: #fffbf2;
+  list-style: none;
+  display: block;
+  padding: 0;
+}
+
+.drop-list li {
+  border-bottom: 1px solid black;
+  padding: 0.5rem;
+}
+
+.drop-list li:last-child{
+  border-bottom: none;
+}
+
+/* styling for search bar */
+
+.search-input {
+  width: 30rem;
+  height: 2rem;
+  border-radius: 16px;
+  padding: 0.5rem;
+  font-size: 0.95rem;
+  font-family: Arial;
+  background-color: white;
+}
+
+.search-list {
+  position: absolute;
+  z-index: 10;
+  border: 1px solid black;
+  border-radius: 12px;
+  background-color: #fffbf2;
+  list-style: none;
+  display: block;
+  padding: 0;
+  width: 30rem;
+}
+
+.search-list li {
+  position: relative;
+  border-bottom: 1px solid black;
+  padding: 0.5rem;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; /* this is a font and i really like it dont ask me how it works */
+}
+
+.search-list li:last-child{
+  border-bottom: none;
+}
+
+.search-list li button{
+  display: flex;
+  position: absolute;
+  left: auto;
+  top: -0.1rem;
+  right: 0.5rem;
+  border: none;
+  background: none;
+  font-size: 1.5rem;
+}
+
+/* styling for certain screen sizes (mobile, desktop, ect.*/
 
 @media screen and (max-height: 450px) {
   .sidebar {padding-top: 15px;}
