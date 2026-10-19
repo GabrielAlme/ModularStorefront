@@ -28,6 +28,7 @@ body {
   top: 0;
   left: 160px;
   background-color: #111;
+  z-index: 20;
 }
 
 .topnav a {
@@ -54,12 +55,16 @@ body {
 
 .workspace {
   display: grid;
-  grid-template-rows: 100px 1fr;
+  grid-template-rows: auto 1fr;
 }
 
 .workspace .navbar {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: auto auto 1fr;
+}
+
+.workspace .navbar > * {
+  padding-right: 0.5rem;
 }
 
 #ws {
@@ -71,6 +76,15 @@ body {
 
 .drop-wrapper {
   position: relative;
+}
+
+.drop-button {
+  height: 2rem;
+  width: 6rem;
+  border-radius: 16px;
+  font-size: 0.95rem;
+  font-family: Arial;
+  background-color: white;
 }
 
 .drop-list {
@@ -102,6 +116,7 @@ body {
   padding: 0.5rem;
   font-size: 0.95rem;
   font-family: Arial;
+  background-color: white;
 }
 
 .search-list {

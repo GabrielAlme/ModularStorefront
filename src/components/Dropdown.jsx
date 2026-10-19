@@ -17,7 +17,7 @@ const Dropdown = ({ registry, onSelect, title, emptyMessage = "Nothing Here"}) =
 
   return (
     <div ref={ref} className="drop-wrapper">
-        <button onClick={() => setIsOpen(prev => !prev)}>
+        <button onClick={() => setIsOpen(prev => !prev)} className="drop-button">
             { title }
         </button>
         {isOpen && (
