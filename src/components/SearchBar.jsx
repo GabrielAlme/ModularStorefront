@@ -36,9 +36,10 @@ const SearchBar = ({ registry, onSelect, button = () => null }) => {
         onChange={e => { setQuery(e.target.value); setOpen(true); }}
         onFocus={() => setOpen(true)}
         placeholder="Search panels..."
+        className="search-input"
       />
         {open && results.length > 0 && (
-            <ul className="search-results">
+            <ul className="search-list">
                 {results.map(item => ( //takes the filtered results and maps the items to an unordered list
                     <li key={item.id} onClick={() => {onSelect(item.id); setOpen(false)}}>
                         <span>{item.title}{"   "/*REMOVE THIS WHITESPACE LATER*/}</span>

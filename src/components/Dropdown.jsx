@@ -16,14 +16,14 @@ const Dropdown = ({ registry, onSelect, title, emptyMessage = "Nothing Here"}) =
 
 
   return (
-    <div ref={ref}>
-        <button onClick={() => setIsOpen(prev => !prev)}>
+    <div ref={ref} className="drop-wrapper">
+        <button onClick={() => setIsOpen(prev => !prev)} className="drop-button">
             { title }
         </button>
         {isOpen && (
-            <ul className="search-results">
+            <ul className="drop-list">
                 {Object.keys(registry).length === 0 ? (
-                    <li className="empty">{ emptyMessage }</li>
+                    <li>{ emptyMessage }</li>
                     ) : (
                     Object.entries(registry).map(([id, type]) => ( //takes the filtered results and maps the items to an unordered list
                         <li key={id} onClick={() => {onSelect(id);}}>
