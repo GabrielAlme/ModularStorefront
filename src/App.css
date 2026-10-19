@@ -51,12 +51,6 @@ body {
   color: #f1f1f1;
 }
 
-.main {
-  margin-left: 160px; /* Same as the width of the sidebar */
-  margin-top: 60px;   /* Same as height of the topnav     */
-  padding: 0px 10px;
-}
-
 /* workshop styling */
 
 .workshop {
@@ -74,9 +68,6 @@ body {
   z-index: 20;
 }
 
-.sb { /*sidebar*/
-
-}
 /* workspace styling */
 
 .workspace {
@@ -90,14 +81,12 @@ body {
   grid-template-columns: auto auto 1fr;
   z-index: 5;
   border-bottom: 1px solid black;
-  padding: 1rem;
   background-color: #fffbf2;
   align-items: center;
 }
 
 .workspace .navbar > * {
-  padding-right: 0.5rem;
-  padding-bottom: 0.5rem;
+  padding-left: 0.5rem;
 }
 
 /* styling for dropdowns */
