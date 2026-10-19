@@ -93,6 +93,41 @@ body {
   border-bottom: none;
 }
 
+/* styling for search bar */
+
+.search-list {
+  position: absolute;
+  z-index: 10;
+  border: 1px solid black;
+  border-radius: 12px;
+  background-color: #fffbf2;
+  list-style: none;
+  display: block;
+  padding: 0;
+  width: 18rem;
+}
+
+.search-list li {
+  position: relative;
+  border-bottom: 1px solid black;
+  padding: 0.5rem;
+}
+
+.search-list li:last-child{
+  border-bottom: none;
+}
+
+.search-list li button{
+  display: flex;
+  position: absolute;
+  left: auto;
+  top: -0.1rem;
+  right: 0.5rem;
+  border: none;
+  background: none;
+  font-size: 1.5rem;
+}
+
 /* styling for certain screen sizes (mobile, desktop, ect.*/
 
 @media screen and (max-height: 450px) {
