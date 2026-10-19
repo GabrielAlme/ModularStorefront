@@ -53,23 +53,36 @@ body {
   padding: 0px 10px;
 }
 
+/* workspace styling */
+
 .workspace {
   display: grid;
-  grid-template-rows: auto 1fr;
+  grid-template-rows: 50px 1fr;
 }
 
 .workspace .navbar {
   display: grid;
+  width: 100%;
   grid-template-columns: auto auto 1fr;
+  position: fixed;
+  z-index: 5;
+  border-bottom: 1px solid black;
+  padding-left: 1rem;
+  background-color: #fffbf2;
 }
 
 .workspace .navbar > * {
   padding-right: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.workspace .mosaic-workspace{
+  margin-top: 40px;
 }
 
 #ws {
-    padding-left: 160px;
-    padding-top: 60px;
+    padding-left: 152px;
+    padding-top: 50px;
 }
 
 /* styling for dropdowns */

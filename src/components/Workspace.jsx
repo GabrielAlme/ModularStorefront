@@ -78,7 +78,9 @@ const Workspace = () => {
         <Dropdown registry={favoritePanels} onSelect={addPanel} title="Favorites" emptyMessage="Add panels to favorites using the star in the search menu"/>  {/* this passes the data from onSelect inside of AddPanel to the function addPanel */}
         <SearchBar registry={PANELS} onSelect={addPanel} button={favoriteButton}/>
       </div>
-      <MosaicWorkspace panels={panels} layout={layout} onChange={handleLayoutChange}/> {/* when a new panel is added/removed to/from panels object it passes the fucntion handleLayoutChange*/}
+      <div className="mosaic-workspace">
+        <MosaicWorkspace panels={panels} layout={layout} onChange={handleLayoutChange}/> {/* when a new panel is added/removed to/from panels object it passes the fucntion handleLayoutChange*/}
+      </div>
     </div>
   )
 }
