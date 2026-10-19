@@ -81,7 +81,7 @@ body {
   border-bottom: 1px solid black;
   background-color: #fffbf2;
   align-items: center;
-  padding: 0.5rem;
+  padding: 0.5rem 0 0.5rem 0;
 }
 
 .workspace .navbar > * {
@@ -90,6 +90,7 @@ body {
 
 .workspace .mosaic-workspace{
   display: grid;
+  overflow-y: auto;
 }
 
 /* styling for dropdowns */
