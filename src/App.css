@@ -67,6 +67,33 @@ body {
     padding-top: 60px;
 }
 
+/* styling for dropdowns */
+
+.drop-wrapper {
+  position: relative;
+}
+
+.drop-list {
+  position: absolute;
+  z-index: 10;
+  border: 1px solid black;
+  border-radius: 12px;
+  background-color: #fffbf2;
+  list-style: none;
+  display: block;
+  padding: 0;
+}
+
+.drop-list li {
+  border-bottom: 1px solid black;
+  padding: 0.5rem;
+}
+
+.drop-list li:last-child{
+  border-bottom: none;
+}
+
+/* styling for certain screen sizes (mobile, desktop, ect.*/
 
 @media screen and (max-height: 450px) {
   .sidebar {padding-top: 15px;}
