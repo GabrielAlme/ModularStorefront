@@ -36,6 +36,7 @@ const SearchBar = ({ registry, onSelect, button = () => null }) => {
         onChange={e => { setQuery(e.target.value); setOpen(true); }}
         onFocus={() => setOpen(true)}
         placeholder="Search panels..."
+        className="search-input"
       />
         {open && results.length > 0 && (
             <ul className="search-list">
