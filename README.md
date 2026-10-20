@@ -44,3 +44,8 @@ PGAdmin is a tool for programming with postgresSQL made by the same people:
 
 The install process is lengthy and involves a lot of different menus so think carefully about 
 
+Other node packages that need to be installed to use this code locally:
+
+ - npm install pg
+ - npm install express
+
