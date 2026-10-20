@@ -1,22 +1,38 @@
-import React from 'react'
-import { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+
 
 const SignUp = () => {
+
+  //States for the new users information
   const [name, setName] = useState("");
   const [user, setUser] = useState("");
   const [pass, setPass] = useState("");
   const [confirm, setConfirm] = useState("");
   const [email, setEmail] = useState("");
 
+  async function handleSubmit(e) {
+    e.preventDefault();
+    
+    if (pass !== confirm) {
+      alert("Passwords do not match");
+      setPass("");
+      setConfirm("");
+      return;
+    }
+
+    alert("Successfully signed up");
+  }
+
   return (
     <>
       <h2>Sign Up:</h2>
-      <form>
+      <form onSubmit={handleSubmit} >
         <label>Enter your name: <br />
           <input 
             type = "text"
             value={name}
             onChange = {(e) => setName(e.target.value)}
+            required
           />
         </label><br /><br />
         <label>Enter your Username:<br />
@@ -24,6 +40,7 @@ const SignUp = () => {
             type = "text"
             value = {user}
             onChange={(e) => setUser(e.target.value)}
+            required
           />
         </label><br /><br />
         <label>Enter your email: <br />
@@ -31,6 +48,7 @@ const SignUp = () => {
             type = "email"
             value = {email}
             onChange = {(e) => setEmail(e.target.value)}
+            required
           />
         </label><br /><br />
         <label>Enter your password: <br />
@@ -38,6 +56,7 @@ const SignUp = () => {
             type = "password" 
             value = {pass}
             onChange={(e) => setPass(e.target.value)}
+            required
           />
         </label><br /><br />
         <label>Confirm password: <br />
@@ -45,18 +64,12 @@ const SignUp = () => {
             type = "password"
             value = {confirm}
             onChange={(e) => setConfirm(e.target.value)}
+            required
           />
-        </label>
-      </form><br /><br />
+        </label><br /><br />
+        <input type="submit" />
+      </form>
 
-      <p>Your name: {name} <br /></p>
-      <p>Your Username: {user} <br /></p>
-      <p>Your email: {email} <br /></p>
-
-      {confirm && (
-        /* Ternary expression. Confirms password if pass and confirm are equal else states they don't match */
-        <p>{pass === confirm ? "Password Confirmed" : "Passwords don't match"}</p>
-      )}
     </>
   )
 }
