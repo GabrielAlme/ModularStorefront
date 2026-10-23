@@ -48,4 +48,5 @@ Other node packages that need to be installed to use this code locally:
 
  - npm install pg
  - npm install express
+ - npm install bcrypt
 
