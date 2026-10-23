@@ -46,7 +46,7 @@ The install process is lengthy and involves a lot of different menus so think ca
 
 Other node packages that need to be installed to use this code locally:
 
- - npm install pg
- - npm install express
- - npm install bcrypt
+ - npm install pg (postgresql)
+ - npm install express (backend for node)
+ - npm install bcrypt (password hashing method)
 
