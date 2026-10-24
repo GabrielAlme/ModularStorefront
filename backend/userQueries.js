@@ -27,13 +27,20 @@ const createUser = async ({ name, username, email, password }) => {
     try {
         email = email.toLowerCase().trim();
         const hash = await bcrypt.hash(password, SALT);
-        email = email.toLowerCase().trim();
         const { rows } = await pool.query(
             "INSERT INTO users (name, username, email, password_hash) VALUES ($1, $2, $3, $4) RETURNING user_id, name, username, email",
             [name, username, email, hash]
         );
         return rows[0];
     } catch (error) {
+        if (error.code === "23505") {
+            if(error.constraint === "users_email_unique") { 
+                throw new Error("Email Already Registered");
+            }
+            if(error.constraint === "users_username_constraint") {
+                throw new Error("Username already taken");
+            }
+        }
         console.error(error);
         throw new Error("Registration error");
     }
@@ -75,19 +82,6 @@ const findUser = async (id) => {
             [id]
         );
         return rows[0] || null;
-    } catch (error) {
-        console.error(error);
-        throw new Error("Internal Server Error");
-    }
-};
-
-const findEmail = async (email) => {
-    try {
-        const { rows } = await pool.query(
-            "SELECT EXISTS (SELECT 1 FROM users WHERE email = $1)",
-            [email]
-        );
-        return rows[0].exists;
     } catch (error) {
         console.error(error);
         throw new Error("Internal Server Error");
