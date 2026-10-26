@@ -242,3 +242,39 @@ body {
 .bg-midnight { background-color: #1E293B !important; color: #F8FAFC; }
 .bg-forest { background-color: #D1FAE5 !important; }
 .bg-sunset { background-color: #FFEDD5 !important; }
+
+/* --- Modal Tab System Layout --- */
+.modal-tabs {
+  display: flex;
+  border-bottom: 2px solid #ccc;
+  margin-bottom: 1.5rem;
+  gap: 4px;
+}
+
+.tab-btn {
+  flex: 1;
+  background: #f3f4f6;
+  border: 1px solid #ccc;
+  border-bottom: none;
+  padding: 8px 12px;
+  border-radius: 8px 8px 0 0;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: bold;
+  color: #666;
+  transition: all 0.15s ease;
+}
+
+.tab-btn.active {
+  background: #fffbf2;
+  color: #111111;
+  border-top: 2px solid black;
+  border-left: 2px solid black;
+  border-right: 2px solid black;
+  margin-bottom: -2px;
+}
+
+.tab-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
