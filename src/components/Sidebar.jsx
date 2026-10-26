@@ -1,26 +1,26 @@
-import React, { useState } from 'react'; // Extended inclusion logic adding core standard React state Hooks
-import SettingsModal from './SettingsModal'; // Appending new implementation modal container entry reference
+import React, { useState } from 'react'; // ADDED: Import state hook to track modal open/close
+import SettingsModal from './SettingsModal'; // ADDED: Import your unified settings panel
 
 const Sidebar = () => {
-  // In-line hook tracks control variables monitoring window rendering active flags
-  const [modalActive, setModalActive] = useState(false);
+  // ADDED: State variable controlling whether the configuration panel is visible
+  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
 
   return (
     <div className="sidebar">
       <div>This is empty for now</div>
       
-      {/* ADDED CODE: Settings interface invocation control trigger button */}
+      {/* ADDED: Reusable custom trigger button that activates the overlay visibility */}
       <button 
         className="sidebar-settings-btn" 
-        onClick={() => setModalActive(true)}
+        onClick={() => setIsSettingsOpen(true)}
       >
         ⚙️ Settings Manager
       </button>
 
-      {/* ADDED CODE: Embedded overlay listener tracking state flags */}
+      {/* ADDED: The modal container itself, passing down state control variables safely */}
       <SettingsModal 
-        isOpen={modalActive} 
-        onClose={() => setModalActive(false)} 
+        isOpen={isSettingsOpen} 
+        onClose={() => setIsSettingsOpen(false)} 
       />
     </div>
   )
