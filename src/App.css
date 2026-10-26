@@ -336,3 +336,22 @@ body {
 .bg-wallpaper-grid {
 
 }
+
+/* --- Force Dashboard Content Text and Modal Elements to Stay Dark --- */
+#config-modal-view,
+#config-modal-view h3,
+#config-modal-view h4,
+#config-modal-view p,
+#config-modal-view label,
+#config-modal-view .theme-btn,
+.ws h1,
+.ws h2,
+.ws h3,
+.ws p {
+  color: #111111 !important; /* Forces solid dark charcoal text across layout labels and headers */
+}
+
+/* --- EXCEPTION RULE: Force the text inside your gradient thumbnail buttons to stay white --- */
+.wallpaper-card {
+  color: #ffffff !important;
+}

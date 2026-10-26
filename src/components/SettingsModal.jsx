@@ -69,9 +69,9 @@ const SettingsModal = ({ isOpen, onClose }) => {
           <div className="tab-panel">
             <div className="modal-section">
               <h4>Canvas Controls</h4>
-              <p style={{ fontSize: '0.85rem', color: '#555' }}>
-                Load an instantly ready production layout template below:
-              </p>
+             <p className="modal-description-text">
+                 Load an instantly ready production layout template below:
+            </p>
               
               <div className="bg-wallpaper-grid">
                 <div 
