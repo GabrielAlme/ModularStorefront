@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BACKGROUND_THEMES } from '../constants/themes';
+import { BACKGROUND_THEMES } from '../components/themes.js';
 
 const SettingsModal = ({ isOpen, onClose }) => {
   // Local tracking configuration for panel inputs
