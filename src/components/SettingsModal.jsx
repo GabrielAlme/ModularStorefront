@@ -84,19 +84,19 @@ const SettingsModal = ({ isOpen, onClose }) => {
             className={`tab-btn ${activeTab === 'customizer' ? 'active' : ''}`}
             onClick={() => setActiveTab('customizer')}
           >
-            🎨 Advanced Themes
+            🎨 Custom Background
           </button>
           <button 
             className={`tab-btn ${activeTab === 'presets' ? 'active' : ''}`}
             disabled // Locked on this branch; handled in AddBackground branch
           >
-            🖼️ Quick Templates
+            🖼️ Add Template
           </button>
           <button 
             className={`tab-btn ${activeTab === 'request' ? 'active' : ''}`}
             disabled // Locked on this branch; handled in RequestPanel branch
           >
-            📥 Propose Panel
+            📥 Request New Panel
           </button>
         </div>
 
