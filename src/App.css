@@ -206,6 +206,13 @@ body {
   max-width: 90%;
 }
 
+/* Also ensure headings and paragraphs inside the modal remain dark */
+.settings-modal h3, 
+.settings-modal h4, 
+.settings-modal p {
+  color: #111111 !important;
+}
+
 .modal-section {
   margin-bottom: 1.5rem;
   padding-bottom: 1rem;
@@ -275,11 +282,16 @@ body {
 
 /* --- Curated Static Wallpapers (Using High-Quality royalty-free Unsplash URLs) --- */
 .bg-tech-blueprint { 
-  background-image: url('https://unsplash.com') !important; 
+  background: linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%) !important; 
+  color: #f8fafc !important; /* White text so you can read your workspace panels */
 }
+
 .bg-dark-mesh { 
-  background-image: url('https://unsplash.com') !important; 
+  background: linear-gradient(135deg, #0d9488 0%, #111827 100%) !important; 
+  color: #f8fafc !important; 
 }
+
 .bg-soft-gradient { 
-  background-image: url('https://unsplash.com') !important; 
+  background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%) !important; 
+  color: #f8fafc !important; 
 }

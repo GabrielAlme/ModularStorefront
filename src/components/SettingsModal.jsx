@@ -3,18 +3,43 @@ import React from 'react';
 const SettingsModal = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
-  // Task execution: Safely clear previous custom body styles before injecting image sets
+    // Task execution: Safely clear previous custom template classes off all layout containers
   const clearAllBackgrounds = () => {
-    document.body.classList.remove(
-      'bg-default', 'bg-midnight', 'bg-forest', 'bg-sunset',
-      'bg-tech-blueprint', 'bg-dark-mesh', 'bg-soft-gradient'
-    );
+    // Collect all potential structural block elements from the DOM
+    const targets = [
+      document.body,
+      document.querySelector('.app'),
+      document.querySelector('.ws'),
+      document.querySelector('.workspace')
+    ];
+    
+    // Loop through each found element and cleanly strip theme tags
+    targets.forEach(element => {
+      if (element) {
+        element.classList.remove(
+          'bg-default', 'bg-midnight', 'bg-forest', 'bg-sunset',
+          'bg-tech-blueprint', 'bg-dark-mesh', 'bg-soft-gradient'
+        );
+      }
+    });
   };
 
-  // Task execution: Apply a specific preset asset backdrop class to the document tree
+  // Task execution: Inject preset wallpaper class rules across every framework element
   const applyPresetWallpaper = (wallpaperClass) => {
     clearAllBackgrounds();
-    document.body.classList.add(wallpaperClass);
+    
+    const targets = [
+      document.body,
+      document.querySelector('.app'),
+      document.querySelector('.ws'),
+      document.querySelector('.workspace')
+    ];
+    
+    targets.forEach(element => {
+      if (element) {
+        element.classList.add(wallpaperClass);
+      }
+    });
   };
 
   return (
