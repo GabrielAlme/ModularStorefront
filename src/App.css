@@ -239,6 +239,107 @@ body {
 
 /* --- Theme Registry Background Classes --- */
 .bg-default { background-color: #F2EBDD !important; }
-.bg-midnight { background-color: #1E293B !important; color: #F8FAFC; }
+.bg-midnight { background-color: #1E293B !important;}
 .bg-forest { background-color: #D1FAE5 !important; }
 .bg-sunset { background-color: #FFEDD5 !important; }
+
+/* --- Shield Modal Content From Color Inversions --- */
+.settings-modal {
+  background-color: #fffbf2;
+  padding: 2rem;
+  border-radius: 12px;
+  border: 2px solid black;
+  width: 420px;
+  max-width: 90%;
+  color: #111111 !important; 
+}
+
+.settings-modal h3, 
+.settings-modal h4, 
+.settings-modal p,
+.settings-modal label {
+  color: #111111 !important;
+}
+
+/* --- Interactive Theme Customizer Styling UI --- */
+.customizer-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+  padding: 8px;
+  background: rgba(0,0,0,0.04);
+  border-radius: 8px;
+}
+
+.color-input-circle {
+  border: 1px solid black;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.color-input-circle::-webkit-color-swatch-wrapper { padding: 0; }
+.color-input-circle::-webkit-color-swatch { border: none; border-radius: 50%; }
+
+/* Ensure base typography changes dynamically inside workspaces when chosen */
+.theme-text-light { color: #f8fafc !important; }
+.theme-text-light h3, .theme-text-light h4, .theme-text-light p { color: #f8fafc !important; }
+
+/* --- Modal Tab System Layout --- */
+.modal-tabs {
+  display: flex;
+  border-bottom: 2px solid #ccc;
+  margin-bottom: 1.5rem;
+  gap: 4px;
+}
+
+.tab-btn {
+  flex: 1;
+  background: #f3f4f6;
+  border: 1px solid #ccc;
+  border-bottom: none;
+  padding: 8px 12px;
+  border-radius: 8px 8px 0 0;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: bold;
+  color: #666;
+  transition: all 0.15s ease;
+}
+
+.tab-btn.active {
+  background: #fffbf2;
+  color: #111111;
+  border-top: 2px solid black;
+  border-left: 2px solid black;
+  border-right: 2px solid black;
+  margin-bottom: -2px; /* Pull active tab over the border line */
+}
+
+.tab-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* --- Custom Image Input Form Section --- */
+.image-input-row {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 15px;
+  padding: 10px;
+  background: rgba(0, 0, 0, 0.04);
+  border-radius: 8px;
+}
+
+.image-url-field {
+  width: 90%;
+  padding: 0.5rem;
+  border: 1px solid black;
+  border-radius: 8px;
+  font-size: 0.85rem;
+}
