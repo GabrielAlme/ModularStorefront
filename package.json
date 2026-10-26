@@ -8,12 +8,16 @@
   },
   "scripts": {
     "dev": "vite",
+    "server": "node --env-file-if-exists=.env server.js",
+    "test": "node --env-file-if-exists=.env.test --test backend/tests/api.test.js",
+    "smoke": "node --test backend/tests/smoke.test.js",
     "build": "vite build",
     "start": "node server.js",
     "heroku-postbuild": "npm run build"
   },
   "dependencies": {
     "express": "^5.2.1",
+    "pg": "^8.23.1",
     "react": "^19.3.0",
     "react-dom": "^19.3.0",
     "react-mosaic-component": "^7.1.0",
