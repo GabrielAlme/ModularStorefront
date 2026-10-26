@@ -182,3 +182,63 @@ body {
   .sidebar {padding-top: 15px;}
   .sidebar a {font-size: 18px;}
 }
+
+/* --- Settings Modal Structure --- */
+.settings-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.settings-modal {
+  background-color: #fffbf2;
+  padding: 2rem;
+  border-radius: 12px;
+  border: 2px solid black;
+  width: 400px;
+  max-width: 90%;
+}
+
+.modal-section {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px dashed #ccc;
+}
+
+.theme-btn {
+  margin: 0.25rem;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  border: 1px solid black;
+  background: white;
+  cursor: pointer;
+}
+
+.sidebar-settings-btn {
+  background: none;
+  border: none;
+  color: #818181;
+  font-size: 18px;
+  padding: 6px 8px 6px 16px;
+  display: block;
+  text-align: left;
+  width: 100%;
+  cursor: pointer;
+}
+
+.sidebar-settings-btn:hover {
+  color: #111111;
+}
+
+/* --- Theme Registry Background Classes --- */
+.bg-default { background-color: #F2EBDD !important; }
+.bg-midnight { background-color: #1E293B !important; color: #F8FAFC; }
+.bg-forest { background-color: #D1FAE5 !important; }
+.bg-sunset { background-color: #FFEDD5 !important; }
