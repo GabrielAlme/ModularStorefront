@@ -242,3 +242,44 @@ body {
 .bg-midnight { background-color: #1E293B !important; color: #F8FAFC; }
 .bg-forest { background-color: #D1FAE5 !important; }
 .bg-sunset { background-color: #FFEDD5 !important; }
+
+/* --- Pre-Selected Wallpaper Layout Classes --- */
+.bg-wallpaper-grid {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+  margin-bottom: 15px;
+}
+
+.wallpaper-card {
+  flex: 1;
+  height: 60px;
+  border: 1px solid black;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 0.8rem;
+  background-size: cover;
+  background-position: center;
+  color: white;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+  transition: transform 0.1s ease;
+}
+
+.wallpaper-card:hover {
+  transform: scale(1.05);
+}
+
+/* --- Curated Static Wallpapers (Using High-Quality royalty-free Unsplash URLs) --- */
+.bg-tech-blueprint { 
+  background-image: url('https://unsplash.com') !important; 
+}
+.bg-dark-mesh { 
+  background-image: url('https://unsplash.com') !important; 
+}
+.bg-soft-gradient { 
+  background-image: url('https://unsplash.com') !important; 
+}
