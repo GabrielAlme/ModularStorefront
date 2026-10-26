@@ -49,14 +49,6 @@ Other node packages that need to be installed to use this code locally:
  - npm install pg (postgresql)
  - npm install express (backend for node)
  - npm install bcrypt (password hashing method)
+ - npm install express (manages talks between backend and frontend)
+ - npm install express dotenv (loads assets from .env)
 
-
-## Running the app with the Neon database (team setup)
-
-1. `npm install`
-2. Copy `.env.example` to `.env` and paste the shared Neon connection string into `DATABASE_URL` (get it from the team privately, never commit it).
-3. Terminal 1: `npm run server` (Express API on http://localhost:3000)
-4. Terminal 2: `npm run dev` (React on http://localhost:5173, proxies /api to the server)
-5. Check http://localhost:3000/api/health returns `{"ok":true}`
-
-The Neon tables are created by running `backend/db/schema.sql` (then optionally `backend/db/seed.sql`) in the Neon SQL Editor.

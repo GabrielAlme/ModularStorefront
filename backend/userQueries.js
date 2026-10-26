@@ -1,16 +1,18 @@
-const { Pool } = require("pg");
+import { pool } from './db.js'
 const bcrypt = require("bcrypt");
 
-const pool = new Pool({
-    user: process.env.DB_USER || "postgres",
-    host: process.env.DB_HOST || "localhost",
-    database: process.env.DB_NAME || "storefront",
-    password: process.env.DB_PASSWORD,
-    port: Number(process.env.DB_PORT) || 5432,
-});
+// const pool = new Pool({
+//     user: process.env.DB_USER || "postgres",
+//     host: process.env.DB_HOST || "localhost",
+//     database: process.env.DB_NAME || "storefront",
+//     password: process.env.DB_PASSWORD,
+//     port: Number(process.env.DB_PORT) || 5432,
+// });
 
+//Salt for bcrypt, number of encryption rounds
 const SALT = 10;
 
+//returns all users
 const getUsers = async () => {
     try {
         const { rows } = await pool.query(
@@ -23,8 +25,10 @@ const getUsers = async () => {
     }
 };
 
+//Creates a new user and inserts them into the users table
 const createUser = async ({ name, username, email, password }) => {
     try {
+        //gets rid of any whitespace on the email before inserting
         email = email.toLowerCase().trim();
         const hash = await bcrypt.hash(password, SALT);
         const { rows } = await pool.query(
@@ -33,7 +37,9 @@ const createUser = async ({ name, username, email, password }) => {
         );
         return rows[0];
     } catch (error) {
-        if (error.code === "23505") {
+        //23505 is the error code for a unique constraint violation
+        //If an email or username is already in the database, it will throw error 23505 with email or username in error.constraint
+        if (error.code === "23505") {  
             if(error.constraint === "users_email_unique") { 
                 throw new Error("Email Already Registered");
             }
@@ -46,6 +52,7 @@ const createUser = async ({ name, username, email, password }) => {
     }
 };
 
+//logs the user in and returns a const with the users information (minus the password) if they are successfully logged in
 const loginUser = async (email, plainPass) => {
     try {
         email = email.toLowerCase().trim();
@@ -53,13 +60,15 @@ const loginUser = async (email, plainPass) => {
             "SELECT * FROM users WHERE email = $1",
             [email]
         );
-
+        //detects if the email is registered or not
         if (rows.length === 0){
             console.log("User Not Found");
             return null;
         }
 
+        //Storing everything but the password in the const user
         const { password_hash: storedPass, ...user} = rows[0];
+        //Detecting if the password given is correct
         const match = await bcrypt.compare(plainPass, storedPass);
 
         if(match) {
@@ -75,6 +84,7 @@ const loginUser = async (email, plainPass) => {
     }
 };
 
+//finds a user by their id
 const findUser = async (id) => {
     try {
         const { rows } = await pool.query(
