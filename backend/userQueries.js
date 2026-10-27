@@ -1,5 +1,5 @@
 import pool from './db.js'
-const bcrypt = require("bcrypt");
+import bcrypt from "bcrypt";
 
 //Salt for bcrypt, number of encryption rounds
 const SALT = 10;
