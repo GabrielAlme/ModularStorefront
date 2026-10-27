@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import { createUser } from '../../backend/userQueries';
 
 
 const SignUp = () => {
