@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { createUser, findEmail } from '../../backend/userQueries';
+import { createUser } from '../../backend/userQueries';
 
 
 const SignUp = () => {

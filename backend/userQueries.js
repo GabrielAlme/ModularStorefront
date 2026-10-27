@@ -1,13 +1,5 @@
-import { pool } from './db.js'
+import pool from './db.js'
 const bcrypt = require("bcrypt");
-
-// const pool = new Pool({
-//     user: process.env.DB_USER || "postgres",
-//     host: process.env.DB_HOST || "localhost",
-//     database: process.env.DB_NAME || "storefront",
-//     password: process.env.DB_PASSWORD,
-//     port: Number(process.env.DB_PORT) || 5432,
-// });
 
 //Salt for bcrypt, number of encryption rounds
 const SALT = 10;
@@ -98,4 +90,4 @@ const findUser = async (id) => {
     }
 };
 
-module.exports = { getUsers, createUser, findUser, findEmail, loginUser };
+export { getUsers, createUser, findUser, loginUser };
