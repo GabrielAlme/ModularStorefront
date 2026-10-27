@@ -1,11 +1,6 @@
 import React from 'react'
 import { useState } from 'react'
-import { Link, Route, Routes } from 'react-router-dom'
-import SignUp from './SignUp'
-
-function ToSignUp() {
-  return <SignUp/>
-}
+import { Link } from 'react-router-dom'
 
 function HandleSubmit(e) {
   e.preventDefault();
