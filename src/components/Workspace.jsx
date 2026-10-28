@@ -6,12 +6,12 @@ import Dropdown from './Dropdown';
 import SearchBar from './SearchBar';
 
 const Workspace = () => {
-  const [workspace, setWorkspace  ] = useState(null);
   const [favorites, setFavorites] = useState(loadFavorites);
-  const [panels, setPanels] = useState(workspace.panels);
-  const [layout, setLayout] = useState(workspace.layout);
+  const [panels, setPanels] = useState({});
+  const [layout, setLayout] = useState(null);
+  const [loaded, setLoaded] = useState(false)
   const nextId = useRef(workspace.nextId);
-
+  const userId = 1;
 
 
 // functions and use states related to loading the workspace panels
@@ -24,9 +24,15 @@ async function loadWorkspace(userId) {
   };
   
   useEffect (() => {
-        localStorage.setItem("workspace", JSON.stringify({ panels, nextId: nextId.current, layout })
-        , [panels, layout]); // this watches the array [panels] and when a change is made to it it uploads it to the local storage
-  });
+        loadWorkspace(userId).then((wrkSpc) => {
+          setPanels(wrkSpc.panels);
+          setLayout(wrkSpc.layout);
+          nextId.current = wrkSpc.nextId;
+          setLoaded(true);
+        })
+  }, [userId]);
+
+  
 
 
 //functions for handling when panels are added and updating the layout
@@ -72,6 +78,9 @@ async function loadWorkspace(userId) {
         </button>
       )
     };
+
+
+  if (!workspace) return <div> loading... </div>; // runs while the workspace is loading from the database
 
   return (
     <div className="workspace">
