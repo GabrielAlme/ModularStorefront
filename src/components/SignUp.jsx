@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react'
+import { useState } from 'react'
+import { Link } from 'react-router-dom';
 
 
 const SignUp = () => {
@@ -9,18 +10,40 @@ const SignUp = () => {
   const [pass, setPass] = useState("");
   const [confirm, setConfirm] = useState("");
   const [email, setEmail] = useState("");
+  const [error, setError] = useState("");
+
 
   async function handleSubmit(e) {
     e.preventDefault();
+    setError("");
     
     if (pass !== confirm) {
-      alert("Passwords do not match");
+      setError("Passwords do not match");
       setPass("");
       setConfirm("");
       return;
     }
 
-    alert("Successfully signed up");
+    const body = { username: user, email, password: pass };
+
+    try {
+      const response = await fetch("/api/signup", {
+        method: "POST",
+        headers: {"Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
+
+      const data = await response.json();
+
+      if(!response.ok) {
+        setError(data.error);
+        return;
+      }
+      alert("Successfully signed up");
+
+    } catch (err) {
+      setError("Could not reach the server");
+    }
   }
 
   return (
@@ -68,8 +91,12 @@ const SignUp = () => {
           />
         </label><br /><br />
         <input type="submit" />
+        {error && <p style={{ color: "red" }}>{error}</p>}
       </form>
 
+      <p>Back to Login:
+        <Link to="/SignIn">Log in here</Link>
+      </p>
     </>
   )
 }
