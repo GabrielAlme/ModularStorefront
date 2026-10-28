@@ -7,7 +7,7 @@ import errorHandler from '../errorHandler.js';
 // Tests WIPE the database they connect to. This refuses to run unless it is clearly a test database.
 export function assertTestDatabase() {
     const name = process.env.DB_NAME || '';
-    if (process.env.DATABASE_URL== "postgresql://neondb_owner:npg_EYLHN4d2qrCn@ep-spring-king-b5t16yvd-pooler.c-7.us-east-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require" || !name.endsWith('_test')) {
+    if (process.env.DATABASE_URL|| !name.endsWith('_test')) {
         throw new Error(
             `Refusing to run tests: DB_NAME must end with "_test" (got "${name}") and DATABASE_URL must be unset. ` +
             'Tests delete everything in the database. Copy .env.test.example to .env.test.'
