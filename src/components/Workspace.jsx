@@ -80,7 +80,7 @@ async function loadWorkspace(userId) {
     };
 
 
-  if (!workspace) return <div> loading... </div>; // runs while the workspace is loading from the database
+  if (!loaded) return <div> loading... </div>; // runs while the workspace is loading from the database
 
   return (
     <div className="workspace">
