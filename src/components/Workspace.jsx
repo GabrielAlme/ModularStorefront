@@ -32,8 +32,22 @@ async function loadWorkspace(userId) {
         })
   }, [userId]);
 
-  
+  async function saveWorkspace(userId, workspace) {
+    const res = await fetch(`/api/layouts/${userId}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(workspace),
+    });
+    if (!res.ok) throw new Error(`Failed to save workspace: ${res.status}`);
+  }
 
+  useEffect(() => {
+    if (!loaded) return;
+    const timer = setTimeout(() => {
+      saveWorkspace(userId, { panels, layout, nextId: nextId.current }).catch(console.error);
+    }, 500);
+    return () => clearTimeout(timer);
+  }, [panels, layout, loaded, userId]);
 
 //functions for handling when panels are added and updating the layout
   const addPanel = (type) => {
