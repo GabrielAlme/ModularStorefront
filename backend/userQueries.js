@@ -8,7 +8,7 @@ const SALT = 10;
 const getUsers = async () => {
     try {
         const { rows } = await pool.query(
-            "SELECT user_id, name, username, email FROM users"
+            "SELECT user_id, username, email FROM users"
         );
         return rows;
     } catch (error) {
@@ -18,24 +18,24 @@ const getUsers = async () => {
 };
 
 //Creates a new user and inserts them into the users table
-const createUser = async ({ name, username, email, password }) => {
+const createUser = async ({ username, email, password }) => {
     try {
         //gets rid of any whitespace on the email before inserting
         email = email.toLowerCase().trim();
         const hash = await bcrypt.hash(password, SALT);
         const { rows } = await pool.query(
-            "INSERT INTO users (name, username, email, password_hash) VALUES ($1, $2, $3, $4) RETURNING user_id, name, username, email",
-            [name, username, email, hash]
+            "INSERT INTO users ( username, email, password_hash) VALUES ($1, $2, $3) RETURNING user_id, username, email",
+            [username, email, hash]
         );
         return rows[0];
     } catch (error) {
         //23505 is the error code for a unique constraint violation
         //If an email or username is already in the database, it will throw error 23505 with email or username in error.constraint
         if (error.code === "23505") {  
-            if(error.constraint === "users_email_unique") { 
+            if(error.constraint === "users_email_key") { 
                 throw new Error("Email Already Registered");
             }
-            if(error.constraint === "users_username_constraint") {
+            if(error.constraint === "users_username_key") {
                 throw new Error("Username already taken");
             }
         }
@@ -80,7 +80,7 @@ const loginUser = async (email, plainPass) => {
 const findUser = async (id) => {
     try {
         const { rows } = await pool.query(
-            "SELECT user_id, name, username, email FROM users WHERE user_id = $1",
+            "SELECT user_id, username, email FROM users WHERE user_id = $1",
             [id]
         );
         return rows[0] || null;

@@ -25,4 +25,4 @@ dist-ssr
 
 # NEVER COMMIT
 .env.env.test
-storefront.env
+.env

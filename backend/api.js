@@ -20,15 +20,15 @@ api.use('/layouts', layoutsRouter);
 
 //Post method for the signup page
 api.post("/signup", async (req, res) => {
-    const { name, username, email, password } = req.body
+    const { username, email, password } = req.body
 
     //Server side validation for security
-    if(!name || !username || !email || !password) {
+    if(!username || !email || !password) {
         return res.status(400).json({error: "All fields are required" });
     }
     
     try {
-        const user = await createUser({ name, username, email, password });
+        const user = await createUser({ username, email, password });
         res.status(201).json(user);
     } catch (error) {
         if (error.message === "Email Already Registered" || error.message === "Username already taken") {

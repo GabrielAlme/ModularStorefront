@@ -24,7 +24,7 @@ const SignUp = () => {
       return;
     }
 
-    const body = { name, username: user, email, password: pass };
+    const body = { username: user, email, password: pass };
 
     try {
       const response = await fetch("/api/signup", {
