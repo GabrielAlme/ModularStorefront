@@ -10,7 +10,7 @@ const Workspace = () => {
   const [panels, setPanels] = useState({});
   const [layout, setLayout] = useState(null);
   const [loaded, setLoaded] = useState(false)
-  const nextId = useRef(workspace.nextId);
+  const nextId = useRef(1);
   const userId = 1;
 
 
