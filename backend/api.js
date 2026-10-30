@@ -2,7 +2,7 @@ import { Router } from 'express';
 import pool from './db.js';
 import storesRouter from './routes/stores.js';
 import productsRouter from './routes/products.js';
-import layoutsRouter from './routes/products.js';
+import layoutsRouter from './routes/layouts.js';
 import { createUser, loginUser } from './userQueries.js';
 
 const api = Router();
