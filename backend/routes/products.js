@@ -16,7 +16,7 @@ router.get('/', async (req, res) => {
         );
         return res.json(rows);
     }
-
+    
     const { rows } = await pool.query('SELECT * FROM products ORDER BY product_id');
     res.json(rows);
 });

@@ -16,13 +16,10 @@ function HomePage() {
 function Workshop() {
   return (
   <>
-  <div>
+    <div>
       <Sidebar/>
     </div>
-    <div id="nav">
-      <Navbar/>
-    </div>
-    <div id="ws">
+    <div className="ws">
       <Workspace/>
     </div>
   </>
@@ -44,20 +41,22 @@ const App = () => {
 
     //React router setup
     <BrowserRouter>
-      {/* Nav that contains the links for the different pages */}
-      <nav>
-        <Link to="/">Home</Link> |{" "}
-        <Link to="/WorkShop">Work Shop</Link> |{" "}
-        <Link to="/SignIn">Login/Sign up</Link>
-      </nav>
+      <div className="app">
+        {/* Nav that contains the links for the different pages */}
+        <nav className="router-nav">
+          <Link to="/">Home</Link> |{" "}
+          <Link to="/WorkShop">Work Shop</Link> |{" "}
+          <Link to="/SignIn">Login/Sign up</Link>
+        </nav>
 
-      {/* These routes make the links navigate to the corresponding functions defined above app */}
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/Workshop" element={<Workshop />} />
-        <Route path="/SignIn" element={<LogIn />} />
-        <Route path="/SignUp" element={<ToSignUp />} />
-      </Routes>
+        {/* These routes make the links navigate to the corresponding functions defined above app */}
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/Workshop" element={<Workshop />} />
+          <Route path="/SignIn" element={<LogIn />} />
+          <Route path="/SignUp" element={<ToSignUp />} />
+        </Routes>
+      </div>
     </BrowserRouter>
   )
 }

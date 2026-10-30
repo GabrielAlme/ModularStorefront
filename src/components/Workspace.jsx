@@ -6,27 +6,48 @@ import Dropdown from './Dropdown';
 import SearchBar from './SearchBar';
 
 const Workspace = () => {
-  const [workspace] = useState(loadWorkspace);
   const [favorites, setFavorites] = useState(loadFavorites);
-  const [panels, setPanels] = useState(workspace.panels);
-  const [layout, setLayout] = useState(workspace.layout);
-  const nextId = useRef(workspace.nextId);
-
+  const [panels, setPanels] = useState({});
+  const [layout, setLayout] = useState(null);
+  const [loaded, setLoaded] = useState(false)
+  const nextId = useRef(1);
+  const userId = 1;
 
 
 // functions and use states related to loading the workspace panels
-  function loadWorkspace() {
-    const saved = JSON.parse(localStorage.getItem("workspace")) ?? {};
+async function loadWorkspace(userId) {
+    const res = await fetch(`/api/layouts/${userId}`);
+    if (!res.ok) return { panels: {}, nextId: 1, layout: null };
+    const data = await res.json();
+    const saved = data.layout ?? {};
     return { panels: saved.panels ?? {}, nextId: saved.nextId ?? 1, layout: saved.layout ?? null} //checks local storage for the stored layout of panels, if there is no layout stored it upates it to the values on the right
   };
   
   useEffect (() => {
-        localStorage.setItem("workspace", JSON.stringify({ panels, nextId: nextId.current, layout })
-        , [panels, layout]); // this watches the array [panels] and when a change is made to it it uploads it to the local storage
-  });
+        loadWorkspace(userId).then((wrkSpc) => {
+          setPanels(wrkSpc.panels);
+          setLayout(wrkSpc.layout);
+          nextId.current = wrkSpc.nextId;
+          setLoaded(true);
+        })
+  }, [userId]);
 
+  async function saveWorkspace(userId, workspace) {
+    const res = await fetch(`/api/layouts/${userId}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(workspace),
+    });
+    if (!res.ok) throw new Error(`Failed to save workspace: ${res.status}`);
+  }
 
-
+  useEffect(() => {
+    if (!loaded) return;
+    const timer = setTimeout(() => {
+      saveWorkspace(userId, { panels, layout, nextId: nextId.current }).catch(console.error);
+    }, 500);
+    return () => clearTimeout(timer);
+  }, [panels, layout, loaded, userId]);
 
 //functions for handling when panels are added and updating the layout
   const addPanel = (type) => {
@@ -72,13 +93,18 @@ const Workspace = () => {
       )
     };
 
+
+  if (!loaded) return <div> loading... </div>; // runs while the workspace is loading from the database
+
   return (
     <div className="workspace">
       <div className="navbar">
         <Dropdown registry={favoritePanels} onSelect={addPanel} title="Favorites" emptyMessage="Add panels to favorites using the star in the search menu"/>  {/* this passes the data from onSelect inside of AddPanel to the function addPanel */}
         <SearchBar registry={PANELS} onSelect={addPanel} button={favoriteButton}/>
       </div>
-      <MosaicWorkspace panels={panels} layout={layout} onChange={handleLayoutChange}/> {/* when a new panel is added/removed to/from panels object it passes the fucntion handleLayoutChange*/}
+      <div className="mosaic-workspace">
+        <MosaicWorkspace panels={panels} layout={layout} onChange={handleLayoutChange}/> {/* when a new panel is added/removed to/from panels object it passes the fucntion handleLayoutChange*/}
+      </div>
     </div>
   )
 }
