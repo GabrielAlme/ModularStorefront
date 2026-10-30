@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom';
 
 
 const SignUp = () => {
@@ -12,6 +13,7 @@ const SignUp = () => {
 
   async function handleSubmit(e) {
     e.preventDefault();
+    const navigate = useNavigate();
     
     if (pass !== confirm) {
       alert("Passwords do not match");
@@ -20,7 +22,8 @@ const SignUp = () => {
       return;
     }
 
-    alert("Successfully signed up");
+    alert("Successfully signed up. Redirecting...");
+    navigate('/');
   }
 
   return (
