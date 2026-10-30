@@ -12,6 +12,7 @@ const SignUp = () => {
   const [confirm, setConfirm] = useState("");
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
+  const navigate = useNavigate("");
 
 
   async function handleSubmit(e) {
@@ -40,7 +41,8 @@ const SignUp = () => {
         setError(data.error);
         return;
       }
-      alert("Successfully signed up");
+      alert("Successfully signed up. Redirecting...");
+      navigate("/");
 
     } catch (err) {
       setError("Could not reach the server");
@@ -95,7 +97,7 @@ const SignUp = () => {
         {error && <p style={{ color: "red" }}>{error}</p>}
       </form>
 
-      <p>Back to Login:
+      <p>Back to Login: 
         <Link to="/SignIn">Log in here</Link>
       </p>
     </>
