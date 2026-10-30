@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 
 const SignUp = () => {
@@ -11,6 +12,7 @@ const SignUp = () => {
   const [confirm, setConfirm] = useState("");
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
+  const navigate = useNavigate("");
 
 
   async function handleSubmit(e) {
@@ -39,7 +41,8 @@ const SignUp = () => {
         setError(data.error);
         return;
       }
-      alert("Successfully signed up");
+      alert("Successfully signed up. Redirecting...");
+      navigate("/");
 
     } catch (err) {
       setError("Could not reach the server");
@@ -49,7 +52,7 @@ const SignUp = () => {
   return (
     <>
       <h2>Sign Up:</h2>
-      <form onSubmit={handleSubmit} >
+      <form onSubmit={handleSubmit}>
         <label>Enter your name: <br />
           <input 
             type = "text"
@@ -94,7 +97,7 @@ const SignUp = () => {
         {error && <p style={{ color: "red" }}>{error}</p>}
       </form>
 
-      <p>Back to Login:
+      <p>Back to Login: 
         <Link to="/SignIn">Log in here</Link>
       </p>
     </>
