@@ -1,12 +1,13 @@
 import React from 'react'
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 const LoginPage = () => {
 
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
   const [error, setError] = useState("");
+  const navigate = userNavigate();
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -27,7 +28,8 @@ const LoginPage = () => {
         setError(data.error);
         return;
       }
-      alert("Successfully Logged in");
+      alert("Successfully Logged in! Redirecting...");
+      navigate("/");
 
     } catch (err) {
       setError("Could not reach the server");
