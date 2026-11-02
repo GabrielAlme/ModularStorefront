@@ -51,10 +51,13 @@ const App = () => {
 
         {/* These routes make the links navigate to the corresponding functions defined above app */}
         <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/Workshop" element={<Workshop />} />
-          <Route path="/SignIn" element={<LogIn />} />
-          <Route path="/SignUp" element={<ToSignUp />} />
+          <Route element={<AppLayout />}>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/Workshop" element={<Workshop />} />
+            <Route path="/SignIn" element={<LogIn />} />
+            <Route path="/SignUp" element={<ToSignUp />} />
+          </Route>
+          <Route path=":/slug" element={<Storefront />} />
         </Routes>
       </div>
     </BrowserRouter>
