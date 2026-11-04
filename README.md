@@ -42,20 +42,18 @@ PGAdmin is a tool for programming with postgresSQL made by the same people:
 
  - [pgadmin](https://www.postgresql.org/ftp/pgadmin/pgadmin4/v9.18/windows/)
 
-The install process is lengthy and involves a lot of different menus so think carefully about 
+The install process is lengthy and involves a lot of different menus so think carefully about it as you go through
 
 Other node packages that need to be installed to use this code locally:
 
  - npm install pg
  - npm install express
 
+Other node packages that need to be installed to use this code locally:
 
-## Running the app with the Neon database (team setup)
+ - npm install pg (postgresql)
+ - npm install express (backend for node)
+ - npm install bcrypt (password hashing method)
+ - npm install express (manages talks between backend and frontend)
+ - npm install express dotenv (loads assets from .env)
 
-1. `npm install`
-2. Copy `.env.example` to `.env` and paste the shared Neon connection string into `DATABASE_URL` (get it from the team privately, never commit it).
-3. Terminal 1: `npm run server` (Express API on http://localhost:3000)
-4. Terminal 2: `npm run dev` (React on http://localhost:5173, proxies /api to the server)
-5. Check http://localhost:3000/api/health returns `{"ok":true}`
-
-The Neon tables are created by running `backend/db/schema.sql` (then optionally `backend/db/seed.sql`) in the Neon SQL Editor.
