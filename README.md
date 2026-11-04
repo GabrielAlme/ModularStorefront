@@ -54,6 +54,7 @@ Other node packages that need to be installed to use this code locally:
  - npm install pg (postgresql)
  - npm install express (backend for node)
  - npm install bcrypt (password hashing method)
- - npm install express (manages talks between backend and frontend)
  - npm install express dotenv (loads assets from .env)
+ - npm install jsonwebtoken (api authorization for user functionality)
+ - npm install jwt-decode (decoding tool for web tokens)
 

@@ -4,8 +4,11 @@ import storesRouter from './routes/stores.js';
 import productsRouter from './routes/products.js';
 import layoutsRouter from './routes/layouts.js';
 import { createUser, loginUser } from './userQueries.js';
+import jwt from 'jsonwebtoken'
 
 const api = Router();
+
+const JWT_SECRET = process.env.SECRET_KEY;
 
 // GET /api/health  -> confirms the server is up AND can reach the database
 api.get('/health', async (req, res) => {
@@ -29,7 +32,17 @@ api.post("/signup", async (req, res) => {
     
     try {
         const user = await createUser({ username, email, password });
-        res.status(201).json(user);
+
+        //payload for the jwt
+        const payload = {
+            username: user.username,
+            id: user.user_id
+        };
+        //Creating the jwt
+        //for security, set an expiresIn in the third field later
+        const token = jwt.sign(payload, JWT_SECRET);
+        res.status(201).json({user, token});
+
     } catch (error) {
         if (error.message === "Email Already Registered" || error.message === "Username already taken") {
             return res.status(409).json({ error: error.message });
@@ -44,7 +57,17 @@ api.post("/login", async (req, res) => {
     try {
         const user = await loginUser(email, password);
         if (!user) return res.status(401).json({error: "Invalid email or password" });
-        res.json(user);
+
+        //payload for the jwt, stores username and id
+        const payload = {
+            username: user.username,
+            id: user.user_id
+        };
+        //creates the jwt
+        //for security, set an expiresIn in the third field later
+        const token = jwt.sign(payload, JWT_SECRET);
+        res.json({user, token});
+
     } catch (error) {
         res.status(500).json({ error: "Something went wrong" });
     }
