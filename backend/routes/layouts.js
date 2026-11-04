@@ -7,7 +7,7 @@ const router = Router();
 router.get("/:userId", async (req, res) => {
     try{
         const { rows } = await pool.query(
-            "SELECT layout FROM users WHERE user_id = $1",
+            "SELECT layout FROM stores WHERE owner_id = $1",
             [req.params.userId]
         );
         if (rows.length === 0) return res.status(404).json({ error: "User not found"});
@@ -21,7 +21,7 @@ router.get("/:userId", async (req, res) => {
 router.put("/:userId", async (req, res) =>{
     try {
         const { rowCount } = await pool.query(
-            "UPDATE users SET layout = $1 WHERE user_id = $2",
+            "UPDATE layout SET layout = $1 WHERE owner_id = $2",
             [JSON.stringify(req.body), req.params.userId]
         );
         if (rowCount === 0) return res.status(404).json({ error: "User not found" });
