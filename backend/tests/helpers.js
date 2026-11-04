@@ -6,7 +6,7 @@ import errorHandler from '../errorHandler.js';
 
 // Tests WIPE the database they connect to. This refuses to run unless it is clearly a test database.
 export function assertTestDatabase() {
-    const name = process.env.DB_NAME || '';
+        const name = process.env.DB_NAME || '';
     if (process.env.DATABASE_URL|| !name.endsWith('_test')) {
         throw new Error(
             `Refusing to run tests: DB_NAME must end with "_test" (got "${name}") and DATABASE_URL must be unset. ` +
