@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../authorization';
 
 
 const SignUp = () => {
@@ -13,6 +14,7 @@ const SignUp = () => {
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate("");
+  const {authuser, login} = useAuth();
 
 
   async function handleSubmit(e) {
@@ -42,6 +44,7 @@ const SignUp = () => {
         return;
       }
       alert("Successfully signed up. Redirecting...");
+      login(data.token);
       navigate("/");
 
     } catch (err) {

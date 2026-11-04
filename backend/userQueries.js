@@ -27,7 +27,9 @@ const createUser = async ({ username, email, password }) => {
             "INSERT INTO users ( username, email, password_hash) VALUES ($1, $2, $3) RETURNING user_id, username, email",
             [username, email, hash]
         );
-        return rows[0];
+        //Stores everything but the password in the const user then returns user
+        const { password_hash: storedPass, ...user} = rows[0];
+        return user;
     } catch (error) {
         //23505 is the error code for a unique constraint violation
         //If an email or username is already in the database, it will throw error 23505 with email or username in error.constraint
