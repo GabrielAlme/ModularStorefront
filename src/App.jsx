@@ -5,6 +5,7 @@ import LoginPage from "./components/LoginPage"
 import Home from "./components/Home"
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom"
 import SignUp from "./components/SignUp"
+import { AuthProvider } from "./authorization"
 
 //Function that links to Home.jsx
 function HomePage() {
@@ -41,25 +42,28 @@ const App = () => {
 
     //React router setup
     <BrowserRouter>
-      <div className="app">
-        {/* Nav that contains the links for the different pages */}
-        <nav className="router-nav">
-          <Link to="/">Home</Link> |{" "}
-          <Link to="/WorkShop">Work Shop</Link> |{" "}
-          <Link to="/SignIn">Login/Sign up</Link>
-        </nav>
+      {/* Auth provider allows components to user information stored in the JWT */}
+      <AuthProvider>
+        <div className="app">
+          {/* Nav that contains the links for the different pages */}
+          <nav className="router-nav">
+            <Link to="/">Home</Link> |{" "}
+            <Link to="/WorkShop">Work Shop</Link> |{" "}
+            <Link to="/SignIn">Login/Sign up</Link>
+          </nav>
 
-        {/* These routes make the links navigate to the corresponding functions defined above app */}
-        <Routes>
-          <Route element={<AppLayout />}>
+          {/* These routes make the links navigate to the corresponding functions defined above app */}
+          <Routes>
+            <Route element={<AppLayout />}>
             <Route path="/" element={<HomePage />} />
-            <Route path="/Workshop" element={<Workshop />} />
-            <Route path="/SignIn" element={<LogIn />} />
-            <Route path="/SignUp" element={<ToSignUp />} />
-          </Route>
+              <Route path="/Workshop" element={<Workshop />} />
+              <Route path="/SignIn" element={<LogIn />} />
+              <Route path="/SignUp" element={<ToSignUp />} />
+            </Route>
           <Route path=":/slug" element={<Storefront />} />
         </Routes>
-      </div>
+        </div>
+      </AuthProvider>
     </BrowserRouter>
   )
 }
