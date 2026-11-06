@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../authorization'
 
 const LoginPage = () => {
-
+  console.log("rendered!")
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
   const [error, setError] = useState("");
@@ -12,6 +12,7 @@ const LoginPage = () => {
   const { login } = useAuth();
 
   async function handleSubmit(e) {
+    console.log("here!");
     e.preventDefault();
     setError("");
 
@@ -60,7 +61,7 @@ const LoginPage = () => {
             required
             />
         </label><br /><br />
-        <input type="submit" />
+        <input type="submit" onClick={() => console.log("clicked")} />
         {error && <p style={{ color: "red" }}>{error}</p>}
       </form>
 

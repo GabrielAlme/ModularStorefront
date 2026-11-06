@@ -14,7 +14,7 @@ const Workspace = () => {
   const [layout, setLayout] = useState(null);
   const [loaded, setLoaded] = useState(false)
   const {token, logout} = useAuth();
-  const navigate = useNavigate;
+  const navigate = useNavigate();
   const nextId = useRef(1);
 
 
@@ -32,7 +32,7 @@ async function loadWorkspace(userId) {
           headers: { Authorization: `Bearer ${token}` },
         }).then((res) => {
           if (res.status === 401) {
-            logout();
+            //logout();
             navigate("/SignIn");
             return null;
           }

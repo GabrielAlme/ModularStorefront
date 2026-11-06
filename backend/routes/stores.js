@@ -44,7 +44,7 @@ router.get("/me", requireAuth, async (req,res) => {
     try {
         const { rows } = await pool.query(
             "SELECT layout FROM stores WHERE owner_id = $1",
-            [req.user.userId]
+            [req.user.id]
         );
 
         if(rows.length === 0) {
@@ -63,7 +63,7 @@ router.put("/me/layout", requireAuth, async (req, res) => {
     try {
         const { rowCount } = await pool.query(
             "UPDATE stores SET layout = $1 where owner_id = $2",
-            [JSON.stringify(req.body.layout), req.user.userId]
+            [JSON.stringify(req.body.layout), req.user.id]
         );
 
         if (rowCount === 0) {
