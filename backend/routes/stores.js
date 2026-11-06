@@ -48,7 +48,7 @@ router.get("/me", requireAuth, async (req,res) => {
         );
 
         if(rows.length === 0) {
-            return res.status(404).json({ error: "Layout could not be fetched" })
+            return res.status(404).json({ error: "Layout could not be fetched" });
         }
 
         res.json(rows[0]);
@@ -59,7 +59,23 @@ router.get("/me", requireAuth, async (req,res) => {
 });
 
 //saves the layout to the stores table
+router.put("/me/layout", requireAuth, async (req, res) => {
+    try {
+        const { rowCount } = await pool.query(
+            "UPDATE stores SET layout = $1 where owner_id = $2",
+            [JSON.stringify(req.body.layout), req.user.userId]
+        );
 
+        if (rowCount === 0) {
+            return res.status(400).json({ error: "Layout couldn't be found" });
+        }
+
+        res.sendStatus(204);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: "Failed to save Layout"});
+    }
+});
 
 
 //gets the store from the stores table
