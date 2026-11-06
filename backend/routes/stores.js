@@ -12,17 +12,17 @@ router.get('/', async (req, res) => {
 });
 
 // GET /api/stores/:id
-router.get('/:id', async (req, res) => {
-    const id = Number(req.params.id);
-    if (!Number.isInteger(id)) return res.status(400).json({ error: 'id must be a number' });
+// router.get('/:id', async (req, res) => {
+//     const id = Number(req.params.id);
+//     if (!Number.isInteger(id)) return res.status(400).json({ error: 'id must be a number' });
 
-    const { rows } = await pool.query(
-        'SELECT store_id, owner_id, store_name, description, created_at FROM stores WHERE store_id = $1',
-        [id]
-    );
-    if (rows.length === 0) return res.status(404).json({ error: 'store not found' });
-    res.json(rows[0]);
-});
+//     const { rows } = await pool.query(
+//         'SELECT store_id, owner_id, store_name, description, created_at FROM stores WHERE store_id = $1',
+//         [id]
+//     );
+//     if (rows.length === 0) return res.status(404).json({ error: 'store not found' });
+//     res.json(rows[0]);
+// });
 
 // POST /api/stores   body: { owner_id, store_name, description? }
 router.post('/', async (req, res) => {

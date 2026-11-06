@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import PanelRenderer from "./PanelRenderer";
+import PanelRender from "./PanelRender";
 
 
 
