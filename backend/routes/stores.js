@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import pool from '../db.js';
+import { requireAuth } from "../middleware/requireAuth.js";
 
 const router = Router();
 
@@ -38,6 +39,29 @@ router.post('/', async (req, res) => {
     res.status(201).json(rows[0]);
 });
 
+//gets the layout from the store table
+router.get("/me", requireAuth, async (req,res) => {
+    try {
+        const { rows } = await pool.query(
+            "SELECT layout FROM stores WHERE owner_id = $1",
+            [req.user.userId]
+        );
+
+        if(rows.length === 0) {
+            return res.status(404).json({ error: "Layout could not be fetched" })
+        }
+
+        res.json(rows[0]);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: "Failed to load layout" });
+    }
+});
+
+//saves the layout to the stores table
+
+
+
 //gets the store from the stores table
 router.get("/:slug", async (req, res) => {
     try {
@@ -53,7 +77,7 @@ router.get("/:slug", async (req, res) => {
         res.json(rows[0]);
     } catch (err) {
         console.error(err);
-        res.status(500).json({ error: "Failed to load store"})
+        res.status(500).json({ error: "Failed to load store" });
     }
 })
 
