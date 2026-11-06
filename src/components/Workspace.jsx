@@ -53,22 +53,21 @@ async function loadWorkspace(userId) {
         Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({ layout: newLayout }),
-    }).catch(console.error);
-  }
-;
+    }).catch(console.error)
+  };
+
   useEffect(() => {
     if (!loaded) return;
-    const timer = setTimeout(() => {
-      saveWorkspace(userId, { panels, layout, nextId: nextId.current }).catch(console.error);
-    }, 500);
+    const timer = setTimeout(() => saveWorkspace(layout), 500);
     return () => clearTimeout(timer);
-  }, [panels, layout, loaded, userId]);
+  }, [layout, loaded]);
 
 //functions for handling when panels are added and updating the layout
   const addPanel = (type) => {
-    const id = nextId.current++; //sets id to the current value of nextId THEN increments the value of nextId
-    setPanels(prev => ({...prev, [id] : { type } })); //now creates and object with a keyed id array and a cooresponding type for each key
-    setLayout(prev => prev ? {type: "split", direction: "column", children: [id, prev]} : id); //places the new panel on top of the others
+    setLayout(prev => {
+      if (prev && getLeaves(prev).includes(type)) return prev;
+      return prev ? { type: "split", direction: "column", children: [type, prev]} :type;
+    });
   };
 
   const handleLayoutChange = (newLayout) => { //mosaic passes its new layout when onChange is called
