@@ -5,13 +5,17 @@ import MosaicWorkspace from './MosaicWorkspace';
 import Dropdown from './Dropdown';
 import SearchBar from './SearchBar';
 
+import { useAuth } from "../authorization";
+import { useNavigate } from "react-router-dom";
+
 const Workspace = () => {
   const [favorites, setFavorites] = useState(loadFavorites);
   const [panels, setPanels] = useState({});
   const [layout, setLayout] = useState(null);
   const [loaded, setLoaded] = useState(false)
+  const {token, logout} = useAuth();
+  const navigate = useNavigate;
   const nextId = useRef(1);
-  const userId = 1;
 
 
 // functions and use states related to loading the workspace panels
@@ -24,13 +28,22 @@ async function loadWorkspace(userId) {
   };
   
   useEffect (() => {
-        loadWorkspace(userId).then((wrkSpc) => {
-          setPanels(wrkSpc.panels);
-          setLayout(wrkSpc.layout);
-          nextId.current = wrkSpc.nextId;
+        fetch("/api/stores/me", {
+          headers: { Authorization: `Bearer ${token}` },
+        }).then((res) => {
+          if (res.status === 401) {
+            logout();
+            navigate("/SignIn");
+            return null;
+          }
+          if (res.status === 404) return null;
+          if (!res.ok) throw new Error(`Store request failed ${res.status}`);
+          return res.json(true);
+        }).then((store) => {
+          setLayout(store?.layout ?? null);
           setLoaded(true);
-        })
-  }, [userId]);
+        }).catch(console.error);
+  }, [token]);
 
   async function saveWorkspace(userId, workspace) {
     const res = await fetch(`/api/layouts/${userId}`, {
