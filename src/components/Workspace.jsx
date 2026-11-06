@@ -45,15 +45,17 @@ async function loadWorkspace(userId) {
         }).catch(console.error);
   }, [token]);
 
-  async function saveWorkspace(userId, workspace) {
-    const res = await fetch(`/api/layouts/${userId}`, {
+  async function saveWorkspace(newLayout) {
+    fetch("/api/store/me/layout", {
       method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(workspace),
-    });
-    if (!res.ok) throw new Error(`Failed to save workspace: ${res.status}`);
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ layout: newLayout }),
+    }).catch(console.error);
   }
-
+;
   useEffect(() => {
     if (!loaded) return;
     const timer = setTimeout(() => {
