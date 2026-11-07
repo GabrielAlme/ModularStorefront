@@ -8,6 +8,7 @@ import SignUp from "./components/SignUp"
 import { AuthProvider } from "./authorization"
 import ProtectedExample from "./components/ProtectedExample"
 import { ProtectedRoute } from "./protectedRoute"
+import Projects from "./components/Projects"
 
 //Function that links to Home.jsx
 function HomePage() {
@@ -40,6 +41,10 @@ function ToSignUp() {
 function ToProtected() {
   return <ProtectedExample />
 }
+function ToProjects() {
+  return <Projects />
+}
+
 
 const App = () => {
   
@@ -53,7 +58,7 @@ const App = () => {
           {/* Nav that contains the links for the different pages */}
           <nav className="router-nav">
             <Link to="/">Home</Link> |{" "}
-            <Link to="/WorkShop">Work Shop</Link> |{" "}
+            <Link to="/Projects">Projects</Link> |{" "}
             <Link to="/SignIn">Login/Sign up</Link> |{" "}
             <Link to="/protected">Protected Page</Link>
           </nav>
@@ -64,6 +69,7 @@ const App = () => {
             <Route path="/Workshop" element={<Workshop />} />
             <Route path="/SignIn" element={<LogIn />} />
             <Route path="/SignUp" element={<ToSignUp />} />
+            <Route path="/Projects" element={<ToProjects />} />
 
             {/*Anything wrapped in this element is protected and redirects to signin if the user is not logged in*/}
             <Route element={<ProtectedRoute />}>
