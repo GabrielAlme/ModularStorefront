@@ -6,6 +6,8 @@ import Home from "./components/Home"
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom"
 import SignUp from "./components/SignUp"
 import { AuthProvider } from "./authorization"
+import ProtectedExample from "./components/ProtectedExample"
+import { ProtectedRoute } from "./protectedRoute"
 
 //Function that links to Home.jsx
 function HomePage() {
@@ -35,6 +37,9 @@ function LogIn() {
 function ToSignUp() {
   return <SignUp/>
 }
+function ToProtected() {
+  return <ProtectedExample />
+}
 
 const App = () => {
   
@@ -49,7 +54,8 @@ const App = () => {
           <nav className="router-nav">
             <Link to="/">Home</Link> |{" "}
             <Link to="/WorkShop">Work Shop</Link> |{" "}
-            <Link to="/SignIn">Login/Sign up</Link>
+            <Link to="/SignIn">Login/Sign up</Link> |{" "}
+            <Link to="/protected">Protected Page</Link>
           </nav>
 
           {/* These routes make the links navigate to the corresponding functions defined above app */}
@@ -58,6 +64,9 @@ const App = () => {
             <Route path="/Workshop" element={<Workshop />} />
             <Route path="/SignIn" element={<LogIn />} />
             <Route path="/SignUp" element={<ToSignUp />} />
+            <Route element={<ProtectedRoute />}>
+              <Route path="/protected" element={<ToProtected />} />
+            </Route>
           </Routes>
         </div>
       </AuthProvider>
