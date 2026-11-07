@@ -64,6 +64,8 @@ const App = () => {
             <Route path="/Workshop" element={<Workshop />} />
             <Route path="/SignIn" element={<LogIn />} />
             <Route path="/SignUp" element={<ToSignUp />} />
+
+            {/*Anything wrapped in this element is protected and redirects to signin if the user is not logged in*/}
             <Route element={<ProtectedRoute />}>
               <Route path="/protected" element={<ToProtected />} />
             </Route>
