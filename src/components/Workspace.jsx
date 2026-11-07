@@ -4,6 +4,7 @@ import { PANELS } from '../panels/registry';
 import MosaicWorkspace from './MosaicWorkspace';
 import Dropdown from './Dropdown';
 import SearchBar from './SearchBar';
+import Sidebar from './Sidebar';
 
 import { useAuth } from "../authorization";
 import { useNavigate } from "react-router-dom";
@@ -111,6 +112,7 @@ async function loadWorkspace(userId) {
 
   return (
     <div className="workspace">
+      <Sidebar/>
       <div className="navbar">
         <Dropdown registry={favoritePanels} onSelect={addPanel} title="Favorites" emptyMessage="Add panels to favorites using the star in the search menu"/>  {/* this passes the data from onSelect inside of AddPanel to the function addPanel */}
         <SearchBar registry={PANELS} onSelect={addPanel} button={favoriteButton}/>

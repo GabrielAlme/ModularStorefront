@@ -1,6 +1,3 @@
-import Sidebar from "./components/Sidebar"
-import Workspace from "./components/Workspace"
-import Navbar from "./components/Navbar"
 import LoginPage from "./components/LoginPage"
 import Home from "./components/Home"
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom"
@@ -8,6 +5,7 @@ import SignUp from "./components/SignUp"
 import { AuthProvider } from "./authorization"
 import RouterNav from "./components/RouterNav"
 import Storefront from "./components/Storefront"
+import Workspace from "./components/Workspace"
 
 //Function that links to Home.jsx
 function HomePage() {
@@ -15,19 +13,7 @@ function HomePage() {
     <Home/>
   )
 }
-//Function that links to workspace.jsx 
-function Workshop() {
-  return (
-  <>
-    <div>
-      <Sidebar/>
-    </div>
-    <div className="ws">
-      <Workspace/>
-    </div>
-  </>
-  )
-}
+
 //Function that links to loginpage.jsx
 function LogIn() {
   return (
@@ -52,7 +38,7 @@ const App = () => {
             <Route element={ <RouterNav /> }>
           {/* These routes make the links navigate to the corresponding functions defined above app */}
               <Route path="/" element={<HomePage />} />
-              <Route path="/Workshop" element={<Workshop />} />
+              <Route path="/Workspace" element={<Workspace />} />
               <Route path="/SignIn" element={<LogIn />} />
               <Route path="/SignUp" element={<ToSignUp />} />
             </Route>

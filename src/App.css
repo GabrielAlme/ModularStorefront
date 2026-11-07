@@ -7,7 +7,7 @@ body {
   height: 100vh;
   display: grid;
   grid-template-rows: auto 1fr;
-  grid-template-columns: auto auto 1fr;
+  grid-template-columns: auto;
   grid-auto-flow: column;
 }
 
@@ -20,6 +20,7 @@ body {
   background-color: #fffbf2;
   overflow-x: hidden;
   border-right: 1px solid black;
+  grid-row: 1 / -1;
 }
 
 .sidebar a {
@@ -54,9 +55,6 @@ body {
 
 /* workshop styling */
 
-.workshop {
-
-}
 
 .ws { /*workspace*/
   overflow: auto;
@@ -64,8 +62,7 @@ body {
 }
 
 .router-nav { /*topnav*/
-  grid-column: 1 / 4;
-  z-index: 20;
+  grid-column: 1 / -1;
 }
 
 /* workspace styling */
@@ -73,6 +70,7 @@ body {
 .workspace {
   display: grid;
   grid-template-rows: auto 1fr;
+  grid-template-columns: auto 1fr;
   height: 100%;
 }
 
@@ -94,6 +92,7 @@ body {
 .workspace .mosaic-workspace{
   display: grid;
   overflow-y: auto;
+  grid-column: 2 / -1;
 }
 
 /* styling for dropdowns */
