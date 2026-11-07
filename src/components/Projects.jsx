@@ -15,6 +15,7 @@ const Projects = () => {
             <button onClick={handleClick}>
                 + New Project
             </button>
+{/*TODO:: pull in-progress projects from the database and allow link to them so users can work on them*/}
         </div>
     )
 }
