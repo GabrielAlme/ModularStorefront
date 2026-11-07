@@ -41,7 +41,10 @@ async function loadWorkspace(userId) {
           if (!res.ok) throw new Error(`Store request failed ${res.status}`);
           return res.json(true);
         }).then((store) => {
-          setLayout(store?.layout ?? null);
+          const saved = store?.layout ?? {};
+          setLayout(saved.layout ?? null);
+          setPanels(saved.panels ?? {});
+          nextId.current = saved.nextId ?? 1;
           setLoaded(true);
         }).catch(console.error);
   }, [token]);
@@ -59,9 +62,9 @@ async function loadWorkspace(userId) {
 
   useEffect(() => {
     if (!loaded) return;
-    const timer = setTimeout(() => saveWorkspace(layout), 500);
+    const timer = setTimeout(() => saveWorkspace({ layout, panels, nextId: nextId.current }), 500);
     return () => clearTimeout(timer);
-  }, [layout, loaded]);
+  }, [layout, panels, loaded]);
 
 //functions for handling when panels are added and updating the layout
   const addPanel = (type) => {
