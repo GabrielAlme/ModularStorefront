@@ -46,7 +46,7 @@ async function loadWorkspace(userId) {
   }, [token]);
 
   async function saveWorkspace(newLayout) {
-    fetch("/api/store/me/layout", {
+    fetch("/api/stores/me/layout", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -64,10 +64,9 @@ async function loadWorkspace(userId) {
 
 //functions for handling when panels are added and updating the layout
   const addPanel = (type) => {
-    setLayout(prev => {
-      if (prev && getLeaves(prev).includes(type)) return prev;
-      return prev ? { type: "split", direction: "column", children: [type, prev]} :type;
-    });
+    const id = nextId.current++; //sets id to the current value of nextId THEN increments the value of nextId
+    setPanels(prev => ({...prev, [id] : { type } })); //now creates and object with a keyed id array and a cooresponding type for each key
+    setLayout(prev => prev ? {type: "split", direction: "column", children: [id, prev]} : id); //places the new panel on top of the others
   };
 
   const handleLayoutChange = (newLayout) => { //mosaic passes its new layout when onChange is called
