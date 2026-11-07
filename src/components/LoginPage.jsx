@@ -41,7 +41,7 @@ const LoginPage = () => {
   }
 
   return (
-    <>
+    <div>
       <h2>Log In:</h2>
       <form onSubmit={handleSubmit}>
         <label>Enter Email:<br />
@@ -68,7 +68,7 @@ const LoginPage = () => {
       <p>Not a user yet? 
         <Link to="/SignUp"> Sign Up Here</Link>
       </p>
-    </>
+    </div>
   )
 }
 
