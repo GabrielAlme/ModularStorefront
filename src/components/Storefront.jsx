@@ -20,7 +20,7 @@ const Storefront = () => {
   if (store === null) return <p> This store doesn't exist.</p>;
   if (store.layout == null) return <p>This store is still being set up. Come back later.</p>;
 
-  return <PanelRenderer node={Storefront.layout} />;
+  return <PanelRender node={Storefront.layout} />;
 }
 
 export default Storefront
