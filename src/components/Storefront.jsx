@@ -18,9 +18,11 @@ const Storefront = () => {
 
   if (store === undefined) return <p> Loading... </p>;
   if (store === null) return <p> This store doesn't exist.</p>;
-  if (store.layout == null) return <p>This store is still being set up. Come back later.</p>;
-
-  return <PanelRender node={Storefront.layout} />;
+  
+  const site = store.layout;
+  if (site.layout == null) return <p>This store is still being set up. Come back later.</p>;
+  console.log("site", site);
+  return <PanelRender node={site.layout} panels={site.panels} />;
 }
 
 export default Storefront
