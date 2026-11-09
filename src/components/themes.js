@@ -1,4 +1,5 @@
-// Registry of basic color themes used by CustomBackgroundTab
+// Registry of basic color themes rendered dynamically by CustomBackgroundTab.
+// Storing themes as data objects makes adding new colors effortless without touching JSX or CSS.
 export const BACKGROUND_THEMES = {
   default: {
     id: 'default',
@@ -26,7 +27,7 @@ export const BACKGROUND_THEMES = {
   },
 };
 
-// Registry of curated gradient templates used by AddTemplateTab
+// Registry of curated gradient templates rendered dynamically by AddTemplateTab.
 export const PRESET_WALLPAPERS = [
   {
     id: 'blueprint',
@@ -48,7 +49,8 @@ export const PRESET_WALLPAPERS = [
   },
 ];
 
-// Calculates perceived brightness so custom hex colors get readable text automatically
+// Calculates perceived brightness using the standard YIQ luminance formula.
+// Ensures custom hex colors always pair with readable dark or light text.
 function getContrastTextColor(hexColor) {
   const cleanHex = hexColor.replace('#', '');
   const r = parseInt(cleanHex.substring(0, 2), 16);
@@ -58,29 +60,30 @@ function getContrastTextColor(hexColor) {
   return brightness > 135 ? '#111111' : '#f8fafc';
 }
 
-// Updates root CSS custom properties dynamically
+// Updates global CSS custom properties on :root so the entire workspace, navbar,
+// and body update reactively without manual DOM class manipulation.
 function setWorkspaceTheme(backgroundValue, textColorValue) {
   document.documentElement.style.setProperty('--workspace-bg', backgroundValue);
   document.documentElement.style.setProperty('--workspace-text', textColorValue);
 }
 
-// Resets workspace CSS variables back to default cream and dark charcoal text
+// Restores the default cream background and dark charcoal text.
 export function clearAllBackgrounds() {
   setWorkspaceTheme('#F2EBDD', '#111111');
 }
 
-// Applies any theme or gradient object from themes.js
+// Applies any preset theme or gradient object from the registries above.
 export function applyThemePreset(background, textColor = '#111111') {
   setWorkspaceTheme(background, textColor);
 }
 
-// Applies a custom solid hex color and calculates readable text contrast
+// Applies a user-selected hex color and automatically sets readable text contrast.
 export function applyCustomColor(hexColor) {
   const readableText = getContrastTextColor(hexColor);
   setWorkspaceTheme(hexColor, readableText);
 }
 
-// Applies a direct image URL as a centered, full-cover background
+// Applies a direct HTTPS image URL as a centered, full-cover workspace backdrop.
 export function applyCustomImage(imageUrl) {
   setWorkspaceTheme(`url('${imageUrl}') center/cover no-repeat`, '#111111');
 }
