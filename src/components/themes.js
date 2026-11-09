@@ -3,25 +3,25 @@ export const BACKGROUND_THEMES = {
   default: {
     id: 'default',
     title: 'Default Cream',
-    className: 'bg-default',
+    background: '#F2EBDD',
     textColor: '#111111',
   },
   midnight: {
     id: 'midnight',
     title: 'Midnight Slate',
-    className: 'bg-midnight',
-    textColor: '#f8fafc',
+    background: '#1E293B',
+    textColor: '#111111',
   },
   forest: {
     id: 'forest',
     title: 'Mint Forest',
-    className: 'bg-forest',
+    background: '#D1FAE5',
     textColor: '#111111',
   },
   sunset: {
     id: 'sunset',
     title: 'Warm Sunset',
-    className: 'bg-sunset',
+    background: '#FFEDD5',
     textColor: '#111111',
   },
 };
@@ -31,40 +31,24 @@ export const PRESET_WALLPAPERS = [
   {
     id: 'blueprint',
     title: 'Abstract',
-    className: 'bg-tech-blueprint',
+    background: 'linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%)',
     textColor: '#f8fafc',
   },
   {
     id: 'ocean',
     title: 'Ocean',
-    className: 'bg-dark-mesh',
+    background: 'linear-gradient(135deg, #0d9488 0%, #111827 100%)',
     textColor: '#f8fafc',
   },
   {
     id: 'gradient',
     title: 'Gradient',
-    className: 'bg-soft-gradient',
+    background: 'linear-gradient(135deg, #6366f1 0%, #a855f7 100%)',
     textColor: '#f8fafc',
   },
 ];
 
-// Dynamically builds the list of all CSS theme classes from the registries above
-const ALL_THEME_CLASSES = [
-  ...Object.values(BACKGROUND_THEMES).map((t) => t.className),
-  ...PRESET_WALLPAPERS.map((p) => p.className),
-];
-
-// Helper to select the main workspace layout containers
-function getLayoutTargets() {
-  return [
-    document.body,
-    document.querySelector('.app'),
-    document.querySelector('.ws'),
-    document.querySelector('.workspace'),
-  ].filter(Boolean);
-}
-
-// Calculates perceived brightness (YIQ formula) so custom colors get readable text automatically
+// Calculates perceived brightness so custom hex colors get readable text automatically
 function getContrastTextColor(hexColor) {
   const cleanHex = hexColor.replace('#', '');
   const r = parseInt(cleanHex.substring(0, 2), 16);
@@ -74,41 +58,29 @@ function getContrastTextColor(hexColor) {
   return brightness > 135 ? '#111111' : '#f8fafc';
 }
 
-// Clears all active background classes, custom inline styles, and resets text color to dark charcoal
+// Updates root CSS custom properties dynamically
+function setWorkspaceTheme(backgroundValue, textColorValue) {
+  document.documentElement.style.setProperty('--workspace-bg', backgroundValue);
+  document.documentElement.style.setProperty('--workspace-text', textColorValue);
+}
+
+// Resets workspace CSS variables back to default cream and dark charcoal text
 export function clearAllBackgrounds() {
-  getLayoutTargets().forEach((element) => {
-    element.classList.remove(...ALL_THEME_CLASSES);
-    element.style.background = '';
-  });
-
-  // Fixes the white-text bug by resetting the CSS text variable back to dark charcoal
-  document.documentElement.style.setProperty('--workspace-text', '#111111');
+  setWorkspaceTheme('#F2EBDD', '#111111');
 }
 
-// Applies a registered CSS theme class and sets its corresponding text contrast variable
-export function applyClassTheme(className, textColor = '#111111') {
-  clearAllBackgrounds();
-  getLayoutTargets().forEach((element) => {
-    element.classList.add(className);
-  });
-  document.documentElement.style.setProperty('--workspace-text', textColor);
+// Applies any theme or gradient object from themes.js
+export function applyThemePreset(background, textColor = '#111111') {
+  setWorkspaceTheme(background, textColor);
 }
 
-// Applies a custom solid hex color and dynamically calculates dark or light text contrast
+// Applies a custom solid hex color and calculates readable text contrast
 export function applyCustomColor(hexColor) {
-  clearAllBackgrounds();
-  getLayoutTargets().forEach((element) => {
-    element.style.background = hexColor;
-  });
   const readableText = getContrastTextColor(hexColor);
-  document.documentElement.style.setProperty('--workspace-text', readableText);
+  setWorkspaceTheme(hexColor, readableText);
 }
 
 // Applies a direct image URL as a centered, full-cover background
 export function applyCustomImage(imageUrl) {
-  clearAllBackgrounds();
-  getLayoutTargets().forEach((element) => {
-    element.style.background = `url('${imageUrl}') center/cover no-repeat`;
-  });
-  document.documentElement.style.setProperty('--workspace-text', '#111111');
+  setWorkspaceTheme(`url('${imageUrl}') center/cover no-repeat`, '#111111');
 }
