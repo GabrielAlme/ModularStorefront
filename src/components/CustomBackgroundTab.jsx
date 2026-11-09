@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import {
   BACKGROUND_THEMES,
-  applyClassTheme,
+  applyThemePreset,
   applyCustomColor,
   applyCustomImage,
   clearAllBackgrounds,
@@ -28,7 +28,6 @@ const CustomBackgroundTab = ({ isOpen, onClose, onSelectTab }) => {
   return (
     <div className="settings-overlay" onClick={onClose}>
       <div id="config-modal-view" className="settings-modal" onClick={(e) => e.stopPropagation()}>
-        {/* Left Steam-Style Navigation Column */}
         <nav className="settings-sidebar-nav">
           <div className="settings-sidebar-title">Settings</div>
           <button type="button" className="tab-btn active">
@@ -45,7 +44,6 @@ const CustomBackgroundTab = ({ isOpen, onClose, onSelectTab }) => {
           </button>
         </nav>
 
-        {/* Right Content Viewport */}
         <div className="settings-viewport">
           <div>
             <h3 className="settings-viewport-header">Custom Background</h3>
@@ -61,7 +59,7 @@ const CustomBackgroundTab = ({ isOpen, onClose, onSelectTab }) => {
                     key={theme.id}
                     type="button"
                     className="theme-btn"
-                    onClick={() => applyClassTheme(theme.className, theme.textColor)}
+                    onClick={() => applyThemePreset(theme.background, theme.textColor)}
                   >
                     {theme.title}
                   </button>
