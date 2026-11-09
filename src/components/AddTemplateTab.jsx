@@ -1,5 +1,5 @@
 import React from 'react';
-import { PRESET_WALLPAPERS, applyClassTheme, clearAllBackgrounds } from './themes';
+import { PRESET_WALLPAPERS, applyThemePreset, clearAllBackgrounds } from './themes';
 
 const AddTemplateTab = ({ isOpen, onClose, onSelectTab }) => {
   if (!isOpen) return null;
@@ -7,7 +7,6 @@ const AddTemplateTab = ({ isOpen, onClose, onSelectTab }) => {
   return (
     <div className="settings-overlay" onClick={onClose}>
       <div id="config-modal-view" className="settings-modal" onClick={(e) => e.stopPropagation()}>
-        {/* Left Steam-Style Navigation Column */}
         <nav className="settings-sidebar-nav">
           <div className="settings-sidebar-title">Settings</div>
           <button type="button" className="tab-btn" onClick={() => onSelectTab?.('customizer')}>
@@ -24,7 +23,6 @@ const AddTemplateTab = ({ isOpen, onClose, onSelectTab }) => {
           </button>
         </nav>
 
-        {/* Right Content Viewport */}
         <div className="settings-viewport">
           <div>
             <h3 className="settings-viewport-header">Add Template</h3>
@@ -41,11 +39,12 @@ const AddTemplateTab = ({ isOpen, onClose, onSelectTab }) => {
                     key={preset.id}
                     role="button"
                     tabIndex={0}
-                    className={`wallpaper-card ${preset.className}`}
-                    onClick={() => applyClassTheme(preset.className, preset.textColor)}
+                    className="wallpaper-card"
+                    style={{ background: preset.background }}
+                    onClick={() => applyThemePreset(preset.background, preset.textColor)}
                     onKeyDown={(e) => {
                       if (e.key === 'Enter' || e.key === ' ') {
-                        applyClassTheme(preset.className, preset.textColor);
+                        applyThemePreset(preset.background, preset.textColor);
                       }
                     }}
                   >
