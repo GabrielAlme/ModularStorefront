@@ -186,4 +186,323 @@ body {
   .sidebar a {font-size: 18px;}
 }
 
+/* Dynamic CSS variables for workspace and modal theming */
+:root {
+  /* Workspace variables */
+  --workspace-bg: #F2EBDD;
+  --workspace-text: #111111;
+  --chrome-surface-bg: #fffbf2;
+  --chrome-surface-text: #111111;
+  --navbar-bg: #000000; /*CHANGE THIS COLOR TO CHANGE THE SEARCH BAR AREA'S COLOR*/
+  --settings-icon-size: 4rem; /*Changes the size of the settings cog icon*/
 
+  /* Modal layout and sizing variables */
+  --modal-width: min(820px, 94vw);
+  --modal-height: min(540px, 88vh);
+  --modal-sidebar-width: 230px;
+  --modal-radius: 8px;
+  --card-radius: 6px;
+  --btn-radius: 4px;
+
+  /* Modal color palette variables */
+  --modal-overlay-bg: rgba(10, 14, 20, 0.72);
+  --modal-sidebar-bg: #171a21;
+  --modal-main-bg: #1b2838;
+  --modal-card-bg: #16202d;
+  --modal-input-bg: #101822;
+  --modal-border: #2a475e;
+  --modal-accent: #66c0f4;
+  --modal-text-primary: #ffffff;
+  --modal-text-secondary: #b8b6b4;
+  --modal-text-muted: #8f98a0;
+  --modal-btn-gradient: linear-gradient(90deg, #06bfff 0%, #2d73ff 100%);
+  --modal-danger-bg: #991b1b;
+  --modal-danger-hover: #b91c1c;
+}
+
+/* Workspace and body dynamically read background and text variables */
+body,
+.app,
+.ws,
+.workspace {
+  background: var(--workspace-bg);
+  color: var(--workspace-text);
+  transition: background 0.25s ease, color 0.25s ease;
+}
+
+/* Make the react-mosaic container transparent so the background shows through */
+.mosaic,
+.mosaic-theme,
+.mosaic-root,
+.mosaic-zero-state {
+  background: transparent !important;
+}
+
+.ws h1,
+.ws h2,
+.ws h3,
+.ws p {
+  color: var(--workspace-text);
+}
+
+/* Update the search bar / navbar area to match the active background */
+.workspace .navbar {
+  background: var(--navbar-bg);
+  color: var(--chrome-surface-text);
+  transition: background 0.25s ease, color 0.25s ease;
+}
+
+/* Keep dropdown menus and search results readable */
+.drop-list,
+.search-list {
+  color: #111111;
+}
+
+.sidebar-settings-btn {
+  background: none;
+  border: none;
+  font-size: var(--settings-icon-size);
+  line-height: 1;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.sidebar-settings-btn:hover {
+  transform: rotate(30deg) scale(1.15);
+}
+
+/* Two-column settings modal layout */
+.settings-overlay {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--modal-overlay-bg);
+  backdrop-filter: blur(4px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+#config-modal-view.settings-modal {
+  display: flex;
+  flex-direction: row;
+  width: var(--modal-width);
+  height: var(--modal-height);
+  background-color: var(--modal-main-bg);
+  color: var(--modal-text-primary);
+  border-radius: var(--modal-radius);
+  border: 1px solid var(--modal-border);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.75);
+  padding: 0;
+  overflow: hidden;
+  font-family: inherit;
+  text-align: left;
+}
+
+/* Left sidebar navigation */
+#config-modal-view .settings-sidebar-nav {
+  width: var(--modal-sidebar-width);
+  min-width: var(--modal-sidebar-width);
+  background-color: var(--modal-sidebar-bg);
+  padding: 24px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  border-right: 1px solid var(--modal-border);
+  box-sizing: border-box;
+}
+
+#config-modal-view .settings-sidebar-title {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--modal-accent);
+  padding: 0 12px 14px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  text-transform: uppercase;
+}
+
+/* Left sidebar tab buttons */
+#config-modal-view .tab-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  flex: none;
+  padding: 11px 14px;
+  margin: 0;
+  background: transparent;
+  border: none;
+  border-left: 3px solid transparent;
+  border-radius: var(--btn-radius);
+  color: var(--modal-text-secondary);
+  font-size: 0.92rem;
+  font-weight: 500;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+#config-modal-view .tab-btn:hover:not(:disabled) {
+  background-color: rgba(255, 255, 255, 0.07);
+  color: var(--modal-text-primary);
+}
+
+#config-modal-view .tab-btn.active {
+  background-color: rgba(102, 192, 244, 0.16);
+  border-left: 3px solid var(--modal-accent);
+  color: var(--modal-text-primary);
+  font-weight: 600;
+}
+
+#config-modal-view .tab-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+/* Right content area */
+#config-modal-view .settings-viewport {
+  flex: 1;
+  padding: 28px 34px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: var(--modal-main-bg);
+  box-sizing: border-box;
+}
+
+#config-modal-view .settings-viewport-header {
+  margin: 0 0 20px;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--modal-text-primary);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  padding-bottom: 12px;
+}
+
+/* Cards inside the right content panel */
+#config-modal-view .setting-group-card {
+  background-color: var(--modal-card-bg);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: var(--card-radius);
+  padding: 18px 20px;
+  margin-bottom: 16px;
+}
+
+#config-modal-view .setting-row-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+#config-modal-view .setting-title {
+  display: block;
+  font-size: 0.96rem;
+  font-weight: 600;
+  color: var(--modal-text-primary);
+  margin-bottom: 4px;
+}
+
+#config-modal-view .setting-description {
+  font-size: 0.85rem;
+  color: var(--modal-text-muted);
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* Buttons inside the modal */
+#config-modal-view .theme-btn {
+  background: var(--modal-btn-gradient);
+  color: var(--modal-text-primary);
+  border: none;
+  border-radius: var(--btn-radius);
+  padding: 9px 16px;
+  margin: 0;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: filter 0.15s ease;
+}
+
+#config-modal-view .theme-btn:hover {
+  filter: brightness(1.12);
+}
+
+#config-modal-view .theme-btn.danger {
+  background: var(--modal-danger-bg);
+}
+
+#config-modal-view .theme-btn.danger:hover {
+  background: var(--modal-danger-hover);
+}
+
+/* Full-width text inputs */
+#config-modal-view .image-url-field {
+  width: 100%;
+  padding: 10px 14px;
+  background-color: var(--modal-input-bg);
+  border: 1px solid var(--modal-border);
+  border-radius: var(--btn-radius);
+  color: var(--modal-text-primary);
+  font-size: 0.9rem;
+  box-sizing: border-box;
+}
+
+#config-modal-view .image-url-field:focus {
+  outline: none;
+  border-color: var(--modal-accent);
+}
+
+/* Color picker input */
+#config-modal-view .color-input-circle {
+  border: 2px solid var(--modal-border);
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  cursor: pointer;
+  overflow: hidden;
+  background: transparent;
+  flex-shrink: 0;
+}
+
+#config-modal-view .color-input-circle::-webkit-color-swatch-wrapper { padding: 0; }
+#config-modal-view .color-input-circle::-webkit-color-swatch { border: none; border-radius: 50%; }
+
+/* Dynamic preset wallpaper grid */
+#config-modal-view .bg-wallpaper-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+  margin-top: 14px;
+}
+
+#config-modal-view .wallpaper-card {
+  height: 70px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--card-radius);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--modal-text-primary);
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.9);
+  transition: transform 0.12s ease, border-color 0.12s ease;
+}
+
+#config-modal-view .wallpaper-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--modal-accent);
+}
