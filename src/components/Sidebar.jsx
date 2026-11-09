@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './Settings.css';
 
 // Feature 1: Custom Background (CreateNewBackground branch)
+import CustomBackgroundTab from './CustomBackgroundTab';
 
 // Feature 2: Add Template (AddBackground branch)
 import AddTemplateTab from './AddTemplateTab';
@@ -27,6 +28,10 @@ const Sidebar = () => {
       </button>
 
       {/* Feature 1 Modal */}
+      <CustomBackgroundTab
+        isOpen={isSettingsOpen}
+        onClose={() => setIsSettingsOpen(false)}
+      />
 
       {/* Feature 2 Modal */}
       <AddTemplateTab
