@@ -4,34 +4,34 @@ import { PANELS } from '../panels/registry';
 import MosaicWorkspace from './MosaicWorkspace';
 import Dropdown from './Dropdown';
 import SearchBar from './SearchBar';
+import Sidebar from './Sidebar';
+
+import { useAuth } from "../authorization";
+import { useNavigate } from "react-router-dom";
 
 const Workspace = () => {
-  const [workspace] = useState(loadWorkspace);
   const [favorites, setFavorites] = useState(loadFavorites);
-  const [panels, setPanels] = useState(workspace.panels);
-  const [layout, setLayout] = useState(workspace.layout);
-  const nextId = useRef(workspace.nextId);
-
+  const [panels, setPanels] = useState({});
+  const [layout, setLayout] = useState(null);
+  const [loaded, setLoaded] = useState(false)
+  const {token, logout} = useAuth();
+  const navigate = useNavigate();
+  const nextId = useRef(1);
 
 
 // functions and use states related to loading the workspace panels
-  function loadWorkspace() {
-    const saved = JSON.parse(localStorage.getItem("workspace")) ?? {};
+async function loadWorkspace(userId) {
+    const res = await fetch(`/api/layouts/${userId}`);
+    if (!res.ok) return { panels: {}, nextId: 1, layout: null };
+    const data = await res.json();
+    const saved = data.layout ?? {};
     return { panels: saved.panels ?? {}, nextId: saved.nextId ?? 1, layout: saved.layout ?? null} //checks local storage for the stored layout of panels, if there is no layout stored it upates it to the values on the right
   };
   
-  useEffect(() => {
-  const activeBg = JSON.parse(localStorage.getItem("savedWebsiteBackground"));
-  if (activeBg) {
-    const targetElement = document.getElementById("ws") || document.body;
-    if (activeBg.isImg) {
-      targetElement.style.background = `url(${activeBg.value}) no-repeat center center / cover`;
-    } else {
-      targetElement.style.backgroundImage = "none";
-      targetElement.style.backgroundColor = activeBg.value;
-    }
-  }
-}, []);
+  useEffect (() => {
+        localStorage.setItem("workspace", JSON.stringify({ panels, nextId: nextId.current, layout })
+        , [panels, layout]); // this watches the array [panels] and when a change is made to it it uploads it to the local storage
+  });
 
 
 
@@ -80,8 +80,12 @@ const Workspace = () => {
       )
     };
 
+
+  if (!loaded) return <div> loading... </div>; // runs while the workspace is loading from the database
+
   return (
     <div className="workspace">
+      <Sidebar/>
       <div className="navbar">
         <Dropdown registry={favoritePanels} onSelect={addPanel} title="Favorites" emptyMessage="Add panels to favorites using the star in the search menu"/>  {/* this passes the data from onSelect inside of AddPanel to the function addPanel */}
         <SearchBar registry={PANELS} onSelect={addPanel} button={favoriteButton}/>
