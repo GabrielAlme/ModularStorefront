@@ -3,7 +3,7 @@ import pool from './db.js';
 import storesRouter from './routes/stores.js';
 import productsRouter from './routes/products.js';
 import layoutsRouter from './routes/layouts.js';
-import { createUser, loginUser } from './userQueries.js';
+import { createUser, loginUser, getUserStores } from './userQueries.js';
 import jwt from 'jsonwebtoken'
 
 const api = Router();
@@ -72,7 +72,16 @@ api.post("/login", async (req, res) => {
         res.status(500).json({ error: "Something went wrong" });
     }
 });
-
+api.post("/projects", async (req, res) => {
+    const { username } = req.body;
+    try {
+        const stores = await getUserStores({username});
+        res.json(stores)
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Something went wrong" });
+    }
+});
 // Any /api path that doesn't exist returns JSON instead of the React page
 api.use((req, res) => res.status(404).json({ error: 'not found' }));
 

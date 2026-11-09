@@ -17,6 +17,22 @@ const getUsers = async () => {
     }
 };
 
+const getUserStores = async ({username}) => {
+    try {
+        const { rows } = await pool.query(
+            `SELECT s.*
+             FROM stores s
+             JOIN users u ON u.user_id = s.user_id
+             WHERE u.username = $1`,
+            [username]
+        );
+        return rows;
+    } catch (error) {
+        console.error(error);
+        throw new Error("Internal Server Error");
+    }
+};
+
 //Creates a new user and inserts them into the users table
 const createUser = async ({ username, email, password }) => {
     try {
@@ -92,4 +108,4 @@ const findUser = async (id) => {
     }
 };
 
-export { getUsers, createUser, findUser, loginUser };
+export { getUsers, getUserStores, createUser, findUser, loginUser };
