@@ -8,6 +8,7 @@ import CustomBackgroundTab from './CustomBackgroundTab';
 import AddTemplateTab from './AddTemplateTab';
 
 // Feature 3: Request New Panel (RequestPanel branch)
+import RequestPanelTab from './RequestPanelTab';
 
 const Sidebar = () => {
   // Controls whether the settings modal overlay is visible
@@ -28,18 +29,21 @@ const Sidebar = () => {
       </button>
 
       {/* Feature 1 Modal */}
-      <CustomBackgroundTab
+<CustomBackgroundTab
         isOpen={isSettingsOpen}
         onClose={() => setIsSettingsOpen(false)}
       />
-
       {/* Feature 2 Modal */}
       <AddTemplateTab
         isOpen={isSettingsOpen}
         onClose={() => setIsSettingsOpen(false)}
       />
-
       {/* Feature 3 Modal */}
+      <RequestPanelTab
+        isOpen={isSettingsOpen}
+        onClose={() => setIsSettingsOpen(false)}
+      />
+
     </div>
   );
 };
