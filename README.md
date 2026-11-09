@@ -42,10 +42,19 @@ PGAdmin is a tool for programming with postgresSQL made by the same people:
 
  - [pgadmin](https://www.postgresql.org/ftp/pgadmin/pgadmin4/v9.18/windows/)
 
-The install process is lengthy and involves a lot of different menus so think carefully about 
+The install process is lengthy and involves a lot of different menus so think carefully about it as you go through
 
 Other node packages that need to be installed to use this code locally:
 
  - npm install pg
  - npm install express
+
+Other node packages that need to be installed to use this code locally:
+
+ - npm install pg (postgresql)
+ - npm install express (backend for node)
+ - npm install bcrypt (password hashing method)
+ - npm install express dotenv (loads assets from .env)
+ - npm install jsonwebtoken (api authorization for user functionality)
+ - npm install jwt-decode (decoding tool for web tokens)
 
