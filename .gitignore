@@ -24,4 +24,5 @@ dist-ssr
 *.sw?
 
 # NEVER COMMIT
+.env.env.test
 .env
