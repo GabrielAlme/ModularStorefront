@@ -193,7 +193,9 @@ body {
   --workspace-text: #111111;
   --chrome-surface-bg: #fffbf2;
   --chrome-surface-text: #111111;
-   --navbar-bg: #000000; /*CHANGE THIS COLOR TO CHANGE THE SEARCH BAR AREA'S COLOR*/
+  --navbar-bg: #000000; /*CHANGE THIS COLOR TO CHANGE THE SEARCH BAR AREA'S COLOR*/
+  --settings-icon-size: 4rem; /*Changes the size of the settings cog icon*/
+
   /* Modal layout and sizing variables */
   --modal-width: min(820px, 94vw);
   --modal-height: min(540px, 88vh);
@@ -259,17 +261,19 @@ body,
 .sidebar-settings-btn {
   background: none;
   border: none;
-  color: #818181;
-  font-size: 18px;
-  padding: 6px 8px 6px 16px;
-  display: block;
-  text-align: left;
+  font-size: var(--settings-icon-size);
+  line-height: 1;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
   cursor: pointer;
+  transition: transform 0.2s ease;
 }
 
 .sidebar-settings-btn:hover {
-  color: #111111;
+  transform: rotate(30deg) scale(1.15);
 }
 
 /* Two-column settings modal layout */
