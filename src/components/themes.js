@@ -32,19 +32,19 @@ export const PRESET_WALLPAPERS = [
     id: 'blueprint',
     title: 'Abstract',
     background: 'linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%)',
-    textColor: '#f8fafc',
+    textColor: '#111111',
   },
   {
     id: 'ocean',
     title: 'Ocean',
     background: 'linear-gradient(135deg, #0d9488 0%, #111827 100%)',
-    textColor: '#f8fafc',
+    textColor: '#111111',
   },
   {
     id: 'gradient',
     title: 'Gradient',
     background: 'linear-gradient(135deg, #6366f1 0%, #a855f7 100%)',
-    textColor: '#f8fafc',
+    textColor: '#111111',
   },
 ];
 

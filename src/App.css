@@ -213,13 +213,22 @@ body {
   --modal-danger-hover: #b91c1c;
 }
 
-/* Workspace dynamically reads background and text variables */
+/* Workspace and body dynamically read background and text variables */
+body,
 .app,
 .ws,
 .workspace {
   background: var(--workspace-bg);
   color: var(--workspace-text);
   transition: background 0.25s ease, color 0.25s ease;
+}
+
+/* Make the react-mosaic container transparent so the background shows through */
+.mosaic,
+.mosaic-theme,
+.mosaic-root,
+.mosaic-zero-state {
+  background: transparent !important;
 }
 
 .ws h1,
@@ -229,8 +238,14 @@ body {
   color: var(--workspace-text);
 }
 
-/* Keep top navbar, dropdowns, and search list readable */
-.workspace .navbar,
+/* Update the search bar / navbar area to match the active background */
+.workspace .navbar {
+  background: var(--workspace-bg);
+  color: var(--workspace-text);
+  transition: background 0.25s ease, color 0.25s ease;
+}
+
+/* Keep dropdown menus and search results readable */
 .drop-list,
 .search-list {
   color: #111111;
@@ -482,3 +497,4 @@ body {
   transform: translateY(-2px);
   border-color: var(--modal-accent);
 }
+
