@@ -5,6 +5,7 @@ import './Settings.css';
 import CustomBackgroundTab from './CustomBackgroundTab';
 
 // Feature 2: Add Template (AddBackground branch)
+import AddTemplateTab from './AddTemplateTab';
 
 // Feature 3: Request New Panel (RequestPanel branch)
 
@@ -33,6 +34,10 @@ const Sidebar = () => {
       />
 
       {/* Feature 2 Modal */}
+      <AddTemplateTab
+        isOpen={isSettingsOpen}
+        onClose={() => setIsSettingsOpen(false)}
+      />
 
       {/* Feature 3 Modal */}
     </div>
