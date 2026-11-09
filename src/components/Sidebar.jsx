@@ -14,7 +14,6 @@ const Sidebar = () => {
 
   return (
     <div className="sidebar">
-      <div>This is empty for now</div>
 
       {/* Icon-only settings trigger button sized via --settings-icon-size */}
       <button
