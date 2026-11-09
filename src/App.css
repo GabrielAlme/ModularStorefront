@@ -206,6 +206,13 @@ body {
   max-width: 90%;
 }
 
+/* Also ensure headings and paragraphs inside the modal remain dark */
+.settings-modal h3, 
+.settings-modal h4, 
+.settings-modal p {
+  color: #111111 !important;
+}
+
 .modal-section {
   margin-bottom: 1.5rem;
   padding-bottom: 1rem;
@@ -239,55 +246,55 @@ body {
 
 /* --- Theme Registry Background Classes --- */
 .bg-default { background-color: #F2EBDD !important; }
-.bg-midnight { background-color: #1E293B !important;}
+.bg-midnight { background-color: #1E293B !important; color: #F8FAFC; }
 .bg-forest { background-color: #D1FAE5 !important; }
 .bg-sunset { background-color: #FFEDD5 !important; }
 
-/* --- Shield Modal Content From Color Inversions --- */
-.settings-modal {
-  background-color: #fffbf2;
-  padding: 2rem;
-  border-radius: 12px;
-  border: 2px solid black;
-  width: 420px;
-  max-width: 90%;
-  color: #111111 !important; 
+/* --- Pre-Selected Wallpaper Layout Classes --- */
+.bg-wallpaper-grid {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+  margin-bottom: 15px;
 }
 
-.settings-modal h3, 
-.settings-modal h4, 
-.settings-modal p,
-.settings-modal label {
-  color: #111111 !important;
-}
-
-/* --- Interactive Theme Customizer Styling UI --- */
-.customizer-row {
+.wallpaper-card {
+  flex: 1;
+  height: 60px;
+  border: 1px solid black;
+  border-radius: 8px;
+  cursor: pointer;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  margin-top: 10px;
-  padding: 8px;
-  background: rgba(0,0,0,0.04);
-  border-radius: 8px;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 0.8rem;
+  background-size: cover;
+  background-position: center;
+  color: white;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+  transition: transform 0.1s ease;
 }
 
-.color-input-circle {
-  border: 1px solid black;
-  border-radius: 50%;
-  width: 32px;
-  height: 32px;
-  padding: 0;
-  cursor: pointer;
-  overflow: hidden;
+.wallpaper-card:hover {
+  transform: scale(1.05);
 }
 
-.color-input-circle::-webkit-color-swatch-wrapper { padding: 0; }
-.color-input-circle::-webkit-color-swatch { border: none; border-radius: 50%; }
+/* --- Curated Static Wallpapers (Using High-Quality royalty-free Unsplash URLs) --- */
+.bg-tech-blueprint { 
+  background: linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%) !important; 
+  color: #f8fafc !important; /* White text so you can read your workspace panels */
+}
 
-/* Ensure base typography changes dynamically inside workspaces when chosen */
-.theme-text-light { color: #f8fafc !important; }
-.theme-text-light h3, .theme-text-light h4, .theme-text-light p { color: #f8fafc !important; }
+.bg-dark-mesh { 
+  background: linear-gradient(135deg, #0d9488 0%, #111827 100%) !important; 
+  color: #f8fafc !important; 
+}
+
+.bg-soft-gradient { 
+  background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%) !important; 
+  color: #f8fafc !important; 
+}
 
 /* --- Modal Tab System Layout --- */
 .modal-tabs {
@@ -317,7 +324,7 @@ body {
   border-top: 2px solid black;
   border-left: 2px solid black;
   border-right: 2px solid black;
-  margin-bottom: -2px; /* Pull active tab over the border line */
+  margin-bottom: -2px;
 }
 
 .tab-btn:disabled {
@@ -325,21 +332,26 @@ body {
   cursor: not-allowed;
 }
 
-/* --- Custom Image Input Form Section --- */
-.image-input-row {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin-top: 15px;
-  padding: 10px;
-  background: rgba(0, 0, 0, 0.04);
-  border-radius: 8px;
+/* --- Pre-Selected Wallpaper Layout Classes --- */
+.bg-wallpaper-grid {
+
 }
 
-.image-url-field {
-  width: 90%;
-  padding: 0.5rem;
-  border: 1px solid black;
-  border-radius: 8px;
-  font-size: 0.85rem;
+/* --- Force Dashboard Content Text and Modal Elements to Stay Dark --- */
+#config-modal-view,
+#config-modal-view h3,
+#config-modal-view h4,
+#config-modal-view p,
+#config-modal-view label,
+#config-modal-view .theme-btn,
+.ws h1,
+.ws h2,
+.ws h3,
+.ws p {
+  color: #111111 !important; /* Forces solid dark charcoal text across layout labels and headers */
+}
+
+/* --- EXCEPTION RULE: Force the text inside your gradient thumbnail buttons to stay white --- */
+.wallpaper-card {
+  color: #ffffff !important;
 }
