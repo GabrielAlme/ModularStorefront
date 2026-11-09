@@ -1,57 +1,40 @@
 import React, { useState } from 'react';
+
+// Feature 1: Custom Background (CreateNewBackground branch)
 import CustomBackgroundTab from './CustomBackgroundTab';
-import AddTemplateTab from './AddTemplateTab';
-import RequestPanelTab from './RequestPanelTab';
+
+// Feature 2: Add Template (AddBackground branch)
+
+// Feature 3: Request New Panel (RequestPanel branch)
 
 const Sidebar = () => {
-  // Tracks whether the settings overlay is open
+  // Controls whether the settings modal overlay is visible
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
-
-  // Set default tab per branch: 'presets' (AddBackground), 'customizer' (CreateNewBackground), or 'request' (RequestPanel)
-  const [activeTab, setActiveTab] = useState('presets');
-
-  // Helper to close the modal and reset back to this branch's default tab
-  const handleClose = () => {
-    setIsSettingsOpen(false);
-    setActiveTab('presets'); // Match the default tab above
-  };
 
   return (
     <div className="sidebar">
+      <div>This is empty for now</div>
 
-      {/* Trigger button that opens the Steam-style settings window */}
+      {/* Icon-only settings trigger button sized via --settings-icon-size */}
       <button
         type="button"
         className="sidebar-settings-btn"
         onClick={() => setIsSettingsOpen(true)}
+        aria-label="Settings"
+        title="Settings"
       >
         ⚙️
       </button>
 
-      {/* Renders whichever standalone tab component is currently active */}
-      {activeTab === 'customizer' && (
-        <CustomBackgroundTab
-          isOpen={isSettingsOpen}
-          onClose={handleClose}
-          onSelectTab={setActiveTab}
-        />
-      )}
+      {/* Feature 1 Modal */}
+      <CustomBackgroundTab
+        isOpen={isSettingsOpen}
+        onClose={() => setIsSettingsOpen(false)}
+      />
 
-      {activeTab === 'presets' && (
-        <AddTemplateTab
-          isOpen={isSettingsOpen}
-          onClose={handleClose}
-          onSelectTab={setActiveTab}
-        />
-      )}
+      {/* Feature 2 Modal */}
 
-      {activeTab === 'request' && (
-        <RequestPanelTab
-          isOpen={isSettingsOpen}
-          onClose={handleClose}
-          onSelectTab={setActiveTab}
-        />
-      )}
+      {/* Feature 3 Modal */}
     </div>
   );
 };
