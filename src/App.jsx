@@ -3,6 +3,9 @@ import Home from "./components/Home"
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom"
 import SignUp from "./components/SignUp"
 import { AuthProvider } from "./authorization"
+import ProtectedExample from "./components/ProtectedExample"
+import { ProtectedRoute } from "./protectedRoute"
+import Projects from "./components/Projects"
 import RouterNav from "./components/RouterNav"
 import Storefront from "./components/Storefront"
 import Workspace from "./components/Workspace"
@@ -23,6 +26,13 @@ function LogIn() {
 function ToSignUp() {
   return <SignUp/>
 }
+function ToProtected() {
+  return <ProtectedExample />
+}
+function ToProjects() {
+  return <Projects />
+}
+
 
 const App = () => {
   
@@ -41,6 +51,12 @@ const App = () => {
               <Route path="/Workspace" element={<Workspace />} />
               <Route path="/SignIn" element={<LogIn />} />
               <Route path="/SignUp" element={<ToSignUp />} />
+            <Route path="/Projects" element={<ToProjects />} />
+
+            {/*Anything wrapped in this element is protected and redirects to signin if the user is not logged in*/}
+            <Route element={<ProtectedRoute />}>
+              <Route path="/protected" element={<ToProtected />} />
+            </Route>
             </Route>
           <Route path="/:slug" element={<Storefront />} />
         </Routes>
