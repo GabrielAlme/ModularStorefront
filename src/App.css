@@ -65,6 +65,9 @@ body {
 .router-nav { /*topnav*/
   grid-column: 1 / 4;
   z-index: 20;
+  background: var(--chrome-surface-bg) !important;
+  color: var(--chrome-surface-text);
+  border-bottom: 1px solid black;
 }
 
 /* workspace styling */
@@ -188,7 +191,9 @@ body {
   /* Workspace variables */
   --workspace-bg: #F2EBDD;
   --workspace-text: #111111;
-
+  --chrome-surface-bg: #fffbf2;
+  --chrome-surface-text: #111111;
+   --navbar-bg: #000000; /*CHANGE THIS COLOR TO CHANGE THE SEARCH BAR AREA'S COLOR*/
   /* Modal layout and sizing variables */
   --modal-width: min(820px, 94vw);
   --modal-height: min(540px, 88vh);
@@ -240,8 +245,8 @@ body,
 
 /* Update the search bar / navbar area to match the active background */
 .workspace .navbar {
-  background: var(--workspace-bg);
-  color: var(--workspace-text);
+  background: var(--navbar-bg);
+  color: var(--chrome-surface-text);
   transition: background 0.25s ease, color 0.25s ease;
 }
 
