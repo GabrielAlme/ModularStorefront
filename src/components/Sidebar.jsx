@@ -18,7 +18,6 @@ const Sidebar = () => {
 
   return (
     <div className="sidebar">
-      <div>This is empty for now</div>
 
       {/* Trigger button that opens the Steam-style settings window */}
       <button
@@ -26,7 +25,7 @@ const Sidebar = () => {
         className="sidebar-settings-btn"
         onClick={() => setIsSettingsOpen(true)}
       >
-        ⚙️ Settings Manager
+        ⚙️
       </button>
 
       {/* Renders whichever standalone tab component is currently active */}
