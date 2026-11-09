@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './Settings.css';
 
 // Feature 1: Custom Background (CreateNewBackground branch)
 import CustomBackgroundTab from './CustomBackgroundTab';
