@@ -26,7 +26,7 @@ const SearchBar = ({ registry, onSelect, button = () => null }) => {
         const q = query.trim().toLowerCase(); //trims the users query of spaces and end lines at the start or end
         if(!q) return [];//hands the searchbar a blank array if the query is empty
         return registryItems.filter(item => item.title.toLowerCase().includes(q)).slice(0, 8);// filters through the entries of registryItems to find what the user is looking for
-    }, [query, registry]);
+    }, [query, registryItems]);
 
   return (
     <div ref={wrapperRef}>
