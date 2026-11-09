@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { useAuth } from '../authorization'
 
 const LoginPage = () => {
 
@@ -8,6 +9,7 @@ const LoginPage = () => {
   const [pass, setPass] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -29,6 +31,7 @@ const LoginPage = () => {
         return;
       }
       alert("Successfully Logged in! Redirecting...");
+      login(data.token);
       navigate("/");
 
     } catch (err) {
