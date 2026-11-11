@@ -3,13 +3,13 @@ import Home from "./components/Home"
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom"
 import SignUp from "./components/SignUp"
 import { AuthProvider } from "./authorization"
-import ProtectedExample from "./components/ProtectedExample"
+import ProtectedExample from "./components/pages/ProtectedExample"
 import { ProtectedRoute } from "./protectedRoute"
-import Projects from "./components/Projects"
+import Projects from "./components/pages/Projects"
 import RouterNav from "./components/RouterNav"
 import Storefront from "./components/Storefront"
-import Workspace from "./components/Workspace"
-import CartPage from "./components/CartPage" 
+import Workspace from "./components/pages/Workspace"
+import CartPage from "./components/pages/CartPage" 
 
 //Function that links to Home.jsx
 function HomePage() {
