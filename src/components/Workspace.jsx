@@ -4,14 +4,19 @@ import { PANELS } from '../panels/registry';
 import MosaicWorkspace from './MosaicWorkspace';
 import Dropdown from './Dropdown';
 import SearchBar from './SearchBar';
+import Sidebar from './Sidebar';
+
+import { useAuth } from "../authorization";
+import { useNavigate } from "react-router-dom";
 
 const Workspace = () => {
   const [favorites, setFavorites] = useState(loadFavorites);
   const [panels, setPanels] = useState({});
   const [layout, setLayout] = useState(null);
   const [loaded, setLoaded] = useState(false)
+  const {token, logout} = useAuth();
+  const navigate = useNavigate();
   const nextId = useRef(1);
-  const userId = 1;
 
 
 // functions and use states related to loading the workspace panels
@@ -24,30 +29,42 @@ async function loadWorkspace(userId) {
   };
   
   useEffect (() => {
-        loadWorkspace(userId).then((wrkSpc) => {
-          setPanels(wrkSpc.panels);
-          setLayout(wrkSpc.layout);
-          nextId.current = wrkSpc.nextId;
+        fetch("/api/stores/me", {
+          headers: { Authorization: `Bearer ${token}` },
+        }).then((res) => {
+          if (res.status === 401) {
+            //logout();
+            navigate("/SignIn");
+            return null;
+          }
+          if (res.status === 404) return null;
+          if (!res.ok) throw new Error(`Store request failed ${res.status}`);
+          return res.json(true);
+        }).then((store) => {
+          const saved = store?.layout ?? {};
+          setLayout(saved.layout ?? null);
+          setPanels(saved.panels ?? {});
+          nextId.current = saved.nextId ?? 1;
           setLoaded(true);
-        })
-  }, [userId]);
+        }).catch(console.error);
+  }, [token]);
 
-  async function saveWorkspace(userId, workspace) {
-    const res = await fetch(`/api/layouts/${userId}`, {
+  async function saveWorkspace(newLayout) {
+    fetch("/api/stores/me/layout", {
       method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(workspace),
-    });
-    if (!res.ok) throw new Error(`Failed to save workspace: ${res.status}`);
-  }
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ layout: newLayout }),
+    }).catch(console.error)
+  };
 
   useEffect(() => {
     if (!loaded) return;
-    const timer = setTimeout(() => {
-      saveWorkspace(userId, { panels, layout, nextId: nextId.current }).catch(console.error);
-    }, 500);
+    const timer = setTimeout(() => saveWorkspace({ layout, panels, nextId: nextId.current }), 500);
     return () => clearTimeout(timer);
-  }, [panels, layout, loaded, userId]);
+  }, [layout, panels, loaded]);
 
 //functions for handling when panels are added and updating the layout
   const addPanel = (type) => {
@@ -98,6 +115,7 @@ async function loadWorkspace(userId) {
 
   return (
     <div className="workspace">
+      <Sidebar/>
       <div className="navbar">
         <Dropdown registry={favoritePanels} onSelect={addPanel} title="Favorites" emptyMessage="Add panels to favorites using the star in the search menu"/>  {/* this passes the data from onSelect inside of AddPanel to the function addPanel */}
         <SearchBar registry={PANELS} onSelect={addPanel} button={favoriteButton}/>
