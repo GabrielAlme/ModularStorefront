@@ -9,6 +9,7 @@ import Projects from "./components/Projects"
 import RouterNav from "./components/RouterNav"
 import Storefront from "./components/Storefront"
 import Workspace from "./components/Workspace"
+import CartPage from "./components/CartPage" 
 
 //Function that links to Home.jsx
 function HomePage() {
@@ -52,10 +53,11 @@ const App = () => {
               <Route path="/SignIn" element={<LogIn />} />
               <Route path="/SignUp" element={<ToSignUp />} />
             <Route path="/Projects" element={<ToProjects />} />
-
+              
             {/*Anything wrapped in this element is protected and redirects to signin if the user is not logged in*/}
             <Route element={<ProtectedRoute />}>
               <Route path="/protected" element={<ToProtected />} />
+                            <Route path="/Cart" element={<CartPage />} /> 
             </Route>
             </Route>
           <Route path="/:slug" element={<Storefront />} />

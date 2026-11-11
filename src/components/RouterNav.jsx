@@ -5,6 +5,7 @@ const RouterNav = () => {
     <>
         <nav className="router-nav">
             <Link to="/">Home</Link> |{" "}
+            <Link to="/Projects">Projects</Link> |{" "}
             <Link to="/Workspace">Workspace</Link> |{" "}
             <Link to="/SignIn">Login/Sign up</Link>
         </nav>
