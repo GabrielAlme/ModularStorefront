@@ -53,11 +53,11 @@ const App = () => {
               <Route path="/SignIn" element={<LogIn />} />
               <Route path="/SignUp" element={<ToSignUp />} />
             <Route path="/Projects" element={<ToProjects />} />
-              <Route path="/Cart" element={<CartPage />} /> 
               
             {/*Anything wrapped in this element is protected and redirects to signin if the user is not logged in*/}
             <Route element={<ProtectedRoute />}>
               <Route path="/protected" element={<ToProtected />} />
+                            <Route path="/Cart" element={<CartPage />} /> 
             </Route>
             </Route>
           <Route path="/:slug" element={<Storefront />} />
