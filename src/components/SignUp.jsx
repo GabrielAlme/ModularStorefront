@@ -53,7 +53,7 @@ const SignUp = () => {
   }
 
   return (
-    <>
+    <div>
       <h2>Sign Up:</h2>
       <form onSubmit={handleSubmit}>
         <label>Enter your name: <br />
@@ -103,7 +103,7 @@ const SignUp = () => {
       <p>Back to Login: 
         <Link to="/SignIn">Log in here</Link>
       </p>
-    </>
+    </div>
   )
 }
 
