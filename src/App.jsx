@@ -49,7 +49,6 @@ const App = () => {
             <Route element={ <RouterNav /> }>
           {/* These routes make the links navigate to the corresponding functions defined above app */}
               <Route path="/" element={<HomePage />} />
-              <Route path="/Workspace" element={<Workspace />} />
               <Route path="/SignIn" element={<LogIn />} />
               <Route path="/SignUp" element={<ToSignUp />} />
             <Route path="/Projects" element={<ToProjects />} />
@@ -57,7 +56,8 @@ const App = () => {
             {/*Anything wrapped in this element is protected and redirects to signin if the user is not logged in*/}
             <Route element={<ProtectedRoute />}>
               <Route path="/protected" element={<ToProtected />} />
-                            <Route path="/Cart" element={<CartPage />} /> 
+              <Route path="/Workspace" element={<Workspace />} />
+              <Route path="/Cart" element={<CartPage />} /> 
             </Route>
             </Route>
           <Route path="/:slug" element={<Storefront />} />
