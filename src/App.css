@@ -67,6 +67,7 @@ body {
   background: var(--chrome-surface-bg) !important;
   color: var(--chrome-surface-text);
   border-bottom: 1px solid black;
+  padding: .5rem;
 }
 
 /* workspace styling */

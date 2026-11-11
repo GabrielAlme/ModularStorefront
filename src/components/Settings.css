@@ -5,7 +5,7 @@
   --workspace-text: #111111;
   --chrome-surface-bg: #fffbf2;
   --chrome-surface-text: #111111;
-  --navbar-bg: #000000; /*CHANGE THIS COLOR TO CHANGE THE SEARCH BAR AREA'S COLOR*/
+  --navbar-bg: #fffbf2; /*CHANGE THIS COLOR TO CHANGE THE SEARCH BAR AREA'S COLOR*/
   --settings-icon-size: 4rem; /*Changes the size of the settings cog icon*/
 
   /* Modal layout and sizing variables */
