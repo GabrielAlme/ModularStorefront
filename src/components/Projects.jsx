@@ -5,7 +5,7 @@ const Projects = () => {
     const navigate = useNavigate();
 
     const handleClick = () => {
-        navigate('/Workshop');
+        navigate('/Workspace');
     }
 
     return (
