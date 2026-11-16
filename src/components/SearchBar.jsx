@@ -38,6 +38,7 @@ const SearchBar = ({ registry, onSelect, button = () => null }) => {
         placeholder="Search panels..."
         className="search-input"
       />
+      {/* TODO: create list of default panels that will be in results if no query is entered */}
         {open && results.length > 0 && (
             <ul className="search-list">
                 {results.map(item => ( //takes the filtered results and maps the items to an unordered list
