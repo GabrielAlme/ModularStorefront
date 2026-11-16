@@ -27,9 +27,6 @@ function LogIn() {
 function ToSignUp() {
   return <SignUp/>
 }
-function ToProtected() {
-  return <ProtectedExample />
-}
 function ToProjects() {
   return <Projects />
 }
@@ -55,7 +52,6 @@ const App = () => {
               
             {/*Anything wrapped in this element is protected and redirects to signin if the user is not logged in*/}
             <Route element={<ProtectedRoute />}>
-              <Route path="/protected" element={<ToProtected />} />
               <Route path="/Workspace" element={<Workspace />} />
               <Route path="/Cart" element={<CartPage />} /> 
             </Route>
