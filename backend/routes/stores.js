@@ -1,6 +1,12 @@
 import { Router } from 'express';
 import pool from '../db.js';
 import { requireAuth } from "../middleware/requireAuth.js";
+import { RegExpMatcher, englishDataset, englishRecommendedTransformers } from "obscenity";
+
+const profanityMatcher = new RegExpMatcher({
+  ...englishDataset.build(),
+  ...englishRecommendedTransformers,
+});
 
 const router = Router();
 
@@ -96,6 +102,85 @@ router.get("/:slug", async (req, res) => {
         res.status(500).json({ error: "Failed to load store" });
     }
 })
+
+const RESERVED = [
+  "login", "logout", "signin", "signout", "signup", "register", "auth", "oauth",
+  "account", "accounts", "password", "reset", "verify", "forgot", "session", "sessions",
+
+  "workshop", "workspace", "projects", "project", "dashboard", "settings", "profile",
+  "editor", "preview", "home", "index", "welcome", "onboarding",
+
+  "admin", "administrator", "root", "system", "sysadmin", "superuser", "moderator",
+  "staff", "owner", "support", "official", "team",
+
+  "api", "graphql", "static", "assets", "cdn", "public", "dist", "src", "build",
+  "uploads", "upload", "files", "media", "images", "img", "css", "fonts",
+  "favicon", "robots", "sitemap", "manifest", "health", "status", "metrics",
+  "webhook", "webhooks", "cron", "socket",
+
+  "www", "mail", "email", "smtp", "ftp", "dns", "localhost", "server", "host",
+  "dev", "staging", "test", "testing", "demo", "sandbox", "beta", "alpha", "app", "apps",
+
+  "store", "stores", "shop", "shops", "cart", "checkout", "order", "orders",
+  "payment", "payments", "billing", "invoice", "invoices", "pricing", "plans",
+  "subscribe", "subscription", "product", "products", "catalog", "category",
+  "categories", "search", "explore", "discover", "browse", "marketplace",
+  "new", "create", "edit", "delete", "manage",
+
+  "about", "contact", "help", "faq", "docs", "documentation", "blog", "news",
+  "press", "careers", "jobs", "terms", "tos", "privacy", "legal", "policy",
+  "security", "cookies", "abuse", "report", "feedback",
+
+  "windowshop", "window-shop", "gabedoeswebsites",
+
+  "null", "undefined", "true", "false", "user", "users", "guest", "anonymous",
+  "everyone", "all", "none", "default", "example", "sample",
+];
+const SLUG_PATTERN = /^[a-z0-9]+(-[a-z0-9]+)*$/;
+
+function validateSlug(raw) {
+  const slug = String(raw ?? "").trim().toLowerCase();
+  if (slug.length < 3 || slug.length > 50) return { error: "Name must be 3-50 characters" };
+  if (!SLUG_PATTERN.test(slug)) return { error: "Please use lowercase letters, numbers, and dashes instead of spaces" };
+  if (RESERVED.includes(slug)) return { error: "That name is reserved" };
+  if (profanityMatcher.hasMatch(slug) || profanityMatcher.hasMatch(slug.replace(/-/g, ""))) {
+    return { error: "That name isn't allowed" };
+}
+  return { slug };
+}
+
+
+router.post("/", requireAuth, async (req, res) => {
+  const { slug, error } = validateSlug(req.body.slug);
+  if (error) return res.status(400).json({ error });
+
+  const ownerId = req.user.userId;
+  for (let attempt = 0; attempt < 3; attempt++) {
+    try {
+      const { rows } = await pool.query(
+        `INSERT INTO stores (owner_id, store_id, slug)
+         SELECT $1, COALESCE(MAX(store_id), 0) + 1, $2
+         FROM stores WHERE owner_id = $1
+         RETURNING *`,
+        [ownerId, slug]
+      );
+      await pool.query(
+        "UPDATE users SET active_store_id = $1 WHERE user_id = $2 AND active_store_id IS NULL",
+        [rows[0].store_id, ownerId]
+      );
+      return res.status(201).json(rows[0]);
+    } catch (err) {
+      if (err.code === "23505" && err.constraint === "stores_slug_key") {
+        return res.status(409).json({ error: "That name is already taken" });
+      }
+      if (err.code === "23505" && err.constraint === "stores_pkey") continue;
+      console.error(err);
+      return res.status(500).json({ error: "Failed to create store" });
+    }
+  }
+  res.status(500).json({ error: "Failed to create store" });
+});
+
 
 
 

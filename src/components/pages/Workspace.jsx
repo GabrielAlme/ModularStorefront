@@ -1,12 +1,12 @@
 import { useState, useRef, useEffect, useMemo } from 'react';
 import { getLeaves } from 'react-mosaic-component';
-import { PANELS } from '../panels/registry';
-import MosaicWorkspace from './MosaicWorkspace';
-import Dropdown from './Dropdown';
-import SearchBar from './SearchBar';
-import Sidebar from './Sidebar';
+import { PANELS } from '../../panels/registry';
+import MosaicWorkspace from '../MosaicWorkspace';
+import Dropdown from '../Dropdown';
+import SearchBar from '../SearchBar';
+import Sidebar from '../Sidebar';
 
-import { useAuth } from "../authorization";
+import { useAuth } from "../../authorization";
 import { useNavigate } from "react-router-dom";
 
 const Workspace = () => {

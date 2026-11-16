@@ -15,7 +15,7 @@ const Projects = () => {
         const stores = await response.json(); // array of store objects
     }
     const handleClick = () => {
-        navigate('/Workshop');
+        navigate('/Workspace');
     }
 
     return (

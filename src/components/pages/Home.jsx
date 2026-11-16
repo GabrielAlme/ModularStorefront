@@ -1,5 +1,5 @@
 import React from 'react'
-import { useAuth } from '../authorization'
+import { useAuth } from '../../authorization'
 
 const Home = () => {
 

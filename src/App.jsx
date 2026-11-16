@@ -1,14 +1,15 @@
-import LoginPage from "./components/LoginPage"
-import Home from "./components/Home"
+import LoginPage from "./components/pages/LoginPage"
+import Home from "./components/pages/Home"
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom"
-import SignUp from "./components/SignUp"
+import SignUp from "./components/pages/SignUp"
 import { AuthProvider } from "./authorization"
-import ProtectedExample from "./components/ProtectedExample"
+import ProtectedExample from "./components/pages/ProtectedExample"
 import { ProtectedRoute } from "./protectedRoute"
-import Projects from "./components/Projects"
+import Projects from "./components/pages/Projects"
 import RouterNav from "./components/RouterNav"
 import Storefront from "./components/Storefront"
-import Workspace from "./components/Workspace"
+import Workspace from "./components/pages/Workspace"
+import CartPage from "./components/pages/CartPage" 
 
 //Function that links to Home.jsx
 function HomePage() {
@@ -48,14 +49,15 @@ const App = () => {
             <Route element={ <RouterNav /> }>
           {/* These routes make the links navigate to the corresponding functions defined above app */}
               <Route path="/" element={<HomePage />} />
-              <Route path="/Workspace" element={<Workspace />} />
               <Route path="/SignIn" element={<LogIn />} />
               <Route path="/SignUp" element={<ToSignUp />} />
             <Route path="/Projects" element={<ToProjects />} />
-
+              
             {/*Anything wrapped in this element is protected and redirects to signin if the user is not logged in*/}
             <Route element={<ProtectedRoute />}>
               <Route path="/protected" element={<ToProtected />} />
+              <Route path="/Workspace" element={<Workspace />} />
+              <Route path="/Cart" element={<CartPage />} /> 
             </Route>
             </Route>
           <Route path="/:slug" element={<Storefront />} />
