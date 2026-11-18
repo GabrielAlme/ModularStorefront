@@ -8,7 +8,8 @@ import Projects from "./components/pages/Projects"
 import RouterNav from "./components/RouterNav"
 import Storefront from "./components/Storefront"
 import Workspace from "./components/pages/Workspace"
-import CartPage from "./components/pages/CartPage" 
+import CartPage from "./components/pages/CartPage"
+import Documentation from "./components/pages/Documentation" 
 
 //Function that links to Home.jsx
 function HomePage() {
@@ -29,6 +30,9 @@ function ToSignUp() {
 function ToProjects() {
   return <Projects />
 }
+function ToDocument() {
+  return <Documentation />
+}
 
 
 const App = () => {
@@ -48,6 +52,7 @@ const App = () => {
               <Route path="/SignIn" element={<LogIn />} />
               <Route path="/SignUp" element={<ToSignUp />} />
             <Route path="/Projects" element={<ToProjects />} />
+            <Route path="/Document" element={<ToDocument />} />
               
             {/*Anything wrapped in this element is protected and redirects to signin if the user is not logged in*/}
             <Route element={<ProtectedRoute />}>

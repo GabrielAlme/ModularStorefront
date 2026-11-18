@@ -1,6 +1,6 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useAuth } from '../authorization';
+import { useAuth } from '../../authorization';
 
 const Projects = () => {
     const navigate = useNavigate();

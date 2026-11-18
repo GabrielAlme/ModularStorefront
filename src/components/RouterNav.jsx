@@ -15,6 +15,7 @@ const RouterNav = () => {
             <Link to="/Projects">Projects</Link> |{" "}
             <Link to="/Workspace">Workspace</Link> |{" "}
             <Link to="/SignIn">Login/Sign up</Link> |{" "}
+            <Link to="/Document">Panel Documentation</Link> |{" "}
             <button onClick={handle}>
               Log Out
             </button>
