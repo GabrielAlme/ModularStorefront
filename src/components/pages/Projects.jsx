@@ -31,7 +31,7 @@ const Projects = () => {
 
     return (
         <div>
-            <h1>{user ? `Your project` : 'Please log in to save your projects'}</h1><br />
+            <h1>{token ? `Your projects` : 'Please log in to save your projects'}</h1><br />
             <button onClick = { handleClick }>
                 + New Project
             </button>

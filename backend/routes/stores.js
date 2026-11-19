@@ -13,7 +13,7 @@ const router = Router();
 // GET /api/stores
 router.get('/', async (req, res) => {
     const { rows } = await pool.query(
-        'SELECT store_id, owner_id, store_name, description, created_at FROM stores ORDER BY store_id'
+        'SELECT store_id, owner_id, slug, created_at FROM stores ORDER BY store_id'
     );
     res.json(rows);
 });
@@ -24,23 +24,23 @@ router.get('/', async (req, res) => {
 //     if (!Number.isInteger(id)) return res.status(400).json({ error: 'id must be a number' });
 
 //     const { rows } = await pool.query(
-//         'SELECT store_id, owner_id, store_name, description, created_at FROM stores WHERE store_id = $1',
+//         'SELECT store_id, owner_id, slug, description, created_at FROM stores WHERE store_id = $1',
 //         [id]
 //     );
 //     if (rows.length === 0) return res.status(404).json({ error: 'store not found' });
 //     res.json(rows[0]);
 // });
 
-// POST /api/stores   body: { owner_id, store_name, description? }
+// POST /api/stores   body: { owner_id, slug, description? }
 router.post('/', async (req, res) => {
-    const { owner_id, store_name, description } = req.body;
-    if (!Number.isInteger(owner_id) || !store_name) {
-        return res.status(400).json({ error: 'owner_id (number) and store_name are required' });
+    const { owner_id, slug } = req.body;
+    if (!Number.isInteger(owner_id) || !slug) {
+        return res.status(400).json({ error: 'owner_id (number) and slug are required' });
     }
 
     const { rows } = await pool.query(
-        'INSERT INTO stores (owner_id, store_name, description) VALUES ($1, $2, $3) RETURNING *',
-        [owner_id, store_name, description ?? null]
+        'INSERT INTO stores (owner_id, slug ) VALUES ($1, $2, $3) RETURNING *',
+        [owner_id, slug ?? null]
     );
     res.status(201).json(rows[0]);
 });
