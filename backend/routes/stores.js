@@ -11,11 +11,17 @@ const profanityMatcher = new RegExpMatcher({
 const router = Router();
 
 // GET /api/stores
-router.get('/', async (req, res) => {
-    const { rows } = await pool.query(
-        'SELECT store_id, owner_id, slug, created_at FROM stores ORDER BY store_id'
-    );
-    res.json(rows);
+router.get('/', requireAuth, async (req, res) => {
+    try {
+        const { rows } = await pool.query(
+            'SELECT store_id, slug, created_at FROM stores WHERE owner_id = $1 ORDER BY store_id',
+            [req.user.id]
+        );
+        res.json(rows);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: "Failed to load stores" });
+    }
 });
 
 // GET /api/stores/:id
@@ -32,35 +38,33 @@ router.get('/', async (req, res) => {
 // });
 
 // POST /api/stores   body: { owner_id, slug, description? }
-router.post('/', async (req, res) => {
-    const { owner_id, slug } = req.body;
-    if (!Number.isInteger(owner_id) || !slug) {
-        return res.status(400).json({ error: 'owner_id (number) and slug are required' });
-    }
+// router.post('/', async (req, res) => {
+//     const { owner_id, slug } = req.body;
+//     if (!Number.isInteger(owner_id) || !slug) {
+//         return res.status(400).json({ error: 'owner_id (number) and slug are required' });
+//     }
 
-    const { rows } = await pool.query(
-        'INSERT INTO stores (owner_id, slug ) VALUES ($1, $2, $3) RETURNING *',
-        [owner_id, slug ?? null]
-    );
-    res.status(201).json(rows[0]);
-});
+//     const { rows } = await pool.query(
+//         'INSERT INTO stores (owner_id, slug ) VALUES ($1, $2, $3) RETURNING *',
+//         [owner_id, slug ?? null]
+//     );
+//     res.status(201).json(rows[0]);
+// });
 
 //gets the layout from the store table
-router.get("/me", requireAuth, async (req,res) => {
+router.get("/active", requireAuth, async (req, res) => {
     try {
         const { rows } = await pool.query(
-            "SELECT layout FROM stores WHERE owner_id = $1",
+            `SELECT s.* FROM users u
+             JOIN stores s ON s.owner_id = u.user_id AND s.store_id = u.active_store
+             WHERE u.user_id = $1`,
             [req.user.id]
         );
-
-        if(rows.length === 0) {
-            return res.status(404).json({ error: "Layout could not be fetched" });
-        }
-
+        if (rows.length === 0) return res.status(404).json({ error: "No active store" });
         res.json(rows[0]);
     } catch (err) {
         console.error(err);
-        res.status(500).json({ error: "Failed to load layout" });
+        res.status(500).json({ error: "Failed to load store" });
     }
 });
 
@@ -68,7 +72,9 @@ router.get("/me", requireAuth, async (req,res) => {
 router.put("/me/layout", requireAuth, async (req, res) => {
     try {
         const { rowCount } = await pool.query(
-            "UPDATE stores SET layout = $1 where owner_id = $2",
+            `UPDATE stores SET layout = $1
+             WHERE owner_id = $2
+               AND store_id = (SELECT active_store FROM users WHERE user_id = $2)`,
             [JSON.stringify(req.body.layout), req.user.id]
         );
 
@@ -109,7 +115,7 @@ const RESERVED = [
   "account", "accounts", "password", "reset", "verify", "forgot", "session", "sessions",
 
   "workshop", "workspace", "projects", "project", "dashboard", "settings", "profile",
-  "editor", "preview", "home", "index", "welcome", "onboarding",
+  "editor", "preview", "home", "index", "welcome", "onboarding", "active",
 
   "admin", "administrator", "root", "system", "sysadmin", "superuser", "moderator",
   "staff", "owner", "support", "official", "team",
