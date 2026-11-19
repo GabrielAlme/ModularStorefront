@@ -17,25 +17,34 @@ const Projects = () => {
             setStores(rows.map((s) => ({ id: s.store_id, label: s.slug, createdAt: s.created_at})))).catch(console.error);
     }, [token]);
 
-    async function getStores() {
-        const response = await fetch("/projects", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username }),
-        });
-        const stores = await response.json(); // array of store objects
-    }
-    const handleClick = () => {
+    const handleClick = async (storeId) => {
         navigate('/Workspace');
     }
+
+    const openStore = async (storeId) => {
+        const res = await fetch(`/api/stores/${storeId}/activate`, {
+            method: "PUT", 
+            headers: { Authorization: `Bearer ${token}` },
+        });
+        if (res.ok) navigate('/Workspace');
+    };
 
     return (
         <div>
             <h1>{user ? `Your project` : 'Please log in to save your projects'}</h1><br />
-            <button onClick={handleClick}>
+            <button onClick = { handleClick }>
                 + New Project
             </button>
-{/*TODO:: pull in-progress projects from the database and allow link to them so users can work on them*/}
+            {stores === null ? (
+                <p>Loading...</p>
+            ) : (
+                <List registry = { stores }
+                onSelect = { openStore }
+                numbered = { true }
+                showCreatedAt = { true }
+                emptyMessage="You don't have any projects yet."
+                />
+            )}
         </div>
     )
 }

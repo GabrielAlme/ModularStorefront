@@ -103,6 +103,7 @@ router.get("/:slug", async (req, res) => {
     }
 })
 
+//lists functions and route for a user creating a store
 const RESERVED = [
   "login", "logout", "signin", "signout", "signup", "register", "auth", "oauth",
   "account", "accounts", "password", "reset", "verify", "forgot", "session", "sessions",
@@ -181,6 +182,22 @@ router.post("/", requireAuth, async (req, res) => {
   res.status(500).json({ error: "Failed to create store" });
 });
 
+//route for updating the users active store
+router.put("/:storeId/activate", requireAuth, async (req , res) => {
+    try {
+        const { rowCount } = await pool.query(
+            `UPDATE users SET active_store = $1
+            WHERE user_id = $2
+            AND EXISTS (SELECT 1 FROM stores WHERE store_id = $1 AND owner_id = $2)`,
+            [req.params.storeId, req.user.userId]
+        );
+        if (rowCount === 0) return res.status(404).json({ error : "Store not found" });
+        res.sendStatus(204);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: "Failed to switch store" });
+    }
+});
 
 
 
