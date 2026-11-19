@@ -1,10 +1,21 @@
-import React from 'react'
-import { useNavigate } from 'react-router-dom'
-import { useAuth } from '../authorization';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../authorization';
+import { useState, useEffect } from 'react';
+import List from '../List';
 
 const Projects = () => {
     const navigate = useNavigate();
-    const user = useAuth();
+    const { token } = useAuth();
+    const [stores, setStores] = useState(null);
+
+    useEffect(() => {
+        fetch("/api/stores", {headers : { Authorization: `Bearer ${ token }` } }).then((res) => {
+            if (res.status === 401) { navigate("/SignIn"); return []; }
+            if (!res.ok) throw new Error(`Stores request failed ${ res.status }`);
+            return res.json();
+        }).then((rows) => 
+            setStores(rows.map((s) => ({ id: s.store_id, label: s.slug, createdAt: s.created_at})))).catch(console.error);
+    }, [token]);
 
     async function getStores() {
         const response = await fetch("/projects", {
