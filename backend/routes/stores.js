@@ -52,10 +52,10 @@ router.get('/', requireAuth, async (req, res) => {
 // });
 
 //gets the layout from the store table
-router.get("/active", requireAuth, async (req, res) => {
+router.get("/me", requireAuth, async (req, res) => {
     try {
         const { rows } = await pool.query(
-            `SELECT s.* FROM users u
+            `SELECT s.store_id, s.slug, s.layout FROM users u
              JOIN stores s ON s.owner_id = u.user_id AND s.store_id = u.active_store
              WHERE u.user_id = $1`,
             [req.user.id]
