@@ -33,9 +33,9 @@ const Projects = () => {
     };
 
     return (
-        <div>
-            <h1>{token ? `Your projects` : 'Please log in to save your projects'}</h1><br />
-            <button onClick = {() => setAdding(true)}>
+        <div className="projects">
+            <h1>{token ? `Your Projects:` : 'Please log in to save your projects'}</h1><br />
+            <button onClick = {() => setAdding(true)} className="projects-button">
                 + New Project
             </button>
             {adding && <SiteCreation onClose={() => setAdding(false)} onCreated={handleCreated} />}
