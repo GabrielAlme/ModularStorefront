@@ -195,7 +195,7 @@ router.put("/:storeId/activate", requireAuth, async (req , res) => {
             `UPDATE users SET active_store = $1
             WHERE user_id = $2
             AND EXISTS (SELECT 1 FROM stores WHERE store_id = $1 AND owner_id = $2)`,
-            [req.params.storeId, req.user.userId]
+            [req.params.storeId, req.user.id]
         );
         if (rowCount === 0) return res.status(404).json({ error : "Store not found" });
         res.sendStatus(204);
