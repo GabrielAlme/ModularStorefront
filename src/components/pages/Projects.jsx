@@ -1,6 +1,7 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../authorization';
+import { Link } from 'react-router-dom'
 
 const Projects = () => {
     const navigate = useNavigate();
@@ -18,6 +19,8 @@ const Projects = () => {
         navigate('/Workspace');
     }
 
+    const rows = getStores();
+
     return (
         <div>
             <h1>{user ? `Your project` : 'Please log in to save your projects'}</h1><br />
@@ -25,6 +28,9 @@ const Projects = () => {
                 + New Project
             </button>
 {/*TODO:: pull in-progress projects from the database and allow link to them so users can work on them*/}
+            <ol>
+                
+            </ol>
         </div>
     )
 }
