@@ -37,9 +37,12 @@ async function loadWorkspace(userId) {
             navigate("/SignIn");
             return null;
           }
-          if (res.status === 404) return null;
+          if (res.status === 404) {
+            navigate("/Projects");
+            return null;
+          }
           if (!res.ok) throw new Error(`Store request failed ${res.status}`);
-          return res.json(true);
+          return res.json();
         }).then((store) => {
           const saved = store?.layout ?? {};
           setLayout(saved.layout ?? null);

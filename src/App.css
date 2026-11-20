@@ -53,6 +53,75 @@ body {
   color: #f1f1f1;
 }
 
+/* modal styling */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+}
+
+.modal {
+  background: white;
+  padding: 20px;
+  border: 1px solid black;
+  min-width: 300px;
+}
+
+/*List styling*/
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.list-row {
+  border-radius: 3px;
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+  padding: 0;
+  border: 1px solid black;
+  background: #fffbf2;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.list-row > span {
+  padding: 2px;
+  display: flex;
+  align-items: center;
+}
+
+.list-row:hover {
+  background: #F2EBDD;
+}
+
+.list-number{
+  width: 15px;
+  border-right: 1px solid black;
+  display: flex;
+  justify-content: center;
+}
+
+.list-row > .list-label {
+  flex: 1;
+}
+
+/* projects styling */
+.projects{
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.projects-button{
+  margin-bottom: 20px;
+}
+
 /* workshop styling */
 
 
