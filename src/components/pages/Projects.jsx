@@ -2,11 +2,13 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../authorization';
 import { useState, useEffect } from 'react';
 import List from '../List';
+import SiteCreation from '../SiteCreation';
 
 const Projects = () => {
     const navigate = useNavigate();
     const { token } = useAuth();
     const [stores, setStores] = useState(null);
+    const [adding, setAdding] = useState(false);
 
     useEffect(() => {
         fetch("/api/stores", {headers : { Authorization: `Bearer ${ token }` } }).then((res) => {
@@ -17,8 +19,9 @@ const Projects = () => {
             setStores(rows.map((s) => ({ id: s.store_id, label: s.slug, createdAt: s.created_at})))).catch(console.error);
     }, [token]);
 
-    const handleClick = async (storeId) => {
-        navigate('/Workspace');
+    const handleCreated = (store) => {
+        setStores((prev) => [...prev, { id: store.store_id, label: store.slug, createdAt: store.created_at }]);
+        setAdding(false);
     }
 
     const openStore = async (storeId) => {
@@ -32,9 +35,10 @@ const Projects = () => {
     return (
         <div>
             <h1>{token ? `Your projects` : 'Please log in to save your projects'}</h1><br />
-            <button onClick = { handleClick }>
+            <button onClick = {() => setAdding(true)}>
                 + New Project
             </button>
+            {adding && <SiteCreation onClose={() => setAdding(false)} onCreated={handleCreated} />}
             {stores === null ? (
                 <p>Loading...</p>
             ) : (

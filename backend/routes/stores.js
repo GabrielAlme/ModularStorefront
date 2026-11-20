@@ -161,18 +161,18 @@ router.post("/", requireAuth, async (req, res) => {
   const { slug, error } = validateSlug(req.body.slug);
   if (error) return res.status(400).json({ error });
 
-  const ownerId = req.user.userId;
+  const ownerId = req.user.id;
   for (let attempt = 0; attempt < 3; attempt++) {
     try {
       const { rows } = await pool.query(
         `INSERT INTO stores (owner_id, store_id, slug)
-         SELECT $1, COALESCE(MAX(store_id), 0) + 1, $2
-         FROM stores WHERE owner_id = $1
+         SELECT $1::int, COALESCE(MAX(store_id), 0) + 1, $2::varchar
+         FROM stores WHERE owner_id = $1::int
          RETURNING *`,
         [ownerId, slug]
       );
       await pool.query(
-        "UPDATE users SET active_store_id = $1 WHERE user_id = $2 AND active_store_id IS NULL",
+        "UPDATE users SET active_store = $1 WHERE user_id = $2 AND active_store IS NULL",
         [rows[0].store_id, ownerId]
       );
       return res.status(201).json(rows[0]);
