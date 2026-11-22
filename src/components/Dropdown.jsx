@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 
-const Dropdown = ({ registry, onSelect, title, emptyMessage = "Nothing Here"}) => {
+const Dropdown = ({ title, children }) => {
 
     const [isOpen, setIsOpen] = useState(false);
     const ref = useRef(null);
@@ -20,19 +20,7 @@ const Dropdown = ({ registry, onSelect, title, emptyMessage = "Nothing Here"}) =
         <button onClick={() => setIsOpen(prev => !prev)} className="drop-button">
             { title }
         </button>
-        {isOpen && (
-            <ul className="drop-list">
-                {Object.keys(registry).length === 0 ? (
-                    <li>{ emptyMessage }</li>
-                    ) : (
-                    Object.entries(registry).map(([id, type]) => ( //takes the filtered results and maps the items to an unordered list
-                        <li key={id} onClick={() => {onSelect(id);}}>
-                            <span>{type.title}</span>
-                        </li>
-                    ))
-                )}
-            </ul>
-        )}
+        {isOpen && children}
     </div>
   )
 }
