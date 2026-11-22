@@ -12,11 +12,11 @@ const RouterNav = () => {
   return (
     <>
         <nav className="router-nav">
-            <Link to="/">Home</Link> |{" "}
-            <Link to="/Projects">Projects</Link> |{" "}
-            <Link to="/Workspace">Workspace</Link> |{" "}
-            <Link to="/SignIn">Login/Sign up</Link> |{" "}
-            <Button onClick={handle}>Log Out</Button>
+            <Link to="/" className="primary_btn">Home</Link> |{" "}
+            <Link to="/Projects" className="primary_btn">Projects</Link> |{" "}
+            <Link to="/Workspace" className="primary_btn">Workspace</Link> |{" "}
+            <Link to="/SignIn" className="primary_btn">Login/Sign up</Link> |{" "}
+            <Button onClick={handle} className="primary_btn">Log Out</Button>
         </nav>
         <Outlet />
     </>

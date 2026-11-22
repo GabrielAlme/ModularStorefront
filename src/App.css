@@ -71,6 +71,54 @@ body {
   min-width: 300px;
 }
 
+/* Styles links to look like buttons, can also be used for regular buttons */
+.primary_btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #e7e7e7;
+  color: black;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 6px;
+  border: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  position: relative;
+  max-width: 200px;
+}
+.primary_btn:hover {
+  background-color: #1d4ed8;
+}
+.primary_btn:visited {
+  color: purple;
+}
+/* Style for the save button */
+.save_btn:active {
+  color: rgba(128, 128, 128, 0.599);
+}
+.save_btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #e7e7e7;
+  color: black;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 6px;
+  border: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  position: relative;
+  max-width: 200px;
+}
+
 /*List styling*/
 .list {
   display: flex;
