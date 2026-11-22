@@ -130,10 +130,8 @@ async function loadWorkspace(userId) {
           <DropdownList registry={favoritePanels} onSelect={addPanel} emptyMessage="Add panels to favorites using the star in the search menu"/>
         </Dropdown>
         <SearchBar registry={PANELS} onSelect={addPanel} button={favoriteButton}/>
-        <div>
-          <Button onClick={saveWorkspace} className='primary_btn'>Save Project</Button>
-          <Button onClick={changeName} className='save_btn'>Rename</Button>
-        </div>
+        <Button onClick={saveWorkspace} className='nav_btn'>Save Project</Button>
+        <Button onClick={changeName} className='nav_btn'>Rename</Button>
       </div>
       <div className="mosaic-workspace">
         <MosaicWorkspace panels={panels} layout={layout} onChange={handleLayoutChange}/> {/* when a new panel is added/removed to/from panels object it passes the fucntion handleLayoutChange*/}
