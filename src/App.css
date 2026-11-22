@@ -93,9 +93,6 @@ body {
 .primary_btn:hover {
   background-color: #1d4ed8;
 }
-.primary_btn:visited {
-  color: purple;
-}
 /* Style for the save button */
 .save_btn:active {
   color: rgba(128, 128, 128, 0.599);
