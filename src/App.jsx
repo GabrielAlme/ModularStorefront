@@ -10,14 +10,12 @@ import Storefront from "./components/Storefront"
 import Workspace from "./components/pages/Workspace"
 import CartPage from "./components/pages/CartPage" 
 
-//Function that links to Home.jsx
+//Functions that just link to their respective pages
 function HomePage() {
   return (
     <Home/>
   )
 }
-
-//Function that links to loginpage.jsx
 function LogIn() {
   return (
     <LoginPage/>

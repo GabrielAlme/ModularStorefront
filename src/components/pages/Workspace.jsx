@@ -6,6 +6,7 @@ import Dropdown from '../Dropdown';
 import DropdownList from '../children/DropdownList';
 import SearchBar from '../SearchBar';
 import Sidebar from '../Sidebar';
+import Button from '../Button';
 
 import { useAuth } from "../../authorization";
 import { useNavigate } from "react-router-dom";
@@ -93,6 +94,10 @@ async function loadWorkspace(userId) {
     return saved;
   }
 
+  function changeName(){
+
+  }
+
   useEffect(() => {
     localStorage.setItem("favorites", JSON.stringify(favorites));
   }, [favorites]);
@@ -125,6 +130,10 @@ async function loadWorkspace(userId) {
           <DropdownList registry={favoritePanels} onSelect={addPanel} emptyMessage="Add panels to favorites using the star in the search menu"/>
         </Dropdown>
         <SearchBar registry={PANELS} onSelect={addPanel} button={favoriteButton}/>
+        <div>
+          <Button onClick={saveWorkspace} className='primary_btn'>Save Project</Button>
+          <Button onClick={changeName} className='save_btn'>Rename</Button>
+        </div>
       </div>
       <div className="mosaic-workspace">
         <MosaicWorkspace panels={panels} layout={layout} onChange={handleLayoutChange}/> {/* when a new panel is added/removed to/from panels object it passes the fucntion handleLayoutChange*/}
