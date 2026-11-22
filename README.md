@@ -57,4 +57,5 @@ Other node packages that need to be installed to use this code locally:
  - npm install express dotenv (loads assets from .env)
  - npm install jsonwebtoken (api authorization for user functionality)
  - npm install jwt-decode (decoding tool for web tokens)
+ - npm install obscenity (profanity detection)
 

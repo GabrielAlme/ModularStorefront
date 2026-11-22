@@ -1,5 +1,6 @@
 import { Link, Outlet } from "react-router-dom";
 import { useAuth } from "../authorization";
+import Button from "./Button";
 
 const RouterNav = () => {
   const {user, logout} = useAuth();
@@ -11,13 +12,11 @@ const RouterNav = () => {
   return (
     <>
         <nav className="router-nav">
-            <Link to="/">Home</Link> |{" "}
-            <Link to="/Projects">Projects</Link> |{" "}
-            <Link to="/Workspace">Workspace</Link> |{" "}
-            <Link to="/SignIn">Login/Sign up</Link> |{" "}
-            <button onClick={handle}>
-              Log Out
-            </button>
+            <Link to="/" className="primary_btn">Home</Link> |{" "}
+            <Link to="/Projects" className="primary_btn">Projects</Link> |{" "}
+            <Link to="/Workspace" className="primary_btn">Workspace</Link> |{" "}
+            <Link to="/SignIn" className="primary_btn">Login/Sign up</Link> |{" "}
+            <Button onClick={handle} className="primary_btn">Log Out</Button>
         </nav>
         <Outlet />
     </>
