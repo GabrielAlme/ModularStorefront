@@ -92,6 +92,29 @@ body {
   background-color: #f9eed4;
 }
 
+.primary_btn {
+  display: inline-block;
+  padding: 4px 10px;
+  background-color: #e7e7e7;
+  color: black;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 6px;
+  border: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  position: relative;
+  width: auto;
+}
+
+.primary_btn:hover {
+  background-color: #f9eed4;
+}
+
 /*List styling*/
 .list {
   display: flex;
