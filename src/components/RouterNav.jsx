@@ -16,7 +16,7 @@ const RouterNav = () => {
             <Link to="/Projects">Projects</Link> |{" "}
             <Link to="/Workspace">Workspace</Link> |{" "}
             <Link to="/SignIn">Login/Sign up</Link> |{" "}
-            <Button onCLick="handle">Log Out</Button>
+            <Button onClick={handle}>Log Out</Button>
         </nav>
         <Outlet />
     </>
