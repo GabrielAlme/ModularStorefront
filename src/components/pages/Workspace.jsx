@@ -3,6 +3,7 @@ import { getLeaves } from 'react-mosaic-component';
 import { PANELS } from '../../panels/registry';
 import MosaicWorkspace from '../MosaicWorkspace';
 import Dropdown from '../Dropdown';
+import DropdownList from '../children/DropdownList';
 import SearchBar from '../SearchBar';
 import Sidebar from '../Sidebar';
 
@@ -120,7 +121,9 @@ async function loadWorkspace(userId) {
     <div className="workspace">
       <Sidebar/>
       <div className="navbar">
-        <Dropdown registry={favoritePanels} onSelect={addPanel} title="Favorites" emptyMessage="Add panels to favorites using the star in the search menu"/>  {/* this passes the data from onSelect inside of AddPanel to the function addPanel */}
+        <Dropdown title="Favorites">
+          <DropdownList registry={favoritePanels} onSelect={addPanel} emptyMessage="Add panels to favorites using the star in the search menu"/>
+        </Dropdown>
         <SearchBar registry={PANELS} onSelect={addPanel} button={favoriteButton}/>
       </div>
       <div className="mosaic-workspace">
