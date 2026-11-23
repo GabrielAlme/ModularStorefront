@@ -29,7 +29,7 @@ router.get('/', requireAuth, async (req, res) => {
 router.get("/me", requireAuth, async (req, res) => {
     try {
         const { rows } = await pool.query(
-            `SELECT s.store_id, s.slug, s.layout FROM users u
+            `SELECT s.store_id, s.slug, s.layout s.height FROM users u
              JOIN stores s ON s.owner_id = u.user_id AND s.store_id = u.active_store
              WHERE u.user_id = $1`,
             [req.user.id]
@@ -43,7 +43,7 @@ router.get("/me", requireAuth, async (req, res) => {
 });
 
 //saves the layout to the stores table
-router.put("/me/:storeId:", requireAuth, async (req, res) => {
+router.put("/me/layout", requireAuth, async (req, res) => {
     try {
         const { rowCount } = await pool.query(
             `UPDATE stores SET layout = $1
