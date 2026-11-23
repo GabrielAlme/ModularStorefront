@@ -7,6 +7,7 @@ import DropdownList from '../children/DropdownList';
 import SearchBar from '../SearchBar';
 import Sidebar from '../Sidebar';
 import Button from '../Button';
+import Modal from '../Modal';
 
 import { useAuth } from "../../authorization";
 import { useNavigate } from "react-router-dom";
@@ -19,6 +20,8 @@ const Workspace = () => {
   const {token, logout} = useAuth();
   const navigate = useNavigate();
   const nextId = useRef(1);
+  const [isOpen, setIsOpen] = useState(false);
+  const [newName, setNewName] = useState("");
 
 
 // functions and use states related to loading the workspace panels
@@ -65,6 +68,10 @@ async function loadWorkspace(userId) {
     }).catch(console.error)
   };
 
+  async function changeName() {
+    
+  }
+
   useEffect(() => {
     if (!loaded) return;
     const timer = setTimeout(() => saveWorkspace({ layout, panels, nextId: nextId.current }), 500);
@@ -94,10 +101,6 @@ async function loadWorkspace(userId) {
     return saved;
   }
 
-  function changeName(){
-
-  }
-
   useEffect(() => {
     localStorage.setItem("favorites", JSON.stringify(favorites));
   }, [favorites]);
@@ -120,6 +123,7 @@ async function loadWorkspace(userId) {
     };
 
 
+
   if (!loaded) return <div> loading... </div>; // runs while the workspace is loading from the database
 
   return (
@@ -131,7 +135,21 @@ async function loadWorkspace(userId) {
         </Dropdown>
         <SearchBar registry={PANELS} onSelect={addPanel} button={favoriteButton}/>
         <Button onClick={saveWorkspace} className='nav_btn'>Save Project</Button>
-        <Button onClick={changeName} className='nav_btn'>Rename</Button>
+        <Button onClick={() => setIsOpen(true)} className='nav_btn'>Rename</Button>
+        <Modal isOpen={isOpen} onClose={() =>setIsOpen(false)}>
+          <h2>Rename your project:</h2>
+          <input
+            type="text"
+            value={newName}
+            onChange={(e) => setNewName(e.target.value())}
+          />
+          <div>
+            <Button onClick={changeName} className='nav_btn'>Save</Button>
+            <Button onClick={() => setIsOpen(false)} className='nav_btn'>Cancel</Button>
+          </div>
+
+
+        </Modal>
       </div>
       <div className="mosaic-workspace">
         <MosaicWorkspace panels={panels} layout={layout} onChange={handleLayoutChange}/> {/* when a new panel is added/removed to/from panels object it passes the fucntion handleLayoutChange*/}

@@ -1,4 +1,4 @@
-import pool from './db.js'
+import pool from '../db.js'
 import bcrypt from "bcrypt";
 
 //Salt for bcrypt, number of encryption rounds
@@ -108,4 +108,17 @@ const findUser = async (id) => {
     }
 };
 
-export { getUsers, getUserStores, createUser, findUser, loginUser };
+const renameStore = async (currID, newStore) => {
+    try {
+        const [ rows ] = await pool.query(
+            "UPDATE store SET store_name= $1 WHERE store_id = $2",
+            [newStore, currID]
+        );
+        return rows[0] || null;
+    } catch (error) {
+        console.error(error);
+        throw new Error("Internal Sever Error");
+    }
+}
+
+export { getUsers, getUserStores, createUser, findUser, loginUser, renameStore };

@@ -3,7 +3,7 @@ import pool from './db.js';
 import storesRouter from './routes/stores.js';
 import productsRouter from './routes/products.js';
 import layoutsRouter from './routes/layouts.js';
-import { createUser, loginUser, getUserStores } from './userQueries.js';
+import { createUser, loginUser, getUserStores, renameStore } from './routes/userQueries.js';
 import jwt from 'jsonwebtoken'
 
 const api = Router();
@@ -82,6 +82,19 @@ api.post("/projects", async (req, res) => {
         res.status(500).json({ error: "Something went wrong" });
     }
 });
+
+//Post method for changing a stores name
+//TODO: verify that the user logged in is authorized to change that store's name
+api.post("/changeName", async (req, res) => {
+    const { currID, newName } = req.body;
+    try {  
+        const newStore = await renameStore({currID, newName});
+        res.json(newStore);
+    } catch (error){
+        console.error(error);
+        res.status(500).json({ error: "Something went wrong "});
+    }
+})
 // Any /api path that doesn't exist returns JSON instead of the React page
 api.use((req, res) => res.status(404).json({ error: 'not found' }));
 
