@@ -89,6 +89,25 @@ router.put("/me/layout", requireAuth, async (req, res) => {
     }
 });
 
+//route for updating the page height
+router.patch("/me/:storeId/height", requireAuth, async (req, res) => {
+    try {
+        const { rowCount } = await pool.query(
+            "UPDATE stores SET height = $1 WHERE store_id = $2 AND owner_id = $3",
+            [JSON.stringify(req.body.height), req.params.storeId, req.user.id]
+        );
+
+        if (rowCount === 0) {
+            return res.status(404).json({ error: "Store not found" });
+        }
+
+        res.sendStatus(204);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: "Failed to save height" });
+    }
+});
+
 
 //gets the store from the stores table
 router.get("/:slug", async (req, res) => {
