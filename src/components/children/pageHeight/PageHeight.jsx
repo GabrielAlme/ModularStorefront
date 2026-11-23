@@ -13,6 +13,13 @@ const PageHeight = ({ value, onChange }) => {
     const confirm = (e) => {
         e.preventDefault();
         const parsed = parseInt(draftAmount, 10);
-        const min = UNITS[draftUnit].min;
-    }
+        const min = UNITS[draftUnit].min;  
+        const amount = Number.isNAN(parsed) ? min : Math.max(parsed, min);
+        setDraftAmount(String(amount));
+        onChange({ amount, unit: draftUnit });
+    };
+
+    const unchanged = draftUnit === value.unit && draftAmount === String(value.amount);
+
+
 }
