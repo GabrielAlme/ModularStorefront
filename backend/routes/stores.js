@@ -24,32 +24,6 @@ router.get('/', requireAuth, async (req, res) => {
     }
 });
 
-// GET /api/stores/:id
-// router.get('/:id', async (req, res) => {
-//     const id = Number(req.params.id);
-//     if (!Number.isInteger(id)) return res.status(400).json({ error: 'id must be a number' });
-
-//     const { rows } = await pool.query(
-//         'SELECT store_id, owner_id, slug, description, created_at FROM stores WHERE store_id = $1',
-//         [id]
-//     );
-//     if (rows.length === 0) return res.status(404).json({ error: 'store not found' });
-//     res.json(rows[0]);
-// });
-
-// POST /api/stores   body: { owner_id, slug, description? }
-// router.post('/', async (req, res) => {
-//     const { owner_id, slug } = req.body;
-//     if (!Number.isInteger(owner_id) || !slug) {
-//         return res.status(400).json({ error: 'owner_id (number) and slug are required' });
-//     }
-
-//     const { rows } = await pool.query(
-//         'INSERT INTO stores (owner_id, slug ) VALUES ($1, $2, $3) RETURNING *',
-//         [owner_id, slug ?? null]
-//     );
-//     res.status(201).json(rows[0]);
-// });
 
 //gets the layout from the store table
 router.get("/me", requireAuth, async (req, res) => {
@@ -69,7 +43,7 @@ router.get("/me", requireAuth, async (req, res) => {
 });
 
 //saves the layout to the stores table
-router.put("/me/layout", requireAuth, async (req, res) => {
+router.put("/me/:storeId:", requireAuth, async (req, res) => {
     try {
         const { rowCount } = await pool.query(
             `UPDATE stores SET layout = $1
