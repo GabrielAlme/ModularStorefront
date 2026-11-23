@@ -87,10 +87,9 @@ router.patch("/me/:storeId/height", requireAuth, async (req, res) => {
 router.get("/:slug", async (req, res) => {
     try {
         const { rows } = await pool.query(
-            "SELECT store_id, slug, layout FROM stores WHERE slug = $1",
+            "SELECT store_id, slug, layout, height FROM stores WHERE slug = $1"
             [req.params.slug.toLowerCase()]
         );
-
         if (rows.length === 0) {
             return res.status(404).json({ error: "Store not found" });
         }

@@ -21,5 +21,29 @@ const PageHeight = ({ value, onChange }) => {
 
     const unchanged = draftUnit === value.unit && draftAmount === String(value.amount);
 
+    return (
+        <form className="drop-list" onSubmit={confirm} noValidate>
+            <input
+                type="number"
+                min={UNITS[draftUnit].min}
+                step="1"
+                value={draftAmount}
+                onChange={(e) => setDraftAmount(e.target.value)}
+            />
+            {object.entries(UNITS).map(([unit, { label }]) => (
+                <label key={unit}>
+                    <input
+                        type="radio"
+                        name="page-height-unit"
+                        checked={draftUnit === unit}
+                        onChange={() => changeUnit(unit)}
+                    />
+                    {label}
+                </label>
+            ))}
+            <button type="submit" disabled={unchanged}>Set Height</button>
+        </form>
+    );
+};
 
-}
+export default PageHeight;
